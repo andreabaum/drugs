@@ -1,29 +1,36 @@
 p#notice = notice
 
-h2 = @drug.name
+.panel.panel-default.drug
+  .panel-heading
+    h3.panel-title = @drug.name
+    - unless @drug.active
+      .label.label-default.pull-right Not active
 
-p
-  strong Note:
-  = @drug.note
+  .panel-body
+    - unless @drug.note.empty?
+      .row
+        .col-sm-2 Note:
+        .col-sm-6 = @drug.note
 
-p
-  strong Active:
-  = @drug.active
+    .row
+      .col-sm-2 Amount:
+      .col-sm-6 = @drug.current_amount
 
-p
-  strong Amount:
-  = @drug.current_amount
+    hr
 
-/ Purchases
-- if @drug.purchases.any?
-  p
-    strong Purchases:
-    ul
-      - @drug.purchases.each do |purchase|
-        li = link_to purchase.when, purchase_path(purchase)
-= link_to 'Add purchase', new_purchase_path
+    / Purchases
+    .row
+      - if @drug.purchases.any?
+        .col-sm-2 Purchases:
+        .col-sm-6
+            - @drug.purchases.each do |purchase|
+              .item
+                = link_to purchase.when, purchase_path(purchase)
+                = " (#{purchase.amount})"
+      .btn.btn-default = link_to 'Add purchase', new_purchase_path
 
-.actions
-  = link_to 'Edit', edit_drug_path(@drug)
-  br
-  = link_to 'Back', drugs_path
+.row
+  .col-sm-6
+    .btn = link_to 'Edit', edit_drug_path(@drug)
+    .btn = link_to 'Home', root_path
+    .btn= link_to 'Delete', @drug, method: :delete, data: { confirm: 'Are you sure?' }

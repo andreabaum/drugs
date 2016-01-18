@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  padding: 20px;
+  background-color: #D8D8D8;
+}
+
+.drug .panel-heading {
+  background-color: #69d045 !important;
+}
+
+.purchase .panel-heading {
+  background-color: #A9D0F5 !important;
+}
