@@ -7,13 +7,13 @@ p#notice = notice
       .label.label-default.pull-right Not active
 
   .panel-body
-    - unless @drug.note.empty?
+    - if @drug.note && !@drug.note.empty?
       .row
-        .col-sm-2 Note:
+        .col-sm-2 Note
         .col-sm-6 = @drug.note
 
     .row
-      .col-sm-2 Amount:
+      .col-sm-2 Amount
       .col-sm-6 = @drug.current_amount
 
     hr
@@ -21,16 +21,17 @@ p#notice = notice
     / Purchases
     .row
       - if @drug.purchases.any?
-        .col-sm-2 Purchases:
+        .col-sm-2 Purchases
         .col-sm-6
-            - @drug.purchases.each do |purchase|
-              .item
-                = link_to purchase.when, purchase_path(purchase)
-                = " (#{purchase.amount})"
+          .list-group
+            - @drug.purchases_sorted.each do |purchase|
+              .list-group-item
+                = link_to purchase.when.strftime("%d.%m.%Y"), purchase_path(purchase)
+                span.badge = purchase.amount
       .btn.btn-default = link_to 'Add purchase', new_purchase_path
 
 .row
   .col-sm-6
-    .btn = link_to 'Edit', edit_drug_path(@drug)
     .btn = link_to 'Home', root_path
+    .btn = link_to 'Edit', edit_drug_path(@drug)
     .btn= link_to 'Delete', @drug, method: :delete, data: { confirm: 'Are you sure?' }

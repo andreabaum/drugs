@@ -6,23 +6,24 @@ p#notice = notice
 
   .panel-body
     .row
-      .col-sm-2 Date:
+      .col-sm-2 Date
       .col-sm-6 = @purchase.when
 
     .row
-      .col-sm-2 Drug:
+      .col-sm-2 Drug
       .col-sm-6 = link_to @purchase.drug.name, drug_path(@purchase.drug)
 
     .row
-      .col-sm-2 Amount:
+      .col-sm-2 Amount
       .col-sm-6 = @purchase.amount
 
-    - unless @purchase.note.empty?
+    - if @purchase.note && !@purchase.note.empty?
       .row
-        .col-sm-2 Note:
+        .col-sm-2 Note
         .col-sm-6 = @purchase.note
 
 .row
   .col-sm-6
+    .btn = link_to 'Home', root_path
     .btn = link_to 'Edit', edit_purchase_path(@purchase)
     .btn = link_to 'Delete', @purchase, method: :delete, data: { confirm: 'Are you sure?' }

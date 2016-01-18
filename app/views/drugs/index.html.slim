@@ -6,7 +6,16 @@ p#notice = notice
     h3.panel-title Drugs
 
   .panel-body
-    - @drugs.each do |drug|
-      .item = link_to drug.name, drug
+    .list-group
+      - @drugs.each do |drug|
+        .list-group-item
+          = link_to drug.name, drug
+          span.badge = drug.ends_at
+          span.badge = drug.current_amount
 
-.btn = link_to 'New Drug', new_drug_path
+      .list-group-item
+        = form_for(:drug) do |f|
+          = f.text_field :name
+          .btn = f.submit
+
+/.btn = link_to 'New Drug', new_drug_path
