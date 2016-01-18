@@ -1,3 +1,5 @@
+p#notice = notice
+
 h2 = @drug.name
 
 p
@@ -8,12 +10,17 @@ p
   strong Active:
   = @drug.active
 
+p
+  strong Amount:
+  = @drug.current_amount
+
+/ Purchases
 - if @drug.purchases.any?
   p
     strong Purchases:
-    - @drug.purchases.each do |purchase|
-      .purchase = link_to purchase.when, purchase_path(purchase)
-
+    ul
+      - @drug.purchases.each do |purchase|
+        li = link_to purchase.when, purchase_path(purchase)
 = link_to 'Add purchase', new_purchase_path
 
 .actions
