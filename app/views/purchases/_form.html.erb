@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :drug %><br>
+    <%= f.collection_select :drug_id, Drug.all, :id, :name %>
+  </div>
+  <div class="field">
     <%= f.label :when %><br>
     <%= f.date_select :when %>
   </div>

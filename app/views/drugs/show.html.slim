@@ -1,0 +1,22 @@
+h2 = @drug.name
+
+p
+  strong Note:
+  = @drug.note
+
+p
+  strong Active:
+  = @drug.active
+
+- if @drug.purchases.any?
+  p
+    strong Purchases:
+    - @drug.purchases.each do |purchase|
+      .purchase = link_to purchase.when, purchase_path(purchase)
+
+= link_to 'Add purchase', new_purchase_path
+
+.actions
+  = link_to 'Edit', edit_drug_path(@drug)
+  br
+  = link_to 'Back', drugs_path

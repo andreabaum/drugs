@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
-
+<p>
+  <strong>Drug:</strong>
+  <%= @purchase.drug.name %>
+</p>
 <p>
   <strong>When:</strong>
   <%= @purchase.when %>
@@ -16,4 +19,4 @@
 </p>
 
 <%= link_to 'Edit', edit_purchase_path(@purchase) %> |
-<%= link_to 'Back', purchases_path %>
+<%= link_to 'Back', drug_path(@purchase.drug) %>
