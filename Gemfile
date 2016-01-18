@@ -29,6 +29,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+# Slim template language
+gem 'slim', '~> 3.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
