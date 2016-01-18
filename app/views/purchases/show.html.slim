@@ -2,28 +2,28 @@ p#notice = notice
 
 .panel.panel-default.purchase
   .panel-heading
-    h3.panel-title Purchase
+    h3.panel-title =t('purchase')
 
   .panel-body
     .row
-      .col-sm-2 Date
-      .col-sm-6 = @purchase.when
+      .col-sm-2 = t('when')
+      .col-sm-6 = @purchase.when_formatted
 
     .row
-      .col-sm-2 Drug
+      .col-sm-2 = t('drug')
       .col-sm-6 = link_to @purchase.drug.name, drug_path(@purchase.drug)
 
     .row
-      .col-sm-2 Amount
+      .col-sm-2 = t('amount')
       .col-sm-6 = @purchase.amount
 
     - if @purchase.note && !@purchase.note.empty?
       .row
-        .col-sm-2 Note
+        .col-sm-2 = t('note')
         .col-sm-6 = @purchase.note
 
 .row
   .col-sm-6
-    .btn = link_to 'Home', root_path
-    .btn = link_to 'Edit', edit_purchase_path(@purchase)
-    .btn = link_to 'Delete', @purchase, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to t('home'), root_path, class: 'btn btn-info'
+    = link_to t('edit'), edit_purchase_path(@purchase), class: 'btn btn-default'
+    = link_to t('delete'), @purchase, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }

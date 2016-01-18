@@ -1,21 +1,28 @@
 p#notice = notice
 
-.panel.panel-default.drug
+.panel.panel-default.drugs
 
   .panel-heading
-    h3.panel-title Drugs
+    h3.panel-title = t('drugs')
 
   .panel-body
     .list-group
-      - @drugs.each do |drug|
-        .list-group-item
-          = link_to drug.name, drug
-          span.badge = drug.ends_at
-          span.badge = drug.current_amount
+      - @drugs.select{ |drug| drug[:active]}.each do |drug|
+        = link_to drug, class: "list-group-item"
+          = drug.name
+          - if drug.purchases.any? && drug.active
+            span.badge = drug.ends_at
+            span.badge = drug.amount_current
 
       .list-group-item
         = form_for(:drug) do |f|
-          = f.text_field :name
-          .btn = f.submit
+          .col-sm-4 = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
+          = f.submit t('add'), class: 'btn btn-default'
 
-/.btn = link_to 'New Drug', new_drug_path
+    .list-group
+      - @drugs.select{ |drug| !drug[:active]}.each do |drug|
+        = link_to drug, class: "list-group-item not-active"
+          = drug.name
+          - if drug.purchases.any? && drug.active
+            span.badge = drug.ends_at
+            span.badge = drug.current_amount

@@ -15,6 +15,7 @@ class DrugsController < ApplicationController
   # GET /drugs/new
   def new
     @drug = Drug.new
+    @drug.active = true
   end
 
   # GET /drugs/1/edit
@@ -25,6 +26,7 @@ class DrugsController < ApplicationController
   # POST /drugs.json
   def create
     @drug = Drug.new(drug_params)
+    @drug.active = true
 
     respond_to do |format|
       if @drug.save

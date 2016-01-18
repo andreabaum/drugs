@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :drug %><br>
-    <%= f.collection_select :drug_id, Drug.all, :id, :name %>
+    <%= f.collection_select :drug_id, Drug.all.where(active: true), :id, :name %>
   </div>
   <div class="field">
     <%= f.label :when %><br>

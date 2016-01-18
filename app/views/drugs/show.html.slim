@@ -1,37 +1,43 @@
 p#notice = notice
 
 .panel.panel-default.drug
-  .panel-heading
-    h3.panel-title = @drug.name
-    - unless @drug.active
-      .label.label-default.pull-right Not active
+  .panel-heading class=(@drug.active ? 'active' : 'not-active')
+    h3.panel-title
+      = @drug.name
+      - unless @drug.active
+        .label = t('not_active')
 
   .panel-body
     - if @drug.note && !@drug.note.empty?
       .row
-        .col-sm-2 Note
-        .col-sm-6 = @drug.note
+        .col-sm-8
+          .well.well-sm
+            em = @drug.note
 
     .row
-      .col-sm-2 Amount
-      .col-sm-6 = @drug.current_amount
+      .col-sm-2 = t('amount')
+      .col-sm-6 = @drug.amount_current
 
     hr
 
     / Purchases
     .row
+      .col-sm-2 = t('purchases_last')
       - if @drug.purchases.any?
-        .col-sm-2 Purchases
         .col-sm-6
           .list-group
+            .list-group-item
+              = form_for([@drug, Purchase.new]) do |f|
+                .col-sm-6 = f.date_select :when
+                .col-sm-2 = f.text_field :amount, class: 'form-control', value: @drug.amount_last_purchased
+                = f.submit t('add'), class: 'btn btn-default'
             - @drug.purchases_sorted.each do |purchase|
-              .list-group-item
-                = link_to purchase.when.strftime("%d.%m.%Y"), purchase_path(purchase)
+              = link_to purchase, class: "list-group-item"
+                = purchase.when_formatted
                 span.badge = purchase.amount
-      .btn.btn-default = link_to 'Add purchase', new_purchase_path
 
 .row
   .col-sm-6
-    .btn = link_to 'Home', root_path
-    .btn = link_to 'Edit', edit_drug_path(@drug)
-    .btn= link_to 'Delete', @drug, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to t('home'), root_path, class: 'btn btn-info'
+    = link_to t('edit'), edit_drug_path(@drug), class: 'btn btn-default'
+    = link_to t('delete'), @drug, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }

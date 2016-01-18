@@ -57,4 +57,8 @@ Rails.application.routes.draw do
   #   end
 
   root 'drugs#index'
+
+  resources :drugs do
+    resources :purchases
+  end
 end

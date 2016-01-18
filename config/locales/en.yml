@@ -20,4 +20,23 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  home: Home
+  drug: Medicina
+  drugs: Elenco Medicine
+  purchase: Acquisto
+  purchases: Acquisti
+  purchases_last: Ultimi Acquisti
+
+  add: Aggiungi
+  edit: Modifica
+  delete: Elimina
+  reset: Reset
+
+  note: Commento
+  amount: Quantità
+  when: Data
+  not_active: Sospesa
+
+  placeholder:
+    drug: 'Medicina'
+    purchase: '20'

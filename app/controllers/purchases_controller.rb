@@ -25,10 +25,11 @@ class PurchasesController < ApplicationController
   # POST /purchases.json
   def create
     @purchase = Purchase.new(purchase_params)
+    @purchase.drug_id = params[:drug_id]
 
     respond_to do |format|
       if @purchase.save
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+        format.html { redirect_to @purchase.drug, notice: 'Purchase was successfully created.' }
         format.json { render :show, status: :created, location: @purchase }
       else
         format.html { render :new }
@@ -54,9 +55,10 @@ class PurchasesController < ApplicationController
   # DELETE /purchases/1
   # DELETE /purchases/1.json
   def destroy
+    drug = @purchase.drug
     @purchase.destroy
     respond_to do |format|
-      format.html { redirect_to purchases_url, notice: 'Purchase was successfully destroyed.' }
+      format.html { redirect_to drug, notice: 'Purchase was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
