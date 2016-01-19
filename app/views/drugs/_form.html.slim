@@ -17,31 +17,40 @@ p#notice = notice
           ul
             - @drug.errors.full_messages.each do |message|
               li = message
+      .list-group
+        .list-group-item
+          .row
+            .col-sm-2 = t('name')
+            .col-sm-10 = f.text_field :name
 
-      .row
-        .col-sm-2 = t('name')
-        .col-sm-10 = f.text_field :name
+        .list-group-item
+          .row
+            .col-sm-2 = t('note')
+            .col-sm-10 = f.text_area :note
 
-      .row
-        .col-sm-2 = t('note')
-        .col-sm-10 = f.text_area :note
+        .list-group-item
+          .row
+            .col-sm-2 = t('format')
+            .col-sm-10 = f.text_field :format
 
-      .row
-        .col-sm-2 = t('active')
-        .col-sm-10 = f.check_box :active
+        .list-group-item
+          .row
+            .col-sm-2 = t('active')
+            .col-sm-10 = f.check_box :active
 
-      .row
-        .col-sm-2 = t('dose')
-        .col-sm-10 = f.number_field :dose, class: 'form-control', min: 0.5, step: 0.5
+        .list-group-item
+          .row
+            .col-sm-2 = t('dose')
+            .col-sm-10 = f.number_field :dose, class: 'form-control', min: 0.5, step: 0.5
 
-      .row
-        .col-sm-8
-        .col-sm-2
-          = f.submit t('save'), class: 'btn btn-default'
+        .list-group-item.footer
+          .row
+            .col-sm-2
+            .col-sm-2.no-padding-left
+              = f.submit t('save'), class: 'btn btn-default'
 
-    hr
-
-    = form_for(@drug) do |r|
+    /hr
+    /= form_for(@drug) do |r|
       .row
         .col-sm-2 = t('amount')
         .col-sm-6 = r.number_field :reset_amount, class: 'form-control', value: @drug.amount_current, min: 0, step: 0.5

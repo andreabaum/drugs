@@ -1,8 +1,8 @@
 p#notice = notice
 
-.panel.panel-default
+.panel.panel-default.drug
 
-  .panel-heading
+  .panel-heading.active
     h3.panel-title = t('drugs')
 
   .panel-body
@@ -10,38 +10,41 @@ p#notice = notice
       / Header
       .list-group-item.header.hidden-xs
         .row
-          .col-sm-6 = t('name')
-          .col-sm-2 = t('dose')
-          .col-sm-2 = t('amount')
-          .col-sm-2 = t('ends_at')
+          .col-sm-9 = t('name')
+          .col-sm-1 = t('dose')
+          /.col-sm-2 = t('amount')
+          .col-sm-2= t('ends_at')
 
       / Drug list
       - @drugs.select{ |drug| drug[:active]}.each do |drug|
         = link_to drug, class: "list-group-item"
           .row
-              .col-sm-6
+              .col-sm-9
                 = drug.name
+                span.text-muted.m-l = drug.format
                 .pull-right
                   meter[value="#{drug.ends_in.to_f/14}" low="0.4" high="0.8" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
-              .col-sm-2.hidden-xs = drug.dose_clean
+              .col-sm-1.hidden-xs = drug.dose_clean
               - if drug.amount_current > 0
-                .col-sm-2.hidden-xs = drug.amount_current
+                /.col-sm-2.hidden-xs = drug.amount_current
                 .col-sm-2[title='#{t('ends_in_days', days: drug.ends_in)}']
                   = drug.ends_at_formatted
 
-
-      .list-group-item
+      .list-group-item.footer
         = form_for(:drug) do |f|
-          .col-sm-6.no-padding-left
+          .col-sm-9.no-padding-left
             = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
-          .col-sm-2
+          .col-sm-1
             = f.number_field :dose, step: 0.5, class: 'form-control', value: 1, min: 0.5
-          .col-sm-2
+          /.col-sm-2
             = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
           = f.hidden_field :reset_at, value: Date.today
-          = f.submit t('add'), class: 'btn btn-default'
+          = f.submit t('add'), class: 'btn btn-default m-l-x'
+
+    hr
 
     .list-group
       - @drugs.select{ |drug| !drug[:active]}.each do |drug|
         = link_to drug, class: "list-group-item not-active"
           = drug.name
+          .pull-right = t('not_active')

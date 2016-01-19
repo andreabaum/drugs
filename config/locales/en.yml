@@ -43,6 +43,9 @@ en:
   ends_at: Termina
   ends_in_days: In %{days} giorni
   name: Nome
+  format: Tipo
+  no_purchase: Nessun acquisto
+  details: Dettagli
 
   placeholder:
     drug: 'Medicina'

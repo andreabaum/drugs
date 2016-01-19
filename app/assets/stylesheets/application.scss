@@ -35,12 +35,21 @@ body {
   }
 }
 
+.panel-body {
+  padding: 30px 0px 20px 0px;
+
+  .list-group-item {
+    border-radius: 0;
+    border-left: 0px !important;
+    border-right: 0 !important;
+  }
+}
+
 .editor {
   .panel-heading {
     background-color: #F7D358 !important;
   }
 }
-
 
 .drug {
   .panel-heading.active {
@@ -74,6 +83,10 @@ a.list-group-item:hover {
   background-color: #f4f4f4 !important;
   height: 35px;
   line-height: 5px;
+}
+
+.list-group-item.footer {
+  background-color: #fafafa !important;
 }
 
 .btn {
@@ -121,8 +134,8 @@ input[type='number'] {
 }
 
 input[type='submit'] {
-  border: 1px solid #6ccccc;
-  background-color: #b1F9aF;
+  border: 1px solid #8ccfcf;
+  background-color: #CEF6CE;
   color: #555;
   padding: 5px;
   border-radius: 4px;
@@ -144,6 +157,19 @@ input[type='submit']:hover {
   margin-right: 8px;
 }
 
+.m-l {
+  margin-left: 8px;
+}
+
+.m-l-x {
+  margin-left: 25px;
+}
+
+.text-muted {
+  color: #c2c2c2;
+
+}
+
 a.btn.danger:hover {
   color: #B40404;
 }
@@ -151,8 +177,8 @@ a.btn.danger:hover {
 /* HTML5 meter - @see http://blog.teamtreehouse.com/use-meter-progress-elements */
 
 meter {
-  width: 50px;
-  height: 20px;
+  width: 30px;
+  height: 8px;
   border-radius: 2px;
   -webkit-appearance: none; /* Reset appearance */
   -moz-appearance: none;
@@ -173,4 +199,11 @@ meter::-webkit-meter-suboptimum-value {
 
 meter::-webkit-meter-even-less-good-value {
     background: #FE4E4E;
+}
+h4 {
+  margin-left: 10px;
+  font-style: italic;
+}
+hr {
+  margin: 40px 25px;
 }

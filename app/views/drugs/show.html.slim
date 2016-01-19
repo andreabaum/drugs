@@ -8,13 +8,25 @@ p#notice = notice
         .label = t('not_active')
 
   .panel-body
-    - if @drug.note && !@drug.note.empty?
-        .row
-          .col-sm-8
-            .well.well-sm
-              em = @drug.note
 
     .list-group
+      / Header
+      .list-group-item.header.hidden-xs
+        .row
+          .col-sm-12 = t('details')
+
+      - if @drug.note && !@drug.note.empty?
+          .row
+            .col-sm-8
+              .well.well-sm
+                em = @drug.note
+
+      - if @drug.format && !@drug.format.empty?
+        .list-group-item
+          .row
+            .col-sm-2 = t('format')
+            .col-sm-6 = @drug.format
+
       .list-group-item
         .row
           .col-sm-2 = t('dose')
@@ -36,30 +48,37 @@ p#notice = notice
     hr
 
     / Purchases
-    .row
-      .col-sm-2 = t('purchases_last')
-      .col-sm-10
-        .list-group
-          - if @drug.purchases_after_reset.any?
-            - @drug.purchases_after_reset.each do |purchase|
-              .list-group-item
-                .row
-                  .col-sm-6 = purchase.when_formatted
-                  .col-sm-4 = purchase.amount
-                  .col-sm-2
-                    = link_to purchase, method: :delete, data: { confirm: 'Are you sure?' }
-                      .i.glyphicon.glyphicon-remove.text-danger
+    .list-group
+      / Header
+      .list-group-item.header.hidden-xs
+        .row
+          .col-sm-12 = t('purchases')
 
+      - if @drug.purchases_after_reset.any?
+        - @drug.purchases_after_reset.each do |purchase|
           .list-group-item
-            = form_for([@drug, Purchase.new]) do |f|
-              / http://apidock.com/rails/ActionView/Helpers/DateHelper/date_select
-              .col-sm-6.no-padding-left
-                / Hide purchase.when field
-                / = f.date_select :when, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
-                = f.hidden_field :when, value: Date.today
-              .col-sm-4
-                = f.number_field :amount, class: 'form-control', value: 0, min: 0
-              = f.submit t('add'), class: 'btn btn-default'
+            .row
+              .col-sm-6 = purchase.when_formatted
+              .col-sm-4 = purchase.amount
+              .col-sm-2
+                = link_to purchase, method: :delete, data: { confirm: 'Are you sure?' }
+                  .i.glyphicon.glyphicon-remove.text-danger
+      - else
+        .list-group-item
+          .row
+            .col-sm-6
+              em.text-muted = t('no_purchase')
+
+      .list-group-item.footer
+        = form_for([@drug, Purchase.new]) do |f|
+          / http://apidock.com/rails/ActionView/Helpers/DateHelper/date_select
+          .col-sm-6.no-padding-left
+            / Hide purchase.when field
+            / = f.date_select :when, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
+            = f.hidden_field :when, value: Date.today
+          .col-sm-4
+            = f.number_field :amount, class: 'form-control', value: 0, min: 0
+          = f.submit t('add'), class: 'btn btn-default'
 
   .panel-footer
     .row
