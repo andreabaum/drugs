@@ -30,7 +30,7 @@ class DrugsController < ApplicationController
 
     respond_to do |format|
       if @drug.save
-        format.html { redirect_to @drug, notice: 'Drug was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Drug was successfully created.' }
         format.json { render :show, status: :created, location: @drug }
       else
         format.html { render :new }
@@ -71,6 +71,6 @@ class DrugsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def drug_params
-      params.require(:drug).permit(:name, :note, :active)
+      params.require(:drug).permit(:name, :note, :active, :dose, :reset_amount, :reset_at)
     end
 end

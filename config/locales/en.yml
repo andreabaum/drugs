@@ -26,16 +26,22 @@ en:
   purchase: Acquisto
   purchases: Acquisti
   purchases_last: Ultimi Acquisti
+  dose: Dose
 
   add: Aggiungi
   edit: Modifica
   delete: Elimina
   reset: Reset
+  save: Salva
+  index: Elenco
 
   note: Commento
   amount: Quantità
   when: Data
+  active: Attiva
   not_active: Sospesa
+  ends_at: Termina
+  name: Nome
 
   placeholder:
     drug: 'Medicina'

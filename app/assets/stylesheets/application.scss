@@ -23,6 +23,11 @@ body {
   background-color: #D8D8D8;
 }
 
+.panel {
+  margin: auto;
+  width: 800px;
+}
+
 .panel-heading {
   height: 50px;
   h3 {
@@ -30,16 +35,16 @@ body {
   }
 }
 
-.drugs {
+.editor {
   .panel-heading {
-    background-color: #9ae297 !important;
+    background-color: #F7D358 !important;
   }
 }
 
 
 .drug {
   .panel-heading.active {
-    background-color: #8ae267 !important;
+    background-color: #9ae297 !important;
   }
   .panel-heading.not-active {
     background-color: #ccc !important;
@@ -53,7 +58,22 @@ body {
 }
 
 .list-group-item.not-active {
+  color: #aaa !important;
+}
+
+
+a.list-group-item:hover {
+  background-color: #CEF6CE !important  ;
+}
+
+.list-group-item:hover {
+  background-color: #fafafa !important  ;
+}
+
+.list-group-item.header {
   background-color: #f4f4f4 !important;
+  height: 35px;
+  line-height: 5px;
 }
 
 .btn {
@@ -74,6 +94,52 @@ select {
   border-radius: 4px;
 }
 
+textarea {
+  width: 400px;
+  height: 200px;
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+  color: #555;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+input[type='text'], input[type='number'] {
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+  color: #555;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+input[type='text'] {
+  width: 300px;
+}
+
+input[type='number'] {
+  width: 60px;
+}
+
+input[type='submit'] {
+  border: 1px solid #6ccccc;
+  background-color: #b1F9aF;
+  color: #555;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+input[type='submit']:hover {
+  background-color: #81F79F;
+}
+
 .well {
   background-color: #fafafa;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.m-r {
+  margin-right: 8px;
 }

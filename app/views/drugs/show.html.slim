@@ -9,35 +9,56 @@ p#notice = notice
 
   .panel-body
     - if @drug.note && !@drug.note.empty?
-      .row
-        .col-sm-8
-          .well.well-sm
-            em = @drug.note
+        .row
+          .col-sm-8
+            .well.well-sm
+              em = @drug.note
 
-    .row
-      .col-sm-2 = t('amount')
-      .col-sm-6 = @drug.amount_current
+    .list-group
+      .list-group-item
+        .row
+          .col-sm-2 = t('ends_at')
+          .col-sm-6 = @drug.ends_at_formatted
+
+      .list-group-item
+        .row
+          .col-sm-2 = t('dose')
+          .col-sm-6 = @drug.dose_clean
+
+      .list-group-item
+        .row
+          .col-sm-2 = t('amount')
+          .col-sm-10 = @drug.amount_current
 
     hr
 
     / Purchases
     .row
       .col-sm-2 = t('purchases_last')
-      - if @drug.purchases.any?
-        .col-sm-6
-          .list-group
-            .list-group-item
-              = form_for([@drug, Purchase.new]) do |f|
-                .col-sm-6 = f.date_select :when
-                .col-sm-2 = f.text_field :amount, class: 'form-control', value: @drug.amount_last_purchased
-                = f.submit t('add'), class: 'btn btn-default'
-            - @drug.purchases_sorted.each do |purchase|
-              = link_to purchase, class: "list-group-item"
-                = purchase.when_formatted
-                span.badge = purchase.amount
+      .col-sm-10
+        .list-group
+          - if @drug.purchases_after_reset.any?
+            - @drug.purchases_after_reset.each do |purchase|
+              .list-group-item
+                .row
+                  .col-sm-6 = purchase.when_formatted
+                  .col-sm-4 = purchase.amount
+                  .col-sm-2
+                    = link_to purchase, method: :delete, data: { confirm: 'Are you sure?' }
+                      .i.glyphicon.glyphicon-remove.text-danger
 
-.row
-  .col-sm-6
-    = link_to t('home'), root_path, class: 'btn btn-info'
-    = link_to t('edit'), edit_drug_path(@drug), class: 'btn btn-default'
-    = link_to t('delete'), @drug, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }
+          .list-group-item
+            = form_for([@drug, Purchase.new]) do |f|
+              / http://apidock.com/rails/ActionView/Helpers/DateHelper/date_select
+              .col-sm-6.no-padding-left = f.date_select :when, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
+              .col-sm-4 = f.number_field :amount, class: 'form-control', value: @drug.amount_last_purchased, min: 0
+              = f.submit t('add'), class: 'btn btn-default'
+
+  .panel-footer
+    .row
+      .col-sm-12
+        = link_to t('delete'), @drug, class: 'btn btn-default pull-right', method: :delete, data: { confirm: 'Are you sure?' }
+        = link_to t('edit'), edit_drug_path(@drug), class: 'btn btn-default pull-right'
+        = link_to root_path, class: 'btn btn-default pull-right'
+          .i.glyphicon.glyphicon-home.m-r
+          = t('index')

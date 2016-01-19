@@ -1,28 +1,38 @@
 p#notice = notice
 
-.panel.panel-default.drugs
+.panel.panel-default.drug
 
   .panel-heading
     h3.panel-title = t('drugs')
 
   .panel-body
     .list-group
+      .list-group-item.header
+        .row
+          .col-sm-6 = t('name')
+          .col-sm-2 = t('dose')
+          .col-sm-2 = t('amount')
+          .col-sm-2 = t('ends_at')
+
       - @drugs.select{ |drug| drug[:active]}.each do |drug|
+
         = link_to drug, class: "list-group-item"
-          = drug.name
-          - if drug.purchases.any? && drug.active
-            span.badge = drug.ends_at
-            span.badge = drug.amount_current
+          .row
+            .col-sm-6 = drug.name
+            .col-sm-2 = drug.dose_clean
+            - if drug.amount_current > 0
+              .col-sm-2 = drug.amount_current
+              .col-sm-2 = drug.ends_at_formatted
 
       .list-group-item
         = form_for(:drug) do |f|
-          .col-sm-4 = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
+          .col-sm-6.no-padding-left = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
+          .col-sm-2 = f.number_field :dose, step: 0.5, class: 'form-control', value: 1, min: 0.5
+          .col-sm-2 = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
+          = f.hidden_field :reset_at, value: Date.today
           = f.submit t('add'), class: 'btn btn-default'
 
     .list-group
       - @drugs.select{ |drug| !drug[:active]}.each do |drug|
         = link_to drug, class: "list-group-item not-active"
           = drug.name
-          - if drug.purchases.any? && drug.active
-            span.badge = drug.ends_at
-            span.badge = drug.current_amount

@@ -21,5 +21,12 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  database: drugs
+  pool: 5
+  username: admincrl1IE6
+  password: tyTdBiIYe8NW
+  # socket: /tmp/mysql.sock
+  # echo $OPENSHIFT_MYSQL_DB_SOCKET
+  socket: /var/lib/openshift/569c0eb12d5271dd230000c0/mysql//socket/mysql.sock
