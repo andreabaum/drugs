@@ -17,11 +17,6 @@ p#notice = notice
     .list-group
       .list-group-item
         .row
-          .col-sm-2 = t('ends_at')
-          .col-sm-6 = @drug.ends_at_formatted
-
-      .list-group-item
-        .row
           .col-sm-2 = t('dose')
           .col-sm-6 = @drug.dose_clean
 
@@ -29,6 +24,14 @@ p#notice = notice
         .row
           .col-sm-2 = t('amount')
           .col-sm-10 = @drug.amount_current
+
+      .list-group-item
+        .row
+          .col-sm-2 = t('ends_at')
+          .col-sm-2
+            = @drug.ends_at_formatted
+          .col-sm-2
+            = t('ends_in_days', days: @drug.ends_in)
 
     hr
 
@@ -50,15 +53,23 @@ p#notice = notice
           .list-group-item
             = form_for([@drug, Purchase.new]) do |f|
               / http://apidock.com/rails/ActionView/Helpers/DateHelper/date_select
-              .col-sm-6.no-padding-left = f.date_select :when, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
-              .col-sm-4 = f.number_field :amount, class: 'form-control', value: @drug.amount_last_purchased, min: 0
+              .col-sm-6.no-padding-left
+                / Hide purchase.when field
+                / = f.date_select :when, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
+                = f.hidden_field :when, value: Date.today
+              .col-sm-4
+                = f.number_field :amount, class: 'form-control', value: 0, min: 0
               = f.submit t('add'), class: 'btn btn-default'
 
   .panel-footer
     .row
       .col-sm-12
-        = link_to t('delete'), @drug, class: 'btn btn-default pull-right', method: :delete, data: { confirm: 'Are you sure?' }
-        = link_to t('edit'), edit_drug_path(@drug), class: 'btn btn-default pull-right'
+        = link_to @drug, class: 'btn btn-default pull-right danger', method: :delete, data: { confirm: 'Are you sure?' }
+          .i.glyphicon.glyphicon-trash.m-r
+          = t('delete')
+        = link_to edit_drug_path(@drug), class: 'btn btn-default pull-right'
+          .i.glyphicon.glyphicon-pencil.m-r
+          = t('edit')
         = link_to root_path, class: 'btn btn-default pull-right'
           .i.glyphicon.glyphicon-home.m-r
           = t('index')

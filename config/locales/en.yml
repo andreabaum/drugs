@@ -41,6 +41,7 @@ en:
   active: Attiva
   not_active: Sospesa
   ends_at: Termina
+  ends_in_days: In %{days} giorni
   name: Nome
 
   placeholder:

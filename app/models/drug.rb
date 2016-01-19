@@ -34,8 +34,6 @@ class Drug < ActiveRecord::Base
     i == f ? i : f
   end
 
-
-
   def amount_last_purchased
     (purchases.any?) ? purchases.last.amount : 0
   end
@@ -44,8 +42,12 @@ class Drug < ActiveRecord::Base
     if dose
       Date.today + (amount_current/dose)
     else
-      nil
+      Date.today
     end
+  end
+
+  def ends_in
+    (ends_at - Date.today).to_i
   end
 
   def ends_at_formatted

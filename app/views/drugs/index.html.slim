@@ -1,34 +1,43 @@
 p#notice = notice
 
-.panel.panel-default.drug
+.panel.panel-default
 
   .panel-heading
     h3.panel-title = t('drugs')
 
   .panel-body
     .list-group
-      .list-group-item.header
+      / Header
+      .list-group-item.header.hidden-xs
         .row
           .col-sm-6 = t('name')
           .col-sm-2 = t('dose')
           .col-sm-2 = t('amount')
           .col-sm-2 = t('ends_at')
 
+      / Drug list
       - @drugs.select{ |drug| drug[:active]}.each do |drug|
-
         = link_to drug, class: "list-group-item"
           .row
-            .col-sm-6 = drug.name
-            .col-sm-2 = drug.dose_clean
-            - if drug.amount_current > 0
-              .col-sm-2 = drug.amount_current
-              .col-sm-2 = drug.ends_at_formatted
+              .col-sm-6
+                = drug.name
+                .pull-right
+                  meter[value="#{drug.ends_in.to_f/14}" low="0.4" high="0.8" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
+              .col-sm-2.hidden-xs = drug.dose_clean
+              - if drug.amount_current > 0
+                .col-sm-2.hidden-xs = drug.amount_current
+                .col-sm-2[title='#{t('ends_in_days', days: drug.ends_in)}']
+                  = drug.ends_at_formatted
+
 
       .list-group-item
         = form_for(:drug) do |f|
-          .col-sm-6.no-padding-left = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
-          .col-sm-2 = f.number_field :dose, step: 0.5, class: 'form-control', value: 1, min: 0.5
-          .col-sm-2 = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
+          .col-sm-6.no-padding-left
+            = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
+          .col-sm-2
+            = f.number_field :dose, step: 0.5, class: 'form-control', value: 1, min: 0.5
+          .col-sm-2
+            = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
           = f.hidden_field :reset_at, value: Date.today
           = f.submit t('add'), class: 'btn btn-default'
 

@@ -4,7 +4,7 @@ class DrugsController < ApplicationController
   # GET /drugs
   # GET /drugs.json
   def index
-    @drugs = Drug.all
+    @drugs = Drug.all.sort_by{|e| e.ends_at}
   end
 
   # GET /drugs/1
