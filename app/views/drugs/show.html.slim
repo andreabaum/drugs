@@ -8,6 +8,12 @@ p#notice = notice
         .label = t('not_active')
 
   .panel-body
+    - if @drug.note && !@drug.note.empty?
+      .row
+        .col-sm-1
+        .col-sm-10
+          .well.well-sm
+            em.text-muted = @drug.note
 
     .list-group
       / Header
@@ -15,17 +21,10 @@ p#notice = notice
         .row
           .col-sm-12 = t('details')
 
-      - if @drug.note && !@drug.note.empty?
-          .row
-            .col-sm-8
-              .well.well-sm
-                em = @drug.note
-
-      - if @drug.format && !@drug.format.empty?
-        .list-group-item
-          .row
-            .col-sm-2 = t('format')
-            .col-sm-6 = @drug.format
+      .list-group-item
+        .row
+          .col-sm-2 = t('format')
+          .col-sm-6 = @drug.format
 
       .list-group-item
         .row

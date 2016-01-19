@@ -47,4 +47,5 @@ p#notice = notice
       - @drugs.select{ |drug| !drug[:active]}.each do |drug|
         = link_to drug, class: "list-group-item not-active"
           = drug.name
+          span.text-muted.m-l = drug.format
           .pull-right = t('not_active')
