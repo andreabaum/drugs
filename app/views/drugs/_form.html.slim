@@ -1,9 +1,9 @@
-p#notice = notice
+/p#notice = notice
 
 .panel.panel-default.editor
 
   = render "partials/nav"
-  
+
   .panel-heading class=(@drug.active ? 'active' : 'not-active')
     h3.panel-title
       = @drug.name
