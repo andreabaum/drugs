@@ -23,26 +23,65 @@ p#notice = notice
 
       .list-group-item
         .row
-          .col-sm-2 = t('format')
+          .col-sm-3 = t('name')
+          .col-sm-6 = @drug.name
+
+      .list-group-item
+        .row
+          .col-sm-3 = t('format')
           .col-sm-6 = @drug.format
 
       .list-group-item
         .row
-          .col-sm-2 = t('dose')
+          .col-sm-3 = t('dose')
           .col-sm-6 = @drug.dose_clean
 
       .list-group-item
         .row
-          .col-sm-2 = t('amount')
-          .col-sm-10 = @drug.amount_current
+          .col-sm-3 = t('amount')
+          .col-sm-6 = @drug.amount_current
 
       .list-group-item
         .row
-          .col-sm-2 = t('ends_at')
+          .col-sm-3 = t('ends_at')
           .col-sm-2
             = @drug.ends_at_formatted
           .col-sm-2
             = t('ends_in_days', days: @drug.ends_in)
+
+    hr
+
+    / Consumptions
+    .list-group
+    / Header
+    .list-group-item.header.hidden-xs
+      .row
+        .col-sm-12 = t('consumptions')
+
+    - if @drug.consumptions.any?
+      - @drug.consumptions_sorted.each do |consumption|
+        .list-group-item
+          .row
+            .col-sm-3
+            .col-sm-3 = consumption.when_formatted
+            .col-sm-4 = consumption.amount_clean
+            .col-sm-2
+              = link_to consumption, method: :delete, data: { confirm: 'Are you sure?' }
+                .i.glyphicon.glyphicon-remove.text-danger
+    - else
+      .list-group-item
+        .row
+          .col-sm-6
+            em.text-muted = t('no_consumption')
+
+    .list-group-item.footer
+      = form_for([@drug, Consumption.new]) do |c|
+        .col-sm-3
+        .col-sm-3.no-padding-left
+          = c.time_select :when, minute_step: 30, ignore_date: true
+        .col-sm-4
+          = c.number_field :amount, class: 'form-control', value: 1, min: 0.5, step: 0.5
+        = c.submit t('add'), class: 'btn btn-default'
 
     hr
 
@@ -57,7 +96,8 @@ p#notice = notice
         - @drug.purchases_after_reset.each do |purchase|
           .list-group-item
             .row
-              .col-sm-6 = purchase.when_formatted
+              .col-sm-3
+              .col-sm-3 = purchase.when_formatted
               .col-sm-4 = purchase.amount
               .col-sm-2
                 = link_to purchase, method: :delete, data: { confirm: 'Are you sure?' }
@@ -70,8 +110,9 @@ p#notice = notice
 
       .list-group-item.footer
         = form_for([@drug, Purchase.new]) do |f|
-          / http://apidock.com/rails/ActionView/Helpers/DateHelper/date_select
-          .col-sm-6.no-padding-left
+          / @see http://apidock.com/rails/ActionView/Helpers/DateHelper/date_select
+          .col-sm-3
+          .col-sm-3.no-padding-left
             / Hide purchase.when field
             / = f.date_select :when, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
             = f.hidden_field :when, value: Date.today

@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119145417) do
+ActiveRecord::Schema.define(version: 20160120114300) do
+
+  create_table "consumptions", force: :cascade do |t|
+    t.integer  "drug_id"
+    t.time     "when"
+    t.float    "amount"
+    t.text     "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "consumptions", ["drug_id"], name: "index_consumptions_on_drug_id"
 
   create_table "drugs", force: :cascade do |t|
     t.string   "name"
@@ -19,7 +30,6 @@ ActiveRecord::Schema.define(version: 20160119145417) do
     t.boolean  "active"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.float    "dose"
     t.float    "reset_amount"
     t.date     "reset_at"
     t.string   "format"

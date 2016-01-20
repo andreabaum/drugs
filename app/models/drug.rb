@@ -1,7 +1,12 @@
 class Drug < ActiveRecord::Base
   has_many :purchases
+  has_many :consumptions
 
   validates :name, :presence => true
+
+  def consumptions_sorted
+    consumptions.order(:when)
+  end
 
   def purchases_sorted
     purchases.order(when: :desc).limit(10)
@@ -19,13 +24,17 @@ class Drug < ActiveRecord::Base
     if reset_at && dose && !reset_amount.nil?
       amount = reset_amount
       purchases_after_reset.each{ |i| amount += i.amount }
-      amount - dose*(Date.today - reset_at)
+      amount - dose * (Date.today - reset_at)
       # Remove trailing zero
       i, f = amount.to_i, amount.to_f
       i == f ? i : f
     else
       purchases.sum(:amount)
     end
+  end
+
+  def dose
+    consumptions.sum(:amount)
   end
 
   def dose_clean
@@ -39,7 +48,7 @@ class Drug < ActiveRecord::Base
   end
 
   def ends_at
-    if dose
+    if dose > 0
       Date.today + (amount_current/dose)
     else
       Date.today

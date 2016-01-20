@@ -27,6 +27,7 @@ en:
   purchases: Acquisti
   purchases_last: Ultimi Acquisti
   dose: Dose
+  consumptions: Quando
 
   add: Aggiungi
   edit: Modifica
@@ -45,6 +46,7 @@ en:
   name: Nome
   format: Tipo
   no_purchase: Nessun acquisto
+  no_consumption: Quando deve essere presa?
   details: Dettagli
 
   placeholder:

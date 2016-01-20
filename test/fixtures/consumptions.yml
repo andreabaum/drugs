@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  when: 2016-01-20 10:31:22
+  note: MyText
+  amount: 1
+  drug: 
+
+two:
+  when: 2016-01-20 10:31:22
+  note: MyText
+  amount: 1
+  drug: 

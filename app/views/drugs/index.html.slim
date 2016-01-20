@@ -23,18 +23,21 @@ p#notice = notice
                 = drug.name
                 span.text-muted.m-l = drug.format
                 .pull-right
-                  meter[value="#{drug.ends_in.to_f/14}" low="0.4" high="0.8" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
-              .col-sm-1.hidden-xs = drug.dose_clean
-              - if drug.amount_current > 0
-                /.col-sm-2.hidden-xs = drug.amount_current
-                .col-sm-2[title='#{t('ends_in_days', days: drug.ends_in)}']
-                  = drug.ends_at_formatted
+                  meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
+              - if drug.dose > 0
+                .col-sm-1.hidden-xs
+                  = drug.dose_clean
+                - if drug.amount_current > 0
+                  /.col-sm-2.hidden-xs = drug.amount_current
+                  .col-sm-2[title='#{t('ends_in_days', days: drug.ends_in)}']
+                    = drug.ends_at_formatted
 
+      / Add drug
       .list-group-item.footer
         = form_for(:drug) do |f|
-          .col-sm-9.no-padding-left
+          .col-sm-10.no-padding-left
             = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
-          .col-sm-1
+          /.col-sm-1
             = f.number_field :dose, step: 0.5, class: 'form-control', value: 1, min: 0.5
           /.col-sm-2
             = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
