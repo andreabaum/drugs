@@ -2,7 +2,7 @@ class ConsumptionsController < ApplicationController
   before_action :set_consumption, only: [:show, :edit, :update, :destroy]
 
   def index
-    @consumptions = Consumption.all
+    @consumptions = Consumption.all.sort_by{|e| e.when}
   end
 
   def show

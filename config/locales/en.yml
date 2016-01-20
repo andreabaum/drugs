@@ -22,11 +22,12 @@
 en:
   home: Home
   drug: Medicina
-  drugs: Elenco Medicine
+  drugs: Elenco
   purchase: Acquisto
   purchases: Acquisti
   purchases_last: Ultimi Acquisti
   dose: Dose
+  consumption: Quando
   consumptions: Quando
 
   add: Aggiungi
@@ -35,10 +36,12 @@ en:
   reset: Reset
   save: Salva
   index: Elenco
+  agenda: Agenda
 
   note: Commento
   amount: Quantità
   when: Data
+  time: Orario
   active: Attiva
   not_active: Sospesa
   ends_at: Termina

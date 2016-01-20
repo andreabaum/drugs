@@ -23,6 +23,24 @@ body {
   background-color: #D8D8D8;
 }
 
+#nav {
+  position: relative;
+  left: -2px;
+  top: 47px;
+  width: 2px;
+  display: block;
+  float: left;
+
+  .btn {
+      margin-top: 2px;
+      padding-right: 15px;
+      border-right: 0px;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      min-width: 100px;
+  }
+}
+
 .panel {
   margin: auto;
   width: 800px;
@@ -49,6 +67,10 @@ body {
   .panel-heading {
     background-color: #F7D358 !important;
   }
+}
+
+.agenda .panel-heading {
+  background-color: #99bbff !important;
 }
 
 .drug {

@@ -1,6 +1,6 @@
 class Drug < ActiveRecord::Base
-  has_many :purchases
-  has_many :consumptions
+  has_many :purchases, dependent: :destroy
+  has_many :consumptions, dependent: :destroy
 
   validates :name, :presence => true
 
@@ -21,7 +21,7 @@ class Drug < ActiveRecord::Base
   end
 
   def amount_current
-    if reset_at && dose && !reset_amount.nil?
+    if reset_at && !reset_amount.nil?
       amount = reset_amount
       purchases_after_reset.each{ |i| amount += i.amount }
       amount - dose * (Date.today - reset_at)

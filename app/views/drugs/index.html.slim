@@ -1,6 +1,9 @@
 p#notice = notice
 
+
 .panel.panel-default.drug
+
+  = render "partials/nav"
 
   .panel-heading.active
     h3.panel-title = t('drugs')
@@ -12,7 +15,6 @@ p#notice = notice
         .row
           .col-sm-9 = t('name')
           .col-sm-1 = t('dose')
-          /.col-sm-2 = t('amount')
           .col-sm-2= t('ends_at')
 
       / Drug list
@@ -28,7 +30,6 @@ p#notice = notice
                 .col-sm-1.hidden-xs
                   = drug.dose_clean
                 - if drug.amount_current > 0
-                  /.col-sm-2.hidden-xs = drug.amount_current
                   .col-sm-2[title='#{t('ends_in_days', days: drug.ends_in)}']
                     = drug.ends_at_formatted
 
@@ -37,8 +38,6 @@ p#notice = notice
         = form_for(:drug) do |f|
           .col-sm-10.no-padding-left
             = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
-          /.col-sm-1
-            = f.number_field :dose, step: 0.5, class: 'form-control', value: 1, min: 0.5
           /.col-sm-2
             = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
           = f.hidden_field :reset_at, value: Date.today

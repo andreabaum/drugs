@@ -1,0 +1,34 @@
+p#notice = notice
+
+.panel.panel-default.agenda
+
+  = render "partials/nav"
+
+  .panel-heading.active
+    h3.panel-title = t('agenda')
+
+  .panel-body
+    .list-group
+      / Header
+      .list-group-item.header.hidden-xs
+        .row
+          .col-sm-1
+          .col-sm-2 = t('time')
+          .col-sm-2 = t('amount')
+          .col-sm-6 = t('drug')
+
+      / consumption list
+      - @consumptions.each do |consumption|
+        - if consumption.drug.active
+          - drug = consumption.drug
+          = link_to drug, class: "list-group-item"
+            .row
+              .col-sm-1
+              .col-sm-2
+                = consumption.when_formatted
+              .col-sm-2
+                = consumption.amount_clean
+              .col-sm-6
+                = drug.name
+                .pull-right
+                  meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']

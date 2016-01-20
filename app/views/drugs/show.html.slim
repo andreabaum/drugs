@@ -1,6 +1,9 @@
 p#notice = notice
 
 .panel.panel-default.drug
+
+  = render "partials/nav"
+
   .panel-heading class=(@drug.active ? 'active' : 'not-active')
     h3.panel-title
       = @drug.name
@@ -129,6 +132,3 @@ p#notice = notice
         = link_to edit_drug_path(@drug), class: 'btn btn-default pull-right'
           .i.glyphicon.glyphicon-pencil.m-r
           = t('edit')
-        = link_to root_path, class: 'btn btn-default pull-right'
-          .i.glyphicon.glyphicon-home.m-r
-          = t('index')

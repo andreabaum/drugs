@@ -1,6 +1,9 @@
 p#notice = notice
 
 .panel.panel-default.editor
+
+  = render "partials/nav"
+  
   .panel-heading class=(@drug.active ? 'active' : 'not-active')
     h3.panel-title
       = @drug.name
@@ -58,6 +61,3 @@ p#notice = notice
     .row
       .col-sm-12
         = link_to t('cancel'), @drug, class: 'btn btn-default pull-right'
-        = link_to root_path, class: 'btn btn-default pull-right'
-          i.glyphicon.glyphicon-home.m-r
-          = t('index')
