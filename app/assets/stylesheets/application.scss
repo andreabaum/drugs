@@ -70,7 +70,7 @@ body {
 }
 
 .agenda .panel-heading {
-  background-color: #99bbff !important;
+  background-color: #99bbff  !important;
 }
 
 .drug {
@@ -86,6 +86,10 @@ body {
   .panel-heading {
     background-color: #A9D0F5 !important;
   }
+}
+
+.list-group-item {
+  padding: 10px 40px;
 }
 
 .list-group-item.not-active {
