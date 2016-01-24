@@ -24,7 +24,7 @@ class Drug < ActiveRecord::Base
     if reset_at && !reset_amount.nil?
       amount = reset_amount
       purchases_after_reset.each{ |i| amount += i.amount }
-      amount - dose * (Date.today - reset_at)
+      amount - dose * (Date.today - reset_at).to_i
       # Remove trailing zero
       i, f = amount.to_i, amount.to_f
       i == f ? i : f
