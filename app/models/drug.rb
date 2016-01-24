@@ -50,7 +50,7 @@ class Drug < ActiveRecord::Base
   end
 
   def ends_at
-    if dose > 0
+    if dose && dose > 0
       Date.today + (amount_current/dose)
     else
       Date.today

@@ -5,6 +5,30 @@ class DrugsControllerTest < ActionController::TestCase
     @drug = drugs(:one)
   end
 
+  test "should get index" do
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:drugs)
+  end
+
+  test "should get new" do
+    get :new
+    assert_response :success
+  end
+
+  test "should create drug" do
+    assert_difference('Drug.count') do
+      post :create, drug: { active: @drug.active, name: @drug.name, note: @drug.note }
+    end
+
+    assert_redirected_to root_path
+  end
+
+  test "should show drug" do
+    get :show, id: @drug
+    assert_response :success
+  end
+
   test "should get edit" do
     get :edit, id: @drug
     assert_response :success
