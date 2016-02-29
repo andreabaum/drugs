@@ -92,11 +92,12 @@
           = c.number_field :amount, class: 'form-control', value: 1, min: 0.5, step: 0.5
         = c.submit t('add'), class: 'btn btn-default'
 
-    .list-group-item
-      .hint.text-muted
-        = t('consumptions_not_active')
-        - @drug.consumptions.each do |consumption|
-          - unless consumption.is_active?
+
+    - if @drug.consumptions.not_active.any?
+      .list-group-item
+        .hint.text-muted
+          = t('consumptions_not_active')
+          - @drug.consumptions.not_active.each do |consumption|
             = link_to edit_consumption_path(consumption)
               span.m-l = "#{consumption.amount_clean} (dal #{consumption.starts_at_formatted} al #{consumption.ends_at_formatted})"
 

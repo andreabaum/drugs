@@ -4,6 +4,7 @@ class Consumption < ActiveRecord::Base
   validates :drug, :presence => true
 
   scope :active, -> { where('? >= starts_at AND ? <= ends_at', Date.today, Date.today) }
+  scope :not_active, -> { where('? < starts_at OR ? > ends_at', Date.today, Date.today) }
 
   def amount_clean
     # Remove trailing zero
@@ -24,7 +25,7 @@ class Consumption < ActiveRecord::Base
   end
 
   def is_active?
-    Date.today >= starts_at && Date.today <= ends_at
+    (starts_at..ends_at).include?(Date.today)
   end
 
   # Return the number days the consumption was active, after the drug has been reset
