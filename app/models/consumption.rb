@@ -1,10 +1,13 @@
 class Consumption < ActiveRecord::Base
   belongs_to :drug
+  belongs_to :user
 
   validates :drug, :presence => true
 
   scope :active, -> { where('? >= starts_at AND ? <= ends_at', Date.today, Date.today) }
   scope :not_active, -> { where('? < starts_at OR ? > ends_at', Date.today, Date.today) }
+
+  scope :by_user, -> (user_id) { where(user_id: user_id) }
 
   def amount_clean
     # Remove trailing zero

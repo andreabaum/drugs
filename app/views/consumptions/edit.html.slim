@@ -29,6 +29,11 @@
 
         .list-group-item
           .row
+            .col-sm-3 = t('user')
+            .col-sm-6 = f.select :user_id, User.all.collect {|u| [ u.name, u.id ] }, { include_blank: true }
+
+        .list-group-item
+          .row
             .col-sm-3 = t('amount')
             .col-sm-6 = f.number_field :amount, class: 'form-control', min: 0.5, step: 0.5
 

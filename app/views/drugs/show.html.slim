@@ -92,7 +92,6 @@
           = c.number_field :amount, class: 'form-control', value: 1, min: 0.5, step: 0.5
         = c.submit t('add'), class: 'btn btn-default'
 
-
     - if @drug.consumptions.not_active.any?
       .list-group-item
         .hint.text-muted

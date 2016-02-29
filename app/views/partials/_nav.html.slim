@@ -3,6 +3,7 @@
   = link_to root_path, class: 'btn btn-default pull-right'
     .i.glyphicon.glyphicon-menu-hamburger.m-r
     = t('index')
-  = link_to consumptions_path, class: 'btn btn-default pull-right'
-    .i.glyphicon.glyphicon-time.m-r
-    = t('agenda')
+  - User.all.each do |user|
+    = link_to consumptions_path(user_id: user.id), class: 'btn btn-default pull-right'
+      .i.glyphicon.glyphicon-time.m-r
+      = user.name

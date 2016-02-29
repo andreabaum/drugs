@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229103910) do
+ActiveRecord::Schema.define(version: 20160229171339) do
 
   create_table "consumptions", force: :cascade do |t|
     t.integer  "drug_id"
@@ -22,9 +22,11 @@ ActiveRecord::Schema.define(version: 20160229103910) do
     t.datetime "updated_at",                        null: false
     t.date     "starts_at",  default: '2016-02-29'
     t.date     "ends_at",    default: '2016-02-29'
+    t.integer  "user_id"
   end
 
   add_index "consumptions", ["drug_id"], name: "index_consumptions_on_drug_id"
+  add_index "consumptions", ["user_id"], name: "index_consumptions_on_user_id"
 
   create_table "drugs", force: :cascade do |t|
     t.string   "name"
@@ -35,7 +37,10 @@ ActiveRecord::Schema.define(version: 20160229103910) do
     t.float    "reset_amount"
     t.date     "reset_at"
     t.string   "format"
+    t.integer  "user_id"
   end
+
+  add_index "drugs", ["user_id"], name: "index_drugs_on_user_id"
 
   create_table "purchases", force: :cascade do |t|
     t.integer  "drug_id"
@@ -47,5 +52,11 @@ ActiveRecord::Schema.define(version: 20160229103910) do
   end
 
   add_index "purchases", ["drug_id"], name: "index_purchases_on_drug_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
