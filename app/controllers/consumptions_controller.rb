@@ -2,7 +2,7 @@ class ConsumptionsController < ApplicationController
   before_action :set_consumption, only: [:show, :edit, :update, :destroy]
 
   def index
-    @consumptions = Consumption.all.sort_by{|e| e.when}
+    @consumptions = Consumption.all.active.sort_by{|e| e.when}
   end
 
   def show
@@ -33,7 +33,7 @@ class ConsumptionsController < ApplicationController
   def update
     respond_to do |format|
       if @consumption.update(consumption_params)
-        format.html { redirect_to @consumption, notice: 'Consumption was successfully updated.' }
+        format.html { redirect_to @consumption.drug, notice: 'Consumption was successfully updated.' }
         format.json { render :show, status: :ok, location: @consumption }
       else
         format.html { render :edit }
@@ -59,6 +59,6 @@ class ConsumptionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def consumption_params
-      params.require(:consumption).permit(:when, :note, :amount, :drug_id)
+      params.require(:consumption).permit(:when, :note, :amount, :drug_id, :starts_at, :ends_at)
     end
 end

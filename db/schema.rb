@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120114300) do
+ActiveRecord::Schema.define(version: 20160229103910) do
 
   create_table "consumptions", force: :cascade do |t|
     t.integer  "drug_id"
     t.time     "when"
     t.float    "amount"
     t.text     "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.date     "starts_at",  default: '2016-02-29'
+    t.date     "ends_at",    default: '2016-02-29'
   end
 
   add_index "consumptions", ["drug_id"], name: "index_consumptions_on_drug_id"

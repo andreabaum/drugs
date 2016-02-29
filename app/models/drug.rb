@@ -20,11 +20,15 @@ class Drug < ActiveRecord::Base
     end
   end
 
+  def consumed_after_reset
+    consumptions.any?  ? consumptions.map(&:consumed_after_reset).inject(:+) : 0
+  end
+
   def amount_current
     if reset_at && !reset_amount.nil?
       amount = reset_amount
       purchases_after_reset.each{ |i| amount += i.amount }
-      amount -= dose * (Date.today - reset_at).to_f
+      amount -= consumed_after_reset
       # Remove trailing zero
       i, f = amount.to_i, amount.to_f
       i == f ? i : f
@@ -35,8 +39,8 @@ class Drug < ActiveRecord::Base
   end
 
   def dose
-    # Sum consumptions amount (float)
-    consumptions.map(&:amount).inject(:+)
+    # Current daily dose, sum active consumptions (float)
+    consumptions.active.map(&:amount).inject(:+)
   end
 
   def dose_clean

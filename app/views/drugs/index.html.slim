@@ -25,7 +25,7 @@
                 span.text-muted.m-l = drug.format
                 .pull-right
                   meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
-              - if drug.dose > 0
+              - if drug.dose && drug.dose > 0
                 .col-sm-1.hidden-xs
                   = drug.dose_clean
                 - if drug.amount_current > 0
@@ -40,6 +40,7 @@
           /.col-sm-2
             = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
           = f.hidden_field :reset_at, value: Date.today
+          = f.hidden_field :reset_amount, value: 0
           = f.submit t('add'), class: 'btn btn-default m-l-x'
 
     hr

@@ -1,0 +1,66 @@
+/p#notice = notice
+
+.panel.panel-default.consumption
+
+  = render "partials/nav"
+
+  .panel-heading
+    h3.panel-title
+      = t('time')
+
+  .panel-body
+    = form_for(@consumption) do |f|
+      - if @consumption.errors.any?
+        #error_explanation
+          h2
+            = pluralize(@consumption.errors.count, "error")
+            prohibited this consumption from being saved:
+          ul
+            - @consumption.errors.full_messages.each do |message|
+              li = message
+
+      .list-group
+        .list-group-item
+          .row
+            .col-sm-3 = t('drug')
+            .col-sm-6
+              = link_to @consumption.drug
+                = @consumption.drug.name
+
+        .list-group-item
+          .row
+            .col-sm-3 = t('amount')
+            .col-sm-6 = f.number_field :amount, class: 'form-control', min: 0.5, step: 0.5
+
+        .list-group-item
+          .row
+            .col-sm-3 = t('time')
+            .col-sm-6 = f.time_select :when, minute_step: 30, ignore_date: true
+
+        .list-group-item
+          .row
+            .col-sm-3 = t('from')
+            .col-sm-6 = f.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
+
+        .list-group-item
+          .row
+            .col-sm-3 = t('until')
+            .col-sm-6
+              = f.date_select :ends_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
+
+        .list-group-item.footer
+          .row
+            .col-sm-3
+            .col-sm-2.no-padding-left
+              = f.submit t('save'), class: 'btn btn-default'
+  .panel-footer
+    .row
+      .col-sm-12
+        = link_to @consumption, class: 'btn btn-default pull-right danger', method: :delete, data: { confirm: 'Are you sure?' }
+          .i.glyphicon.glyphicon-trash.m-r
+          = t('delete')
+
+        = link_to t('cancel'), @consumption.drug, class: 'btn btn-default pull-right'
+        /= link_to edit_drug_path(@consumption), class: 'btn btn-default pull-right'
+          .i.glyphicon.glyphicon-pencil.m-r
+          = t('edit')

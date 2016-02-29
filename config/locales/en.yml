@@ -29,14 +29,18 @@ en:
   dose: Dose
   consumption: Quando
   consumptions: Quando
+  consumptions_not_active: Storico
 
   add: Aggiungi
   edit: Modifica
+  cancel: Annulla
   delete: Elimina
   reset: Reset
   save: Salva
   index: Elenco
   agenda: Agenda
+  from: Inizio
+  until: Fine
 
   note: Commento
   amount: Quantità
