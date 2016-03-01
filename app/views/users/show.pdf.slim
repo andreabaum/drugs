@@ -1,0 +1,29 @@
+h2 = @user.name
+
+hr
+
+table[width="100%"]
+  tr
+    td[width="30%"]
+      em = t('drug')
+    td[width="35%"]
+      em = t('format')
+    td[width="10%"]
+      em = t('dose')
+    td[width="10%"]
+      em = t('time')
+    /td[width="10%"]
+      em = t('from')
+
+  - @consumptions.each do |consumption|
+    - if consumption.drug.active
+      - drug = consumption.drug
+      tr
+        td = drug.name
+        td = drug.format
+        td = consumption.amount_clean
+        td = consumption.when_formatted
+        /td = consumption.starts_at_formatted
+hr
+p
+  em = t('updated_at', day: Date.today.strftime("%d.%m.%Y"))

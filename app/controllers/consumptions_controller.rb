@@ -2,12 +2,7 @@ class ConsumptionsController < ApplicationController
   before_action :set_consumption, only: [:show, :edit, :update, :destroy]
 
   def index
-    @user = params[:user_id] ? User.find_by_id(params[:user_id]) : nil
-    if @user
-      @consumptions = Consumption.all.active.by_user(@user.id).sort_by{|e| e.when}
-    else
-      @consumptions = Consumption.all.active.sort_by{|e| e.when}
-    end
+    @consumptions = Consumption.all.active.sort_by{|e| e.when}
   end
 
   def show

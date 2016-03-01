@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :purchases
   resources :drugs
   resources :consumptions
+  resources :users
 
   root 'drugs#index'
 
