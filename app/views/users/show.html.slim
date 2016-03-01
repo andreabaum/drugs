@@ -42,7 +42,7 @@
   .panel-footer
     .row
       .col-sm-12
-        = link_to user_path(User.find_by_id(1), :format => 'pdf'), class: 'btn btn-default pull-right'
+        = link_to user_path(@user, :format => 'pdf'), class: 'btn btn-default pull-right'
           .i.glyphicon.glyphicon-file.m-r
           = t('pdf')
         /= link_to @drug, class: 'btn btn-default pull-right danger', method: :delete, data: { confirm: 'Are you sure?' }
