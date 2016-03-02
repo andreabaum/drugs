@@ -29,6 +29,7 @@ en:
   dose: Dose
   consumption: Quando
   consumptions: Quando
+  daily_dose: "%{dose} dosi al giorno"
   consumptions_not_active: Storico
   user: Paziente
 
@@ -50,7 +51,7 @@ en:
   active: Attiva
   not_active: Sospesa
   ends_at: Termina
-  ends_in_days: In %{days} giorni
+  ends_in_days: Termina in %{days} giorni
   no_more: Finita
   name: Nome
   format: Tipo
@@ -61,6 +62,9 @@ en:
   details: Dettagli
 
   updated_at: Aggiornato al %{day}
+
+  hints:
+    format: "Ad esempio: Compresse 50 mg, Capsule 100 mg, Collirio, etc."
 
   placeholder:
     drug: 'Medicina'

@@ -18,7 +18,6 @@ class ConsumptionsController < ApplicationController
   def create
     @consumption = Consumption.new(consumption_params)
     @consumption.drug_id = params[:drug_id]
-    @consumption.user_id = params[:user_id]
 
     respond_to do |format|
       if @consumption.save

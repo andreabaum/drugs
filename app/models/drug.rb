@@ -68,4 +68,15 @@ class Drug < ActiveRecord::Base
   def ends_at_formatted
     ends_at.strftime("%d.%m.%Y")
   end
+
+  # Return a user object only when all consumptions belong to the same user
+  # Otherwise, when there are no consumptions or multiple users, return nil
+  def user
+    users = consumptions.map(&:user).to_set
+    if users.size == 1
+      users.first
+    else
+      nil
+    end
+  end
 end

@@ -34,11 +34,6 @@
           .col-sm-3 = t('format')
           .col-sm-6 = @drug.format
 
-      /.list-group-item
-        .row
-          .col-sm-3 = t('dose')
-          .col-sm-6 = @drug.dose_clean
-
       .list-group-item
         .row
           .col-sm-3 = t('amount')
@@ -48,13 +43,18 @@
         .row
           .col-sm-3 = t('ends_at')
           - if @drug.dose
-            .col-sm-2
-              = @drug.ends_at_formatted
-            .col-sm-2
-              = t('ends_in_days', days: @drug.ends_in)
+            .col-sm-3 = @drug.ends_at_formatted
+            .col-sm-3.hint.text-muted = t('ends_in_days', days: @drug.ends_in)
           - else
             .col-sm-8
               .hint.text-muted = t('no_consumption')
+
+      - if @drug.user
+        .list-group-item
+          .row
+            .col-sm-3 = t('user')
+            .col-sm-3 = @drug.user.name
+            .col-sm-3.hint.text-muted = t('daily_dose', dose: @drug.dose_clean)
 
     hr
 
@@ -69,7 +69,7 @@
       - @drug.consumptions_sorted.active.each do |consumption|
         .list-group-item
           .row
-            .col-sm-3
+            .col-sm-3.hint.text-muted = consumption.user.name unless consumption.drug.user
             .col-sm-3 = consumption.when_formatted
             .col-sm-4 = consumption.amount_clean
             .col-sm-2
@@ -86,11 +86,15 @@
 
     .list-group-item.footer
       = form_for([@drug, Consumption.new]) do |c|
+        / Hide consumption.starts_at field
+        / = c.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
+        = c.hidden_field :starts_at, value: Date.today
+        = c.hidden_field :ends_at, value: Date.today + 5.years
         .col-sm-3.no-padding-left
-          / Hide consumption.starts_at field
-          / = c.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
-          = c.hidden_field :starts_at, value: Date.today
-          = c.hidden_field :ends_at, value: Date.today + 5.years
+          - if @drug.user
+            = c.hidden_field :user_id, value: @drug.user.id
+          - else
+            = c.select :user_id, User.all.collect {|u| [ u.name, u.id ] }
         .col-sm-3.no-padding-left
           = c.time_select :when, minute_step: 30, ignore_date: true
         .col-sm-4

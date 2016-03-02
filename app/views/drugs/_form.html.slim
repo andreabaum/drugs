@@ -34,7 +34,9 @@
         .list-group-item
           .row
             .col-sm-3 = t('format')
-            .col-sm-9 = f.text_field :format
+            .col-sm-9
+              = f.text_field :format
+              .hint.text-muted = t('hints.format')
 
         .list-group-item
           .row
