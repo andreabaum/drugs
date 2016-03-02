@@ -12,25 +12,29 @@
       / Header
       .list-group-item.header.hidden-xs
         .row
-          .col-sm-9 = t('name')
-          .col-sm-1 = t('dose')
+          .col-sm-10 = t('name')
+          /.col-sm-1 = t('dose')
           .col-sm-2= t('ends_at')
 
       / Drug list
       - @drugs.select{ |drug| drug[:active]}.each do |drug|
         = link_to drug, class: "list-group-item"
           .row
-              .col-sm-9
-                = drug.name
-                span.text-muted.m-l = drug.format
+            .col-sm-10
+              = drug.name
+              span.text-muted.m-l = drug.format
+              - if drug.amount_current && drug.dose
                 .pull-right
-                  meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
-              - if drug.dose && drug.dose > 0
-                .col-sm-1.hidden-xs
-                  = drug.dose_clean
-                - if drug.amount_current > 0
-                  .col-sm-2[title='#{t('ends_in_days', days: drug.ends_in)}']
-                    = drug.ends_at_formatted
+                  - if drug.amount_current > 0
+                    meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
+                  - else
+                    .i.glyphicon.glyphicon-exclamation-sign.text-muted[title='#{t('no_more')}']
+
+            - if drug.dose
+              /.col-sm-1.hidden-xs
+                 = drug.dose_clean
+              .col-sm-2[title='#{t('ends_in_days', days: drug.ends_in)}']
+                = drug.ends_at_formatted
 
       / Add drug
       .list-group-item.footer

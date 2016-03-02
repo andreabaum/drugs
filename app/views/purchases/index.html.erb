@@ -2,13 +2,13 @@
 
 <h1>Listing Purchases</h1>
 
-<table>
+<table width="100%">
   <thead>
     <tr>
       <th>When</th>
-      <th>Note</th>
+      <th>Drug</th>
       <th>Amount</th>
-      <th colspan="3"></th>
+      <!-- th colspan="3"></th -->
     </tr>
   </thead>
 
@@ -16,11 +16,13 @@
     <% @purchases.each do |purchase| %>
       <tr>
         <td><%= purchase.when %></td>
-        <td><%= purchase.note %></td>
+        <td><%= purchase.drug.name %></td>
         <td><%= purchase.amount %></td>
+        <!--
         <td><%= link_to 'Show', purchase %></td>
         <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
         <td><%= link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        -->
       </tr>
     <% end %>
   </tbody>

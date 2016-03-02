@@ -47,10 +47,14 @@
       .list-group-item
         .row
           .col-sm-3 = t('ends_at')
-          .col-sm-2
-            = @drug.ends_at_formatted
-          .col-sm-2
-            = t('ends_in_days', days: @drug.ends_in)
+          - if @drug.dose
+            .col-sm-2
+              = @drug.ends_at_formatted
+            .col-sm-2
+              = t('ends_in_days', days: @drug.ends_in)
+          - else
+            .col-sm-8
+              .hint.text-muted = t('no_consumption')
 
     hr
 
@@ -76,8 +80,9 @@
     - else
       .list-group-item
         .row
+          .col-sm-3
           .col-sm-6
-            em.text-muted = t('no_consumption')
+            em.text-muted = t('add_consumption')
 
     .list-group-item.footer
       = form_for([@drug, Consumption.new]) do |c|
@@ -122,8 +127,9 @@
       - else
         .list-group-item
           .row
+            .col-sm-3
             .col-sm-6
-              em.text-muted = t('no_purchase')
+              em.text-muted = t('add_purchase')
 
       .list-group-item.footer
         = form_for([@drug, Purchase.new]) do |f|

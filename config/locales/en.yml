@@ -30,6 +30,7 @@ en:
   consumption: Quando
   consumptions: Quando
   consumptions_not_active: Storico
+  user: Paziente
 
   add: Aggiungi
   edit: Modifica
@@ -50,10 +51,13 @@ en:
   not_active: Sospesa
   ends_at: Termina
   ends_in_days: In %{days} giorni
+  no_more: Finita
   name: Nome
   format: Tipo
   no_purchase: Nessun acquisto
-  no_consumption: Quando deve essere presa?
+  add_purchase: Aggiungi un acquisto
+  no_consumption: Nessun dosaggio presente
+  add_consumption: Aggiungi un dosaggio
   details: Dettagli
 
   updated_at: Aggiornato al %{day}
