@@ -31,6 +31,10 @@ class Consumption < ActiveRecord::Base
     (starts_at..ends_at).include?(Date.today)
   end
 
+  def is_past?
+    ends_at < Date.today
+  end
+
   # Return the number days the consumption was active, after the drug has been reset
   def consumed_after_reset
     if (starts_at..ends_at).overlaps?(drug.reset_at..Date.today)
