@@ -2,6 +2,8 @@ class Drug < ActiveRecord::Base
   has_many :purchases, dependent: :destroy
   has_many :consumptions, dependent: :destroy
 
+  has_many :users, -> { distinct }, through: :consumptions
+
   validates :name, :presence => true
 
   def consumptions_sorted
@@ -72,7 +74,6 @@ class Drug < ActiveRecord::Base
   # Return a user object only when all consumptions belong to the same user
   # Otherwise, when there are no consumptions or multiple users, return nil
   def user
-    users = consumptions.map(&:user).to_set
     if users.size == 1
       users.first
     else

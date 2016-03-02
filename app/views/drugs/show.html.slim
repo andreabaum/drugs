@@ -47,14 +47,22 @@
             .col-sm-3.hint.text-muted = t('ends_in_days', days: @drug.ends_in)
           - else
             .col-sm-8
-              .hint.text-muted = t('no_consumption')
+              .hint.text-muted = t('no_end_date')
 
-      - if @drug.user
-        .list-group-item
-          .row
-            .col-sm-3 = t('user')
-            .col-sm-3 = @drug.user.name
-            .col-sm-3.hint.text-muted = t('daily_dose', dose: @drug.dose_clean)
+      .list-group-item
+        .row
+          .col-sm-3 = t('user')
+          - if @drug.users.any?
+            - if @drug.user
+              .col-sm-3 = @drug.user.name
+              .col-sm-3.hint.text-muted = t('daily_dose', dose: @drug.dose_clean)
+            - else
+              / TODO Show all users, add drug.dose(user) method
+              .col-sm-8
+                .hint.text-muted = t('multi_user')
+          - else
+            .col-sm-8
+              .hint.text-muted = t('no_user')
 
     hr
 

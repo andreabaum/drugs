@@ -52,12 +52,15 @@ en:
   not_active: Sospesa
   ends_at: Termina
   ends_in_days: Termina in %{days} giorni
+  no_end_date: Non é possibile stimare la scadenza poiché nessun dosaggio é presente
   no_more: Finita
   name: Nome
   format: Tipo
+  no_user: Nessun paziente sta assumento questa medicina
+  multi_user: Piú di un paziente sta assumendo questa medicina
   no_purchase: Nessun acquisto
   add_purchase: Aggiungi un acquisto
-  no_consumption: Nessun dosaggio presente
+  no_consumption: Nessun dosaggio
   add_consumption: Aggiungi un dosaggio
   details: Dettagli
 
