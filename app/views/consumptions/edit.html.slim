@@ -1,62 +1,56 @@
-/p#notice = notice
+.panel-heading
+  h3.panel-title
+    = t('time')
 
-.panel.panel-default.consumption
+.panel-body
+  = form_for(@consumption) do |f|
+    - if @consumption.errors.any?
+      #error_explanation
+        h2
+          = pluralize(@consumption.errors.count, "error")
+          prohibited this consumption from being saved:
+        ul
+          - @consumption.errors.full_messages.each do |message|
+            li = message
 
-  = render "partials/nav"
+    .list-group
+      .list-group-item
+        .row
+          .col-sm-3 = t('drug')
+          .col-sm-6
+            = link_to @consumption.drug
+              = @consumption.drug.name
 
-  .panel-heading
-    h3.panel-title
-      = t('time')
+      .list-group-item
+        .row
+          .col-sm-3 = t('user')
+          .col-sm-6 = f.select :user_id, User.all.collect {|u| [ u.name, u.id ] }
 
-  .panel-body
-    = form_for(@consumption) do |f|
-      - if @consumption.errors.any?
-        #error_explanation
-          h2
-            = pluralize(@consumption.errors.count, "error")
-            prohibited this consumption from being saved:
-          ul
-            - @consumption.errors.full_messages.each do |message|
-              li = message
+      .list-group-item
+        .row
+          .col-sm-3 = t('amount')
+          .col-sm-6 = f.number_field :amount, class: 'form-control', min: 0.5, step: 0.5
 
-      .list-group
-        .list-group-item
-          .row
-            .col-sm-3 = t('drug')
-            .col-sm-6
-              = link_to @consumption.drug
-                = @consumption.drug.name
+      .list-group-item
+        .row
+          .col-sm-3 = t('time')
+          .col-sm-6 = f.time_select :when, minute_step: 30, ignore_date: true
 
-        .list-group-item
-          .row
-            .col-sm-3 = t('user')
-            .col-sm-6 = f.select :user_id, User.all.collect {|u| [ u.name, u.id ] }
+      .list-group-item
+        .row
+          .col-sm-3 = t('from')
+          .col-sm-6 = f.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
 
-        .list-group-item
-          .row
-            .col-sm-3 = t('amount')
-            .col-sm-6 = f.number_field :amount, class: 'form-control', min: 0.5, step: 0.5
+      .list-group-item
+        .row
+          .col-sm-3 = t('until')
+          .col-sm-6
+            = f.date_select :ends_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
 
-        .list-group-item
-          .row
-            .col-sm-3 = t('time')
-            .col-sm-6 = f.time_select :when, minute_step: 30, ignore_date: true
+      .list-group-item.footer
+        .row
+          .col-sm-3
+          .col-sm-2.no-padding-left
+            = f.submit t('save'), class: 'btn btn-default'
 
-        .list-group-item
-          .row
-            .col-sm-3 = t('from')
-            .col-sm-6 = f.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
-
-        .list-group-item
-          .row
-            .col-sm-3 = t('until')
-            .col-sm-6
-              = f.date_select :ends_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
-
-        .list-group-item.footer
-          .row
-            .col-sm-3
-            .col-sm-2.no-padding-left
-              = f.submit t('save'), class: 'btn btn-default'
-
-  = render "partials/footer_buttons", model: @consumption, options: [:cancel, :delete]
+= render "partials/footer_buttons", model: @consumption, options: [:cancel, :delete]

@@ -1,57 +1,51 @@
-/p#notice = notice
+.panel-heading.active
+  h3.panel-title = t('drugs')
 
-.panel.panel-default.drug
+.panel-body
+  .list-group
+    / Header
+    .list-group-item.header.hidden-xs
+      .row
+        .col-sm-10 = t('name')
+        /.col-sm-1 = t('dose')
+        .col-sm-2= t('ends_at')
 
-  = render "partials/nav"
-
-  .panel-heading.active
-    h3.panel-title = t('drugs')
-
-  .panel-body
-    .list-group
-      / Header
-      .list-group-item.header.hidden-xs
+    / Drug list
+    - @drugs.select{ |drug| drug[:active]}.each do |drug|
+      = link_to drug, class: "list-group-item"
         .row
-          .col-sm-10 = t('name')
-          /.col-sm-1 = t('dose')
-          .col-sm-2= t('ends_at')
+          .col-sm-10
+            = drug.name
+            span.text-muted.m-l = drug.format
+            - if drug.amount_current && drug.dose
+              .pull-right
+                - if drug.amount_current > 0
+                  meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
+                - else
+                  .i.glyphicon.glyphicon-exclamation-sign.text-muted[title='#{t('no_more')}']
 
-      / Drug list
-      - @drugs.select{ |drug| drug[:active]}.each do |drug|
-        = link_to drug, class: "list-group-item"
-          .row
-            .col-sm-10
-              = drug.name
-              span.text-muted.m-l = drug.format
-              - if drug.amount_current && drug.dose
-                .pull-right
-                  - if drug.amount_current > 0
-                    meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
-                  - else
-                    .i.glyphicon.glyphicon-exclamation-sign.text-muted[title='#{t('no_more')}']
+          - if drug.dose
+            /.col-sm-1.hidden-xs
+               = drug.dose_clean
+            .col-sm-2[title='#{t('ends_in_days', days: drug.ends_in)}']
+              = drug.ends_at_formatted
 
-            - if drug.dose
-              /.col-sm-1.hidden-xs
-                 = drug.dose_clean
-              .col-sm-2[title='#{t('ends_in_days', days: drug.ends_in)}']
-                = drug.ends_at_formatted
+    / Add drug
+    .list-group-item.footer
+      = form_for(:drug) do |f|
+        .col-sm-10.no-padding-left
+          = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
+        /.col-sm-2
+          = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
+        = f.hidden_field :reset_at, value: Date.today
+        = f.hidden_field :reset_amount, value: 0
+        = f.submit t('add'), class: 'btn btn-default m-l-x'
 
-      / Add drug
-      .list-group-item.footer
-        = form_for(:drug) do |f|
-          .col-sm-10.no-padding-left
-            = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
-          /.col-sm-2
-            = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
-          = f.hidden_field :reset_at, value: Date.today
-          = f.hidden_field :reset_amount, value: 0
-          = f.submit t('add'), class: 'btn btn-default m-l-x'
+  hr
 
-    hr
-
-    .list-group
-      - @drugs.select{ |drug| !drug[:active]}.each do |drug|
-        = link_to drug, class: "list-group-item not-active"
-          = drug.name
-          span.text-muted.m-l = drug.format
-          .pull-right = t('not_active')
+  .list-group
+    - @drugs.select{ |drug| !drug[:active]}.each do |drug|
+      = link_to drug, class: "list-group-item not-active"
+        = drug.name
+        span.text-muted.m-l = drug.format
+        .pull-right = t('not_active')
