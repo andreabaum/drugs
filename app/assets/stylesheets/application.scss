@@ -63,17 +63,15 @@ body {
   }
 }
 
-.editor {
-  .panel-heading {
-    background-color: #F7D358 !important;
-  }
+.editor .panel-heading {
+  background-color: #F7D358 !important;
 }
 
 .agenda .panel-heading {
   background-color: #99bbff  !important;
 }
 
-.drug {
+.drug, .default {
   .panel-heading.active {
     background-color: #9ae297 !important;
   }
@@ -247,4 +245,21 @@ hr {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.btn {
+  padding: 5px;
+  box-shadow: 0 1px 1px 0 #ddd;
+
+  .glyphicon {
+    margin: 0 5px 0 1px;
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.no-border {
+  border: 0;
 }

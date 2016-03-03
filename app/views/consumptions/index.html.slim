@@ -1,4 +1,4 @@
-/ TODO Move to a partial, duplicated in users/show
+/ TODO Currently not used, alternative of users/show
 
 .panel-heading.active
   h3.panel-title
@@ -35,4 +35,4 @@
             .col-sm-6
               = drug.name
               .pull-right
-                meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
+                meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', count: drug.ends_in)}']

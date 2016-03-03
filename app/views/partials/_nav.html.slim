@@ -1,9 +1,9 @@
 
 #nav
   = link_to root_path, class: 'btn btn-default pull-right'
-    .i.glyphicon.glyphicon-menu-hamburger.m-r
+    .i.glyphicon.glyphicon-menu-hamburger
     = t('index')
   - User.all.each do |user|
     = link_to user_path(user), class: 'btn btn-default pull-right'
-      .i.glyphicon.glyphicon-time.m-r
+      .i.glyphicon.glyphicon-time
       = user.name

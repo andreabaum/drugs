@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   resources :drugs do
     resources :purchases
     resources :consumptions
+
+    #get "/reset" => "drugs#reset"
   end
 end

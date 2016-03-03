@@ -22,14 +22,16 @@
 it:
   home: Home
   drug: Medicina
-  drugs: Elenco
+  drugs: Medicine
   purchase: Acquisto
   purchases: Acquisti
   purchases_last: Ultimi Acquisti
   dose: Dose
   consumption: Quando
   consumptions: Quando
-  daily_dose: "%{dose} dosi al giorno"
+  daily_dose:
+    one: Una dose al giorno
+    other: "%{count} dosi al giorno"
   consumptions_not_active: Storico
   user: Paziente
 
@@ -37,7 +39,7 @@ it:
   edit: Modifica
   cancel: Annulla
   delete: Elimina
-  reset: Reset
+  reset: Aggiorna
   save: Salva
   index: Elenco
   agenda: Agenda
@@ -52,7 +54,10 @@ it:
   active: Attiva
   not_active: Sospesa
   ends_at: Termina
-  ends_in_days: Termina in %{days} giorni
+  ends_in_days:
+    # http://guides.rubyonrails.org/i18n.html#pluralization
+    one: Termina domani
+    other: Termina in %{count} giorni
   no_end_date: Non é possibile stimare la scadenza poiché nessun dosaggio é presente
   no_more: Finita
   name: Nome
@@ -64,11 +69,15 @@ it:
   no_consumption: Nessun dosaggio
   add_consumption: Aggiungi un dosaggio
   details: Dettagli
+  pdf: PDF
+  no_drugs: Nessuna medicina, ottimo!
+  total: Totale
 
   updated_at: Aggiornato al %{day}
 
   hints:
     format: "Ad esempio: Compresse 50 mg, Capsule 100 mg, Collirio, etc."
+    reset: "La quantitá presente questa mattina"
 
   placeholder:
     drug: 'Medicina'

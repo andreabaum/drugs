@@ -1,5 +1,5 @@
 class DrugsController < ApplicationController
-  before_action :set_drug, only: [:show, :edit, :update, :destroy]
+  before_action :set_drug, only: [:show, :edit, :update, :destroy, :reset]
 
   # GET /drugs
   # GET /drugs.json
@@ -42,6 +42,10 @@ class DrugsController < ApplicationController
   # PATCH/PUT /drugs/1
   # PATCH/PUT /drugs/1.json
   def update
+
+    # - if reset_at != @drug.current_amount
+
+
     respond_to do |format|
       if @drug.update(drug_params)
         format.html { redirect_to @drug, notice: 'Drug was successfully updated.' }
@@ -66,7 +70,8 @@ class DrugsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_drug
-      @drug = Drug.find(params[:id])
+      id = params[:id] || params[:drug_id]
+      @drug = Drug.find(id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

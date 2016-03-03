@@ -1,4 +1,6 @@
 class Drug < ActiveRecord::Base
+  include ApplicationHelper
+
   has_many :purchases, dependent: :destroy
   has_many :consumptions, dependent: :destroy
 
@@ -31,9 +33,7 @@ class Drug < ActiveRecord::Base
       amount = reset_amount
       purchases_after_reset.each{ |i| amount += i.amount }
       amount -= consumed_after_reset
-      # Remove trailing zero
-      i, f = amount.to_i, amount.to_f
-      i == f ? i : f
+      clean_number amount
     else
       # Sum purchases amount (integer)
       purchases.sum(:amount)
@@ -46,9 +46,7 @@ class Drug < ActiveRecord::Base
   end
 
   def dose_clean
-    # Remove trailing zero
-    i, f = dose.to_i, dose.to_f
-    i == f ? i : f
+    clean_number dose
   end
 
   def amount_last_purchased
@@ -79,5 +77,9 @@ class Drug < ActiveRecord::Base
     else
       nil
     end
+  end
+
+  def reset_at_date
+    reset_at.to_date
   end
 end

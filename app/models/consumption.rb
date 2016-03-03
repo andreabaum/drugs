@@ -1,4 +1,6 @@
 class Consumption < ActiveRecord::Base
+  include ApplicationHelper
+
   belongs_to :drug
   belongs_to :user
 
@@ -8,11 +10,13 @@ class Consumption < ActiveRecord::Base
   scope :not_active, -> { where('? < starts_at OR ? > ends_at', Date.today, Date.today) }
 
   scope :by_user, -> (user_id) { where(user_id: user_id) }
+  scope :by_drug, -> (drug_id) { where(drug_id: drug_id) }
+
+  # TODO not working?
+  # scope :by_time, -> (t) { where('when = ?', t) }
 
   def amount_clean
-    # Remove trailing zero
-    i, f = amount.to_i, amount.to_f
-    i == f ? i : f
+    clean_number amount
   end
 
   def when_formatted
@@ -38,7 +42,7 @@ class Consumption < ActiveRecord::Base
   # Return the number days the consumption was active, after the drug has been reset
   def consumed_after_reset
     if (starts_at..ends_at).overlaps?(drug.reset_at..Date.today)
-      days = [ends_at, Date.today].min - [starts_at, drug.reset_at].max
+      days = [ends_at, Date.today].min - [starts_at, drug.reset_at_date].max
       days * amount
     else
       0

@@ -39,7 +39,7 @@
         .col-sm-3 = t('ends_at')
         - if @drug.dose
           .col-sm-3 = @drug.ends_at_formatted
-          .col-sm-3.hint.text-muted = t('ends_in_days', days: @drug.ends_in)
+          .col-sm-3.hint.text-muted = t('ends_in_days', count: @drug.ends_in)
         - else
           .col-sm-8
             .hint.text-muted = t('no_end_date')
@@ -50,7 +50,7 @@
         - if @drug.users.any?
           - if @drug.user
             .col-sm-3 = @drug.user.name
-            .col-sm-3.hint.text-muted = t('daily_dose', dose: @drug.dose_clean)
+            .col-sm-3.hint.text-muted = t('daily_dose', count: @drug.dose_clean)
           - else
             / TODO Show all users, add drug.dose(user) method
             .col-sm-8
@@ -100,15 +100,6 @@
         = c.number_field :amount, class: 'form-control', value: 1, min: 0.5, step: 0.5
       = c.submit t('add'), class: 'btn btn-default'
 
-  / History, alternative view
-  /- if @drug.consumptions.not_active.any?
-    .list-group-item
-      .hint.text-muted
-        = t('consumptions_not_active')
-        - @drug.consumptions.not_active.each do |consumption|
-          = link_to edit_consumption_path(consumption)
-            span.m-l = "#{consumption.amount_clean} (dal #{consumption.starts_at_formatted} al #{consumption.ends_at_formatted})"
-
   hr
 
   / Purchases
@@ -118,8 +109,8 @@
       .row
         .col-sm-12 = t('purchases_last')
 
-    - if @drug.purchases_after_reset.any?
-      - @drug.purchases_after_reset.each do |purchase|
+    - if @drug.purchases.any?
+      - @drug.purchases.each do |purchase|
         .list-group-item
           .row
             .col-sm-3

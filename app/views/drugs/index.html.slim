@@ -20,14 +20,14 @@
             - if drug.amount_current && drug.dose
               .pull-right
                 - if drug.amount_current > 0
-                  meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
+                  meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', count: drug.ends_in)}']
                 - else
                   .i.glyphicon.glyphicon-exclamation-sign.text-muted[title='#{t('no_more')}']
 
           - if drug.dose
             /.col-sm-1.hidden-xs
                = drug.dose_clean
-            .col-sm-2[title='#{t('ends_in_days', days: drug.ends_in)}']
+            .col-sm-2[title='#{t('ends_in_days', count: drug.ends_in)}']
               = drug.ends_at_formatted
 
     / Add drug
