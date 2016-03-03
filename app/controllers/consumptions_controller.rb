@@ -6,6 +6,8 @@ class ConsumptionsController < ApplicationController
   end
 
   def show
+    # Redirect to drug show view
+    redirect_to @consumption.drug
   end
 
   def new

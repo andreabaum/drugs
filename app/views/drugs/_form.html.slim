@@ -58,8 +58,4 @@
           = r.hidden_field :reset_at, value: Date.today
           = r.submit t('reset'), class: 'btn btn-default'
 
-
-  .panel-footer
-    .row
-      .col-sm-12
-        = link_to t('cancel'), @drug, class: 'btn btn-default pull-right'
+  = render "partials/footer_buttons", model: @drug, options: [:cancel, :delete]

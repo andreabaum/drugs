@@ -1,0 +1,22 @@
+.panel-footer
+  .row
+    .col-sm-12
+      - if options.include?(:delete)
+        = link_to model, class: 'btn btn-default pull-right danger', method: :delete, data: { confirm: 'Are you sure?' }
+          .i.glyphicon.glyphicon-trash.m-r
+          = t('delete')
+
+      - if options.include?(:edit)
+        = link_to edit_polymorphic_path(model), class: 'btn btn-default pull-right'
+          .i.glyphicon.glyphicon-pencil.m-r
+          = t('edit')
+
+      - if options.include?(:cancel)
+        = link_to model, class: 'btn btn-default pull-right'
+          .i.glyphicon.glyphicon-chevron-left.m-r
+          = t('cancel')
+
+      - if options.include?(:pdf)
+        = link_to polymorphic_path(model, :format => 'pdf'), class: 'btn btn-default pull-right'
+          .i.glyphicon.glyphicon-file.m-r
+          = t('pdf')

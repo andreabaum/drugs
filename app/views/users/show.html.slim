@@ -41,15 +41,4 @@
                 .pull-right
                   meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
 
-  .panel-footer
-    .row
-      .col-sm-12
-        = link_to user_path(@user, :format => 'pdf'), class: 'btn btn-default pull-right'
-          .i.glyphicon.glyphicon-file.m-r
-          = t('pdf')
-        /= link_to @drug, class: 'btn btn-default pull-right danger', method: :delete, data: { confirm: 'Are you sure?' }
-          .i.glyphicon.glyphicon-trash.m-r
-          = t('delete')
-        /= link_to edit_drug_path(@drug), class: 'btn btn-default pull-right'
-          .i.glyphicon.glyphicon-pencil.m-r
-          = t('edit')
+  = render "partials/footer_buttons", model: @user, options: [:pdf]

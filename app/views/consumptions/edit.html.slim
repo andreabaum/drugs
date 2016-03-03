@@ -58,14 +58,5 @@
             .col-sm-3
             .col-sm-2.no-padding-left
               = f.submit t('save'), class: 'btn btn-default'
-  .panel-footer
-    .row
-      .col-sm-12
-        = link_to @consumption, class: 'btn btn-default pull-right danger', method: :delete, data: { confirm: 'Are you sure?' }
-          .i.glyphicon.glyphicon-trash.m-r
-          = t('delete')
 
-        = link_to t('cancel'), @consumption.drug, class: 'btn btn-default pull-right'
-        /= link_to edit_drug_path(@consumption), class: 'btn btn-default pull-right'
-          .i.glyphicon.glyphicon-pencil.m-r
-          = t('edit')
+  = render "partials/footer_buttons", model: @consumption, options: [:cancel, :delete]
