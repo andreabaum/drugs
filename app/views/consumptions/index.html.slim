@@ -1,44 +1,38 @@
 / TODO Move to a partial, duplicated in users/show
 
-/p#notice = notice
+.panel-heading.active
+  h3.panel-title
+    - if @user
+      = @user.name
+    - else
+      = t('agenda')
 
-.panel.panel-default.agenda
+.panel-body
+  .list-group
+    / Header
+    .list-group-item.header.hidden-xs
+      .row
+        .col-sm-1
+        .col-sm-2 = t('time')
+        .col-sm-2 = t('amount')
+        .col-sm-6 = t('drug')
 
-  = render "partials/nav"
-
-  .panel-heading.active
-    h3.panel-title
-      - if @user
-        = @user.name
-      - else
-        = t('agenda')
-
-  .panel-body
-    .list-group
-      / Header
-      .list-group-item.header.hidden-xs
-        .row
-          .col-sm-1
-          .col-sm-2 = t('time')
-          .col-sm-2 = t('amount')
-          .col-sm-6 = t('drug')
-
-      / consumption list
-      - prev_time = 0
-      - @consumptions.each do |consumption|
-        - if consumption.drug.active
-          - drug = consumption.drug
-          = link_to drug, class: "list-group-item"
-            .row
-              .col-sm-1
-              .col-sm-2
-                - time = consumption.when_formatted
-                - unless prev_time == time
-                  = consumption.when_formatted
-                  - prev_time = time
-              .col-sm-2
-                = consumption.amount_clean
-              .col-sm-6
-                = drug.name
-                .pull-right
-                  meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']
+    / consumption list
+    - prev_time = 0
+    - @consumptions.each do |consumption|
+      - if consumption.drug.active
+        - drug = consumption.drug
+        = link_to drug, class: "list-group-item"
+          .row
+            .col-sm-1
+            .col-sm-2
+              - time = consumption.when_formatted
+              - unless prev_time == time
+                = consumption.when_formatted
+                - prev_time = time
+            .col-sm-2
+              = consumption.amount_clean
+            .col-sm-6
+              = drug.name
+              .pull-right
+                meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', days: drug.ends_in)}']

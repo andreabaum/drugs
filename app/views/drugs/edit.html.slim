@@ -1,0 +1,57 @@
+
+
+.panel-heading class=(@drug.active ? 'active' : 'not-active')
+  h3.panel-title
+    = @drug.name
+    - unless @drug.active
+      .label = t('not_active')
+
+.panel-body
+  = form_for(@drug) do |f|
+    - if @drug.errors.any?
+      #error_explanation
+        h2
+          = pluralize(@drug.errors.count, "error")
+          prohibited this drug from being saved:
+        ul
+          - @drug.errors.full_messages.each do |message|
+            li = message
+    .list-group
+      .list-group-item
+        .row
+          .col-sm-3 = t('name')
+          .col-sm-9 = f.text_field :name
+
+      .list-group-item
+        .row
+          .col-sm-3 = t('note')
+          .col-sm-9 = f.text_area :note
+
+      .list-group-item
+        .row
+          .col-sm-3 = t('format')
+          .col-sm-9
+            = f.text_field :format
+            .hint.text-muted = t('hints.format')
+
+      .list-group-item
+        .row
+          .col-sm-3 = t('active')
+          .col-sm-9 = f.check_box :active
+
+      .list-group-item.footer
+        .row
+          .col-sm-3
+          .col-sm-2.no-padding-left
+            = f.submit t('save'), class: 'btn btn-default'
+
+  /hr
+  /= form_for(@drug) do |r|
+    .row
+      .col-sm-2 = t('amount')
+      .col-sm-6 = r.number_field :reset_amount, class: 'form-control', value: @drug.amount_current, min: 0, step: 0.5
+      .col-sm-2
+        = r.hidden_field :reset_at, value: Date.today
+        = r.submit t('reset'), class: 'btn btn-default'
+
+= render "partials/footer_buttons", model: @drug, options: [:cancel, :delete]

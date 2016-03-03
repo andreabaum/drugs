@@ -20,3 +20,8 @@
         = link_to polymorphic_path(model, :format => 'pdf'), class: 'btn btn-default pull-right'
           .i.glyphicon.glyphicon-file.m-r
           = t('pdf')
+
+      - if options.include?(:home)
+        = link_to root_path, class: 'btn btn-default pull-right'
+          .i.glyphicon.glyphicon-home.m-r
+          = t('home')

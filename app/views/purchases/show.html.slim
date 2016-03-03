@@ -1,29 +1,23 @@
-/p#notice = notice
+.panel-heading
+  h3.panel-title =t('purchase')
 
-.panel.panel-default.purchase
-  .panel-heading
-    h3.panel-title =t('purchase')
-
-  .panel-body
-    .row
-      .col-sm-2 = t('when')
-      .col-sm-6 = @purchase.when_formatted
-
-    .row
-      .col-sm-2 = t('drug')
-      .col-sm-6 = link_to @purchase.drug.name, drug_path(@purchase.drug)
-
-    .row
-      .col-sm-2 = t('amount')
-      .col-sm-6 = @purchase.amount
-
-    - if @purchase.note && !@purchase.note.empty?
+.panel-body
+  .list-group
+    .list-group-item
       .row
-        .col-sm-2 = t('note')
-        .col-sm-6 = @purchase.note
+        .col-sm-3 = t('when')
+        .col-sm-6 = @purchase.when_formatted
+  .row
+    .col-sm-2 = t('drug')
+    .col-sm-6 = link_to @purchase.drug.name, drug_path(@purchase.drug)
 
-.row
-  .col-sm-6
-    = link_to t('home'), root_path, class: 'btn btn-info'
-    = link_to t('edit'), edit_purchase_path(@purchase), class: 'btn btn-default'
-    = link_to t('delete'), @purchase, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }
+  .row
+    .col-sm-2 = t('amount')
+    .col-sm-6 = @purchase.amount
+
+  - if @purchase.note && !@purchase.note.empty?
+    .row
+      .col-sm-2 = t('note')
+      .col-sm-6 = @purchase.note
+
+= render "partials/footer_buttons", model: @purchase, options: [:home, :delete]
