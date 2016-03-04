@@ -1,6 +1,4 @@
-
-
-.panel-heading class=(@drug.active ? 'active' : 'not-active')
+.panel-heading.edit
   h3.panel-title
     = @drug.name
     - unless @drug.active
@@ -33,7 +31,7 @@
           .col-sm-3 = t('format')
           .col-sm-9
             = f.text_field :format
-            .hint.text-muted = t('hints.format')
+            .hint.text-muted.m-t = t('hints.format')
 
       .list-group-item
         .row
@@ -41,7 +39,7 @@
           .col-sm-6
             = f.hidden_field :reset_at, value: Time.now
             = f.number_field :reset_amount, class: 'form-control', value: @drug.amount_current, min: 0, step: 0.5
-            .hint.text-muted = t('hints.reset')
+            .hint.text-muted.m-t = t('hints.amount')
 
       .list-group-item
         .row

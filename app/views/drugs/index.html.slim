@@ -1,4 +1,4 @@
-.panel-heading.active
+.panel-heading.agenda
   h3.panel-title = t('drugs')
 
 .panel-body
@@ -12,6 +12,7 @@
 
     / Drug list
     - @drugs.select{ |drug| drug[:active]}.each do |drug|
+      - message = drug.amount_current > 0 ? t('ends_in_days', count: drug.ends_in) : t('no_more')
       = link_to drug, class: "list-group-item"
         .row
           .col-sm-10
@@ -20,14 +21,12 @@
             - if drug.amount_current && drug.dose
               .pull-right
                 - if drug.amount_current > 0
-                  meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', count: drug.ends_in)}']
+                  meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{message}']
                 - else
-                  .i.glyphicon.glyphicon-exclamation-sign.text-muted[title='#{t('no_more')}']
+                  .i.glyphicon.glyphicon-exclamation-sign.text-muted[title='#{message}']
 
           - if drug.dose
-            /.col-sm-1.hidden-xs
-               = drug.dose_clean
-            .col-sm-2[title='#{t('ends_in_days', count: drug.ends_in)}']
+            .col-sm-2[title='#{message}']
               = drug.ends_at_formatted
 
     / Add drug

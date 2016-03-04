@@ -47,7 +47,7 @@ it:
   until: Fine
   show_all: Mostra tutti
 
-  note: Commento
+  note: Note
   amount: Quantità
   when: Data
   time: Orario
@@ -75,9 +75,12 @@ it:
 
   updated_at: Aggiornato al %{day}
 
+  show_only_firsts: Sono mostrate solo le prima cinque fasce orarie
+  not_now: Non al momento
+
   hints:
     format: "Ad esempio: Compresse 50 mg, Capsule 100 mg, Collirio, etc."
-    reset: "La quantitá presente questa mattina"
+    amount: Quantitá presente stamani
 
   placeholder:
     drug: 'Medicina'

@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
   def consumptions_times
     consumptions.active.order(:when).map(&:when).uniq
   end
+
+  def is_drug_active? drug
+    consumptions.by_drug(drug).active.any?
+  end
 end

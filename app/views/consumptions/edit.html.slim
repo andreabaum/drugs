@@ -1,6 +1,6 @@
-.panel-heading
+.panel-heading.edit
   h3.panel-title
-    = t('time')
+    = t('dose')
 
 .panel-body
   = form_for(@consumption) do |f|
@@ -14,12 +14,10 @@
             li = message
 
     .list-group
-      .list-group-item
+      = link_to @consumption.drug, class: "list-group-item"
         .row
           .col-sm-3 = t('drug')
-          .col-sm-6
-            = link_to @consumption.drug
-              = @consumption.drug.name
+          .col-sm-6 = @consumption.drug.name
 
       .list-group-item
         .row

@@ -63,25 +63,26 @@ body {
   }
 }
 
-.editor .panel-heading {
-  background-color: #F7D358 !important;
-}
 
-.agenda .panel-heading {
-  background-color: #99bbff  !important;
-}
 
-.drug, .default {
-  .panel-heading.active {
+.panel {
+  .panel-heading {
     background-color: #9ae297 !important;
   }
+
   .panel-heading.not-active {
     background-color: #ccc !important;
   }
-}
 
-.purchase {
-  .panel-heading {
+  .panel-heading.agenda {
+    background-color: #99bbff  !important;
+  }
+
+  .panel-heading.edit {
+    background-color: #F7D358 !important;
+  }
+
+  .panel-heading.purchase {
     background-color: #A9D0F5 !important;
   }
 }
@@ -185,6 +186,14 @@ input[type='submit']:hover {
   margin-left: 8px;
 }
 
+.m-t {
+  margin-top: 8px;
+}
+
+.m-b {
+  margin-bottom: 8px;
+}
+
 .m-l-x {
   margin-left: 25px;
 }
@@ -266,4 +275,11 @@ a {
 
 .no-border {
   border: 0;
+}
+
+.note {
+  color: #C5C5C5;
+  font-weight: lighter;
+  font-style: italic;
+  margin-bottom: 10px;
 }

@@ -1,4 +1,4 @@
-- times = @user.consumptions_times.first(5)
+- times = @user.consumptions_times
 
 .panel-heading.active
   h3.panel-title
@@ -6,8 +6,15 @@
       = @user.name
 
 .panel-body
-  .list-group
-    - if times.any?
+  - if times.count > 5
+    / TODO Support more than 5 times
+    - times = times.first(5)
+    .note.center
+      i.glyphicon.glyphicon-exclamation-sign.m-r
+      = t('show_only_firsts')
+
+  - if times.any?
+    .list-group
       / Header
       .list-group-item.header.hidden-xs
         .row
@@ -18,7 +25,7 @@
 
       / consumptions grid
       - @user.drugs.each do |drug|
-        - if drug.active
+        - if drug.active && @user.is_drug_active?(drug)
           = link_to drug, class: "list-group-item"
             .row
               .col-sm-6
@@ -30,11 +37,13 @@
                 .col-sm-1
                   - @user.consumptions.active.by_drug(drug).each do |consumption|
                     - if time == consumption.when
-                      = consumption.amount_clean
+                      .m-r = consumption.amount_clean
               /.col-sm-2
                 .pull-right
                   meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', count: drug.ends_in)}']
-    - else
-      .hint.text-muted.center = t('no_drugs')
+  - else
+    .note.center
+      i.glyphicon.glyphicon-heart-empty.m-r
+      = t('no_drugs')
 
 = render "partials/footer_buttons", model: @user, options:  times.any? ? [:pdf] : []

@@ -1,4 +1,3 @@
-
 .panel-heading class=(@drug.active ? 'active' : 'not-active')
   h3.panel-title
     = @drug.name
@@ -6,13 +5,6 @@
       .label = t('not_active')
 
 .panel-body
-  - if @drug.note && !@drug.note.empty?
-    .row
-      .col-sm-1
-      .col-sm-10
-        .well.well-sm
-          em.text-muted = @drug.note
-
   .list-group
     / Header
     .list-group-item.header.hidden-xs
@@ -32,33 +24,43 @@
     .list-group-item
       .row
         .col-sm-3 = t('amount')
-        .col-sm-6 = @drug.amount_current
+        .col-sm-3 = @drug.amount_current
+        .col-sm-6.hint.text-muted = t('hints.amount')
 
     .list-group-item
       .row
         .col-sm-3 = t('ends_at')
         - if @drug.dose
           .col-sm-3 = @drug.ends_at_formatted
-          .col-sm-3.hint.text-muted = t('ends_in_days', count: @drug.ends_in)
+          .col-sm-6.hint.text-muted
+            = @drug.amount_current > 0 ? t('ends_in_days', count: @drug.ends_in) : t('no_more')
         - else
-          .col-sm-8
+          .col-sm-9
             .hint.text-muted = t('no_end_date')
 
     .list-group-item
       .row
         .col-sm-3 = t('user')
         - if @drug.users.any?
-          - if @drug.user
-            .col-sm-3 = @drug.user.name
-            .col-sm-3.hint.text-muted = t('daily_dose', count: @drug.dose_clean)
-          - else
-            / TODO Show all users, add drug.dose(user) method
-            .col-sm-8
-              .hint.text-muted = t('multi_user')
+          .col-sm-6
+            - @drug.users.each do |user|
+              .row
+                .col-sm-6 = user.name
+                .col-sm-6.hint.text-muted
+                  - if user.is_drug_active?(@drug)
+                    = t('daily_dose', count: @drug.dose_by_user(user))
+                  - else
+                    = t('not_now')
         - else
           .col-sm-8
             .hint.text-muted = t('no_user')
 
+    - if @drug.note && !@drug.note.empty?
+      .list-group-item
+        .row
+          .col-sm-3 = t('note')
+          .col-sm-6
+            .text-muted = simple_format(@drug.note)
   hr
 
   / Consumptions
@@ -110,7 +112,7 @@
         .col-sm-12 = t('purchases_last')
 
     - if @drug.purchases.any?
-      - @drug.purchases_sorted.each do |purchase|
+      - @drug.purchases_sorted.first(5).each do |purchase|
         .list-group-item
           .row
             .col-sm-3

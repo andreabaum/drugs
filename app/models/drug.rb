@@ -49,6 +49,11 @@ class Drug < ActiveRecord::Base
     clean_number dose
   end
 
+  def dose_by_user user
+    # Current daily dose, sum active consumptions (float)
+    clean_number consumptions.active.by_user(user).map(&:amount).inject(:+)
+  end
+
   def amount_last_purchased
     (purchases.any?) ? purchases.last.amount : 0
   end
