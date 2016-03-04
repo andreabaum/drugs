@@ -55,3 +55,6 @@ end
 # PDF generator
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+
+# Icons
+gem 'font-awesome-rails'

@@ -15,8 +15,10 @@
  */
 
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 
 body {
   padding: 20px;
@@ -62,8 +64,6 @@ body {
     border-right: 0 !important;
   }
 }
-
-
 
 .panel {
   .panel-heading {
@@ -260,7 +260,7 @@ a {
   padding: 5px;
   box-shadow: 0 1px 1px 0 #ddd;
 
-  .glyphicon {
+  .glyphicon, .fa {
     margin: 0 5px 0 1px;
   }
 }
