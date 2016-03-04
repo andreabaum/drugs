@@ -1,29 +1,36 @@
 / TODO To be styled properly
 
+- times = @user.consumptions_times.first(5)
+
 h2 = @user.name
 
-table[width="100%", border="1px"]
-  tr
-    td[width="45%"]
-      em = t('drug')
-    td[width="35%"]
-      em = t('format')
-    td[width="10%"]
-      em = t('dose')
-    td[width="10%"]
-      em = t('time')
-    /td[width="10%"]
-      em = t('from')
+hr
 
-  - @consumptions.each do |consumption|
-    - if consumption.drug.active
-      - drug = consumption.drug
+table[width="100%"]
+  tr
+    td[width="40%"]
+      i = t('drug')
+    td[width="30%"]
+      i = t('format')
+    /td[width="5%"]
+    - times.each do |time|
+      td[width="5%"]
+       i = time.strftime("%k:%M")
+
+  - @user.drugs.each do |drug|
+    - if drug.active
       tr
         td = drug.name
         td = drug.format
-        td = consumption.amount_clean
-        td = consumption.when_formatted
-        /td = consumption.starts_at_formatted
+        /td
+          i = clean_number(@user.consumptions.active.by_drug(drug).map(&:amount).inject(:+))
+        - times.each do |time|
+          td
+            - @user.consumptions.active.by_drug(drug).each do |consumption|
+              - if time == consumption.when
+                = consumption.amount_clean
+
+hr
 
 p
   em = t('updated_at', day: Date.today.strftime("%d.%m.%Y"))

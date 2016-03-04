@@ -110,7 +110,7 @@
         .col-sm-12 = t('purchases_last')
 
     - if @drug.purchases.any?
-      - @drug.purchases.each do |purchase|
+      - @drug.purchases_sorted.each do |purchase|
         .list-group-item
           .row
             .col-sm-3
