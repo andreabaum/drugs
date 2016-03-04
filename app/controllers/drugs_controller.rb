@@ -1,14 +1,12 @@
 class DrugsController < ApplicationController
-  before_action :set_drug, only: [:show, :edit, :update, :destroy, :reset]
+  before_action :set_drug, only: [:show, :edit, :update, :destroy]
 
   # GET /drugs
-  # GET /drugs.json
   def index
     @drugs = Drug.all.sort_by{|e| e.ends_at}
   end
 
   # GET /drugs/1
-  # GET /drugs/1.json
   def show
   end
 
@@ -23,7 +21,6 @@ class DrugsController < ApplicationController
   end
 
   # POST /drugs
-  # POST /drugs.json
   def create
     @drug = Drug.new(drug_params)
     @drug.active = true
@@ -40,12 +37,7 @@ class DrugsController < ApplicationController
   end
 
   # PATCH/PUT /drugs/1
-  # PATCH/PUT /drugs/1.json
   def update
-
-    # - if reset_at != @drug.current_amount
-
-
     respond_to do |format|
       if @drug.update(drug_params)
         format.html { redirect_to @drug, notice: 'Drug was successfully updated.' }
@@ -58,7 +50,6 @@ class DrugsController < ApplicationController
   end
 
   # DELETE /drugs/1
-  # DELETE /drugs/1.json
   def destroy
     @drug.destroy
     respond_to do |format|

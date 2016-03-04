@@ -2,13 +2,11 @@ class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
   # GET /purchases
-  # GET /purchases.json
   def index
     @purchases = Purchase.all
   end
 
   # GET /purchases/1
-  # GET /purchases/1.json
   def show
   end
 
@@ -22,7 +20,6 @@ class PurchasesController < ApplicationController
   end
 
   # POST /purchases
-  # POST /purchases.json
   def create
     @purchase = Purchase.new(purchase_params)
     @purchase.drug_id = params[:drug_id]
@@ -39,7 +36,6 @@ class PurchasesController < ApplicationController
   end
 
   # PATCH/PUT /purchases/1
-  # PATCH/PUT /purchases/1.json
   def update
     respond_to do |format|
       if @purchase.update(purchase_params)
@@ -53,7 +49,6 @@ class PurchasesController < ApplicationController
   end
 
   # DELETE /purchases/1
-  # DELETE /purchases/1.json
   def destroy
     drug = @purchase.drug
     @purchase.destroy

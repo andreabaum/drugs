@@ -1,3 +1,5 @@
+- times = @user.consumptions_times.first(5)
+
 .panel-heading.active
   h3.panel-title
     - if @user
@@ -5,14 +7,13 @@
 
 .panel-body
   .list-group
-
-    - if @user.consumptions_times.any?
+    - if times.any?
       / Header
       .list-group-item.header.hidden-xs
         .row
           .col-sm-6 = t('drug')
-          - @user.consumptions_times.each do |time|
-            .col-sm-1 = time.strftime("%H:%M")
+          - times.each do |time|
+            .col-sm-1 = time.strftime("%k:%M")
           .col-sm-1.text-muted = t('total')
 
       / consumption list
@@ -24,7 +25,7 @@
               .col-sm-6
                 = drug.name
                 span.text-muted.m-l = drug.format
-              - @user.consumptions_times.each do |time|
+              - times.each do |time|
                 .col-sm-1
                   - @user.consumptions.active.by_drug(drug).each do |consumption|
                     - if time == consumption.when
@@ -37,5 +38,4 @@
     - else
       .hint.text-muted.center = t('no_drugs')
 
-
-= render "partials/footer_buttons", model: @user, options: [:pdf]
+= render "partials/footer_buttons", model: @user, options:  times.any? ? [:pdf] : []

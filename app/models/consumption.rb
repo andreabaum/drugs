@@ -20,7 +20,7 @@ class Consumption < ActiveRecord::Base
   end
 
   def when_formatted
-    self.when.strftime("%H:%M")
+    self.when.strftime("%k:%M")
   end
 
   def starts_at_formatted
