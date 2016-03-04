@@ -5,32 +5,34 @@ style[type="text/css"]
 
 - times = @user.consumptions_times.first(5)
 
-h3 = @user.name
+.pdf
 
-table
-  tr
-    th[width="70%"]
-      /= t('drug')
-    th[width="5%"]
-    - times.each do |time|
-      th[width="5%"] = time.strftime("%k:%M")
+  h3 = @user.name
 
-  - @user.drugs.each do |drug|
-    - if drug.active
-      tr
-        td
-          = drug.name
-          '
-          span.text-muted.small
-            = t("format_types.#{drug.format_type}")
-            '
-            = drug.format
+  table
+    tr
+      th[width="70%"]
+        /= t('drug')
+      th[width="5%"]
+      - times.each do |time|
+        th[width="5%"] = time.strftime("%k:%M")
 
-        td.text-muted = clean_number(@user.consumptions.active.by_drug(drug).map(&:amount).inject(:+))
-        - times.each do |time|
+    - @user.drugs.each do |drug|
+      - if drug.active
+        tr
           td
-            - @user.consumptions.active.by_drug(drug).each do |consumption|
-              - if time == consumption.when
-                = consumption.amount_clean
+            = drug.name
+            '
+            span.text-muted.small
+              = t("format_types.#{drug.format_type}")
+              '
+              = drug.format
 
-.footer = t('updated_at', day: Date.today.strftime("%d.%m.%Y"))
+          td.text-muted = clean_number(@user.consumptions.active.by_drug(drug).map(&:amount).inject(:+))
+          - times.each do |time|
+            td
+              - @user.consumptions.active.by_drug(drug).each do |consumption|
+                - if time == consumption.when
+                  = consumption.amount_clean
+
+  .footer = t('updated_at', day: Date.today.strftime("%d.%m.%Y"))

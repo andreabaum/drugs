@@ -4,35 +4,39 @@ body {
   font-weight: 100;
 }
 
-h3 {
-  font-weight: 300;
-  font-size: 20px;
+.pdf {
 
-}
+  h3 {
+    font-weight: 300;
+    font-size: 20px;
+    /* text-transform: uppercase; */
+  }
 
-table, td, th {
-  border-bottom: 1px solid #f7f7f7;
-  border-collapse: collapse;
-  font-weight: 100;
-  padding: 10px 5px;
-}
+  table, td, th {
+    border-bottom: 1px solid #ddd;
+    border-collapse: collapse;
+    font-weight: 100;
+    padding: 10px 5px;
+  }
 
-th {
-  text-decoration: none;
-  text-align: left;
-  font-weight: 100;
-  text-transform: uppercase;
-}
+  th {
+    text-decoration: none;
+    text-align: left;
+    font-weight: 100;
+    text-transform: uppercase;
+  }
 
-.text-muted {
-  color: #b5b5b5;
-}
+  .text-muted {
+    color: #b5b5b5;
+  }
 
-.small {
-  font-size: 12px;
-}
+  .small {
+    font-size: 12px;
+  }
 
-.footer {
-  margin-top: 30px;
-  float: right;
+  .footer {
+    margin-top: 30px;
+    float: right;
+  }
+
 }
