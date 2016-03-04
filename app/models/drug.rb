@@ -8,6 +8,35 @@ class Drug < ActiveRecord::Base
 
   validates :name, :presence => true
 
+  enum format_type: {
+    tablet: 0,
+    capsule: 1,
+    eye_drops: 2,
+    oral_drops: 3,
+    packets: 4,
+    syringe: 5,
+    #liquid: 6
+    #oil: 7,
+    #gel: 8,
+    #powder: 9,
+    other: 100
+  }
+
+  def format_type_icon
+    case format_type
+    when 'tablet'
+      'toggle-off'
+    when 'capsule'
+      'toggle-off'
+    when 'eye_drops'
+      'eye'
+    when 'oral_drops'
+      'tint'
+    else
+      'question'
+    end
+  end
+
   def consumptions_sorted
     consumptions.order(:when)
   end

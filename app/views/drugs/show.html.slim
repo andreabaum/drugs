@@ -19,13 +19,26 @@
     .list-group-item
       .row
         .col-sm-3 = t('format')
-        .col-sm-6 = @drug.format
+        .col-sm-6
+          = t("format_types.#{@drug.format_type}")
+          '
+          = @drug.format
+          /i.m-l[title="#{t("format_types.#{@drug.format_type}")}"] = fa_icon @drug.format_type_icon
 
     .list-group-item
       .row
         .col-sm-3 = t('amount')
         .col-sm-3 = @drug.amount_current
         .col-sm-6.hint.text-muted = t('hints.amount')
+
+    .list-group-item
+      .row
+        .col-sm-3 = t('prescription')
+        .col-sm-3
+          - if @drug.prescription?
+            = t('yes')
+          - else
+            = t('no')
 
     .list-group-item
       .row

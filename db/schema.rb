@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303221642) do
+ActiveRecord::Schema.define(version: 20160304113417) do
 
   create_table "consumptions", force: :cascade do |t|
     t.integer  "drug_id"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20160303221642) do
     t.datetime "reset_at"
     t.string   "format"
     t.integer  "user_id"
+    t.integer  "format_type"
+    t.boolean  "prescription"
   end
 
   add_index "drugs", ["user_id"], name: "index_drugs_on_user_id"

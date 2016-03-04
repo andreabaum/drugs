@@ -17,7 +17,10 @@
         .row
           .col-sm-10
             = drug.name
-            span.text-muted.m-l = drug.format
+            span.text-muted.m-l
+              = t("format_types.#{drug.format_type}")
+              '
+              = drug.format
             - if drug.amount_current && drug.dose
               .pull-right
                 - if drug.amount_current > 0

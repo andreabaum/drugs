@@ -1,36 +1,36 @@
-/ TODO To be styled properly
+/ Load stylesheets
+/ @see http://www.bitelm.com/2013/08/wickedpdf-and-stylesheets.html
+style[type="text/css"]
+  = Rails.application.assets.find_asset('pdf.scss').to_s.html_safe
 
 - times = @user.consumptions_times.first(5)
 
-h2 = @user.name
+h3 = @user.name
 
-hr
-
-table[width="100%"]
+table
   tr
-    td[width="40%"]
-      i = t('drug')
-    td[width="30%"]
-      i = t('format')
-    /td[width="5%"]
+    th[width="70%"]
+      /= t('drug')
+    th[width="5%"]
     - times.each do |time|
-      td[width="5%"]
-       i = time.strftime("%k:%M")
+      th[width="5%"] = time.strftime("%k:%M")
 
   - @user.drugs.each do |drug|
     - if drug.active
       tr
-        td = drug.name
-        td = drug.format
-        /td
-          i = clean_number(@user.consumptions.active.by_drug(drug).map(&:amount).inject(:+))
+        td
+          = drug.name
+          '
+          span.text-muted.small
+            = t("format_types.#{drug.format_type}")
+            '
+            = drug.format
+
+        td.text-muted = clean_number(@user.consumptions.active.by_drug(drug).map(&:amount).inject(:+))
         - times.each do |time|
           td
             - @user.consumptions.active.by_drug(drug).each do |consumption|
               - if time == consumption.when
                 = consumption.amount_clean
 
-hr
-
-p
-  em = t('updated_at', day: Date.today.strftime("%d.%m.%Y"))
+.footer = t('updated_at', day: Date.today.strftime("%d.%m.%Y"))

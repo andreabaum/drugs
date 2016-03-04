@@ -34,6 +34,8 @@ it:
     other: "%{count} dosi al giorno"
   consumptions_not_active: Storico
   user: Paziente
+  yes: Si
+  no: No
 
   add: Aggiungi
   edit: Modifica
@@ -61,7 +63,15 @@ it:
   no_end_date: Non é possibile stimare la scadenza poiché nessun dosaggio é presente
   no_more: Finita
   name: Nome
-  format: Tipo
+  format: Formato
+  format_types:
+    tablet: Compresse
+    capsule: Capsule
+    eye_drops: Collirio
+    oral_drops: Gocce
+    packets: Buste
+    syringe: Siringhe
+    other: Altro
   no_user: Nessun paziente sta assumento questa medicina
   multi_user: Piú di un paziente sta assumendo questa medicina
   no_purchase: Nessun acquisto
@@ -72,6 +82,7 @@ it:
   pdf: PDF
   no_drugs: Nessuna medicina, ottimo!
   total: Totale
+  prescription: Farmaco
 
   updated_at: Aggiornato al %{day}
 
@@ -81,6 +92,7 @@ it:
   hints:
     format: "Ad esempio: Compresse 50 mg, Capsule 100 mg, Collirio, etc."
     amount: Quantitá presente stamani
+    prescription: Prescrizione medica necessaria
 
   placeholder:
     drug: 'Medicina'

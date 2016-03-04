@@ -20,9 +20,17 @@
 @import "bootstrap";
 @import "font-awesome";
 
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Quicksand Regular'), local('Quicksand-Regular'), font-url('quicksand.woff2') format('woff2');
+}
+
 body {
   padding: 20px;
   background-color: #D8D8D8;
+  font-family: 'Quicksand', 'Ubuntu', 'sans-serif';
 }
 
 #nav {
@@ -123,7 +131,7 @@ a.list-group-item:hover {
 }
 
 select {
-  max-width: 100px;
+  max-width: 150px;
   height: 34px;
   border: 1px solid #cccccc;
   background-color: #ffffff;
@@ -154,8 +162,12 @@ input[type='text'] {
   width: 300px;
 }
 
+input.short {
+  width: 80px;
+}
+
 input[type='number'] {
-  width: 60px;
+  width: 70px;
 }
 
 input[type='submit'] {
