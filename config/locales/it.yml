@@ -28,13 +28,13 @@ it:
   purchases_last: Ultimi Acquisti
   dose: Dose
   consumption: Quando
-  consumptions: Quando
+  consumptions: Dosaggi
   daily_dose:
     one: Una dose al giorno
     other: "%{count} dosi al giorno"
   consumptions_not_active: Storico
   user: Paziente
-  yes: Si
+  yep: Si
   no: No
 
   add: Aggiungi

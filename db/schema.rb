@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20160304113417) do
     t.text     "note"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
-    t.date     "starts_at",  default: '2016-02-29'
-    t.date     "ends_at",    default: '2016-02-29'
+    t.date     "starts_at",  default: '2016-03-05'
+    t.date     "ends_at",    default: '2016-03-05'
     t.integer  "user_id"
   end
 
@@ -32,17 +32,14 @@ ActiveRecord::Schema.define(version: 20160304113417) do
     t.string   "name"
     t.text     "note"
     t.boolean  "active"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.float    "reset_amount"
     t.datetime "reset_at"
     t.string   "format"
-    t.integer  "user_id"
-    t.integer  "format_type"
-    t.boolean  "prescription"
+    t.integer  "format_type",  default: 0
+    t.boolean  "prescription", default: true
   end
-
-  add_index "drugs", ["user_id"], name: "index_drugs_on_user_id"
 
   create_table "purchases", force: :cascade do |t|
     t.integer  "drug_id"

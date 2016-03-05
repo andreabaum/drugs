@@ -18,7 +18,8 @@
       / Header
       .list-group-item.header.hidden-xs
         .row
-          .col-sm-6 = t('drug')
+          .col-sm-6
+            /= t('drug')
           .col-sm-1
           - times.each do |time|
             .col-sm-1 = time.strftime("%k:%M")
@@ -38,9 +39,6 @@
                   - @user.consumptions.active.by_drug(drug).each do |consumption|
                     - if time == consumption.when
                       .m-r = consumption.amount_clean
-              /.col-sm-2
-                .pull-right
-                  meter[value="#{drug.ends_in.to_f/30}" low="0.6" high="0.9" optimum="1" title='#{t('ends_in_days', count: drug.ends_in)}']
   - else
     .note.center
       i.glyphicon.glyphicon-heart-empty.m-r

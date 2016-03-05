@@ -1,0 +1,12 @@
+- value = value.to_f/30
+
+/ Meter bar
+/meter[value="#{value}" low="0.6" high="0.9" optimum="1" title='#{message}']
+
+- if value < 0.6
+  .red[title='#{message}']
+    = fa_icon 'circle'
+
+- elsif value < 0.9
+  .yellow[title='#{message}']
+    = fa_icon 'circle'

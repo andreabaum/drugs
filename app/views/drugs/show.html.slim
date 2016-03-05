@@ -4,7 +4,7 @@
     - unless @drug.active
       .label = t('not_active')
 
-.panel-body
+.panel-body.drug-details
   .list-group
     / Header
     .list-group-item.header.hidden-xs
@@ -29,23 +29,26 @@
       .row
         .col-sm-3 = t('amount')
         .col-sm-3 = @drug.amount_current
-        .col-sm-6.hint.text-muted = t('hints.amount')
+        .col-sm-6.hint.text-muted.shy = t('hints.amount')
 
     .list-group-item
       .row
         .col-sm-3 = t('prescription')
         .col-sm-3
           - if @drug.prescription?
-            = t('yes')
+            = t('yep')
           - else
             = t('no')
+        - if @drug.prescription?
+          .col-sm-6.hint.text-muted.shy
+            = t('hints.prescription')
 
     .list-group-item
       .row
         .col-sm-3 = t('ends_at')
         - if @drug.dose
           .col-sm-3 = @drug.ends_at_formatted
-          .col-sm-6.hint.text-muted
+          .col-sm-6.hint.text-muted.shy
             = @drug.amount_current > 0 ? t('ends_in_days', count: @drug.ends_in) : t('no_more')
         - else
           .col-sm-9
@@ -59,7 +62,7 @@
             - @drug.users.each do |user|
               .row
                 .col-sm-6 = user.name
-                .col-sm-6.hint.text-muted
+                .col-sm-6.hint.text-muted.shy
                   - if user.is_drug_active?(@drug)
                     = t('daily_dose', count: @drug.dose_by_user(user))
                   - else
@@ -78,42 +81,42 @@
 
   / Consumptions
   .list-group
-  / Header
-  .list-group-item.header.hidden-xs
-    .row
-      .col-sm-10 = t('time')
-      - if @drug.consumptions.not_active.any?
-        .col-sm-2
-          .i.glyphicon.glyphicon-time.toggle-history.text-muted[title="#{t('show_all')}"]
-
-  - if @drug.consumptions.any?
-    - @drug.consumptions_sorted.each do |consumption|
-      .list-group-item.consumption class=('not-active hidden' unless consumption.is_active?)
-        = render "consumptions/row", consumption: consumption
-
-  - unless @drug.consumptions.active.any?
-    .list-group-item
+    / Header
+    .list-group-item.header.hidden-xs
       .row
-        .col-sm-3
-        .col-sm-6
-          em.text-muted = t('add_consumption')
+        .col-sm-10 = t('consumptions')
+        - if @drug.consumptions.not_active.any?
+          .col-sm-2
+            .i.glyphicon.glyphicon-time.toggle-history.text-muted[title="#{t('show_all')}"]
 
-  .list-group-item.footer
-    = form_for([@drug, Consumption.new]) do |c|
-      / Hide consumption.starts_at field
-      / = c.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
-      = c.hidden_field :starts_at, value: Date.today
-      = c.hidden_field :ends_at, value: Date.today + 5.years
-      .col-sm-3.no-padding-left
-        - if @drug.user
-          = c.hidden_field :user_id, value: @drug.user.id
-        - else
-          = c.select :user_id, User.all.collect {|u| [ u.name, u.id ] }
-      .col-sm-3.no-padding-left
-        = c.time_select :when, minute_step: 30, ignore_date: true
-      .col-sm-4
-        = c.number_field :amount, class: 'form-control', value: 1, min: 0.5, step: 0.5
-      = c.submit t('add'), class: 'btn btn-default'
+    - if @drug.consumptions.any?
+      - @drug.consumptions_sorted.each do |consumption|
+        .list-group-item.consumption class=('not-active hidden' unless consumption.is_active?)
+          = render "consumptions/row", consumption: consumption
+
+    - unless @drug.consumptions.active.any?
+      .list-group-item
+        .row
+          .col-sm-3
+          .col-sm-6
+            em.text-muted = t('add_consumption')
+
+    .list-group-item.footer
+      = form_for([@drug, Consumption.new]) do |c|
+        / Hide consumption.starts_at field
+        / = c.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
+        = c.hidden_field :starts_at, value: Date.today
+        = c.hidden_field :ends_at, value: Date.today + 5.years
+        .col-sm-3.no-padding-left.shy
+          - if @drug.user
+            = c.hidden_field :user_id, value: @drug.user.id
+          - else
+            = c.select :user_id, User.all.collect {|u| [ u.name, u.id ] }
+        .col-sm-3.no-padding-left.shy
+          = c.time_select :when, minute_step: 30, ignore_date: true
+        .col-sm-4.shy
+          = c.number_field :amount, class: 'form-control', value: 1, min: 0.5, step: 0.5
+        = c.submit t('add'), class: 'btn btn-default'
 
   hr
 
@@ -131,7 +134,7 @@
             .col-sm-3
             .col-sm-3 = purchase.when_formatted
             .col-sm-4 = purchase.amount
-            .col-sm-2
+            .col-sm-2.shy
               = link_to purchase, method: :delete, data: { confirm: 'Are you sure?' }
                 .i.glyphicon.glyphicon-remove.text-muted
     - else
@@ -149,8 +152,8 @@
           / Hide purchase.when field
           / = f.date_select :when, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
           = f.hidden_field :when, value: Date.today
-        .col-sm-4
-          = f.number_field :amount, class: 'form-control', value: 0, min: 0
+        .col-sm-4.shy
+          = f.number_field :amount, class: 'form-control', value: @drug.amount_last_purchased, min: 0
         = f.submit t('add'), class: 'btn btn-default'
 
 = render "partials/footer_buttons", model: @drug, options: [:edit]

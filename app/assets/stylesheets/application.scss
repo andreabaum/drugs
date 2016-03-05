@@ -30,7 +30,7 @@
 body {
   padding: 20px;
   background-color: #D8D8D8;
-  font-family: 'Quicksand', 'Ubuntu', 'sans-serif';
+  font-family: /*'Quicksand',*/ 'Ubuntu', 'sans-serif';
 }
 
 #nav {
@@ -97,7 +97,19 @@ body {
 
 .list-group-item {
   padding: 10px 40px;
+
+  .shy {
+    visibility: hidden;
+  }
 }
+
+.list-group-item:hover {
+  .shy {
+    visibility: visible;
+  }
+
+}
+
 
 .list-group-item.not-active {
   color: #aaa !important;
@@ -212,7 +224,6 @@ input[type='submit']:hover {
 
 .text-muted {
   color: #c5c5c5;
-
 }
 
 a.btn.danger:hover {
@@ -245,6 +256,15 @@ meter::-webkit-meter-suboptimum-value {
 meter::-webkit-meter-even-less-good-value {
     background: #FE4E4E;
 }
+
+.red {
+  color: #dd4444;
+}
+
+.yellow {
+  color: #F7D358;
+}
+
 h4 {
   margin-left: 10px;
   font-style: italic;

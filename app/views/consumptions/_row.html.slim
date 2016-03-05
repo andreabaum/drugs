@@ -1,12 +1,12 @@
 .row
-  .col-sm-3.hint.text-muted = consumption.user.name unless consumption.drug.user
+  .col-sm-3.hint.text-muted.shy = consumption.user.name unless consumption.drug.user
   .col-sm-3 = consumption.when_formatted
   .col-sm-4
     - if consumption.is_active?
       = consumption.amount_clean
     - else
       = "#{consumption.amount_clean} (#{consumption.starts_at_formatted} - #{consumption.ends_at_formatted})"
-  .col-sm-2
+  .col-sm-2.shy
     = link_to edit_consumption_path(consumption)
       .i.glyphicon.glyphicon-pencil.text-muted
     / = link_to consumption, method: :delete, data: { confirm: 'Are you sure?' }
