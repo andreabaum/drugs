@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.5.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -50,6 +50,13 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+
+  # Static code analyzer, based on the community Ruby style guide
+  gem 'rubocop', require: false
+
+  # Static analysis security vulnerability scanner
+  gem 'brakeman', :require => false
 end
 
 # PDF generator

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201603062105642) do
+ActiveRecord::Schema.define(version: 201603062115642) do
 
   create_table "consumptions", force: :cascade do |t|
     t.integer  "drug_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 201603062105642) do
     t.float    "reset_amount"
     t.datetime "reset_at"
     t.string   "format"
-    t.integer  "format_type",  default: 0
+    t.integer  "format_type"
     t.boolean  "prescription", default: true
   end
 

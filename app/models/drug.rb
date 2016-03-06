@@ -6,7 +6,7 @@ class Drug < ActiveRecord::Base
 
   has_many :users, -> { distinct }, through: :consumptions
 
-  validates :name, :presence => true
+  validates :name, presence: true
 
   enum format_type: {
     tablet: 0,
@@ -18,8 +18,7 @@ class Drug < ActiveRecord::Base
     #liquid: 6
     #oil: 7,
     #gel: 8,
-    #powder: 9,
-    other: 100
+    #powder: 9
   }
 
   def format_type_icon
@@ -47,20 +46,20 @@ class Drug < ActiveRecord::Base
 
   def purchases_after_reset
     if reset_at
-      purchases_sorted.select{ |purchase| purchase.when >= reset_at }
+      purchases_sorted.select { |purchase| purchase.when >= reset_at }
     else
       purchases_sorted
     end
   end
 
   def consumed_after_reset
-    consumptions.any?  ? consumptions.map(&:consumed_after_reset).inject(:+) : 0
+    consumptions.any? ? consumptions.map(&:consumed_after_reset).inject(:+) : 0
   end
 
   def amount_current
     if reset_at && !reset_amount.nil?
       amount = reset_amount
-      purchases_after_reset.each{ |i| amount += i.amount }
+      purchases_after_reset.each { |i| amount += i.amount }
       amount -= consumed_after_reset
       clean_number amount
     else
@@ -78,7 +77,7 @@ class Drug < ActiveRecord::Base
     clean_number dose
   end
 
-  def dose_by_user user
+  def dose_by_user(user)
     # Current daily dose, sum active consumptions (float)
     clean_number consumptions.active.by_user(user).map(&:amount).inject(:+)
   end
@@ -89,7 +88,7 @@ class Drug < ActiveRecord::Base
 
   def ends_at
     if dose && dose > 0
-      Date.today + (amount_current/dose)
+      Date.today + (amount_current / dose)
     else
       Date.today
     end
@@ -100,7 +99,7 @@ class Drug < ActiveRecord::Base
   end
 
   def ends_at_formatted
-    ends_at.strftime("%d.%m.%Y")
+    format_date ends_at
   end
 
   # Return a user object only when all consumptions belong to the same user

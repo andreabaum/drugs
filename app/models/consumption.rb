@@ -20,19 +20,19 @@ class Consumption < ActiveRecord::Base
   end
 
   def when_formatted
-    self.when.strftime("%k:%M")
+    format_time self.when
   end
 
   def starts_at_formatted
-    starts_at.strftime("%d.%m.%Y")
+   format_date starts_at
   end
 
   def ends_at_formatted
-    ends_at.strftime("%d.%m.%Y")
+    format_date ends_at
   end
 
   def is_active?
-    (starts_at..ends_at).include?(Date.today)
+    (starts_at..ends_at).cover?(Date.today)
   end
 
   def is_past?

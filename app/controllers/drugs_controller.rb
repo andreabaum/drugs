@@ -3,7 +3,7 @@ class DrugsController < ApplicationController
 
   # GET /drugs
   def index
-    @drugs = Drug.all.sort_by{|e| e.ends_at}
+    @drugs = Drug.all.sort_by(&:ends_at)
   end
 
   # GET /drugs/1
@@ -59,6 +59,7 @@ class DrugsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_drug
       id = params[:id] || params[:drug_id]

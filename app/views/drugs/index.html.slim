@@ -19,7 +19,7 @@
           .col-sm-10
             = drug.name
             span.text-muted.m-l
-              = t("format_types.#{drug.format_type}")
+              = t("format_types.#{drug.format_type}") if drug.format_type
               '
               = drug.format
             - if drug.amount_current && drug.dose

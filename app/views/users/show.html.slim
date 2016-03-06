@@ -26,7 +26,7 @@
 
       / consumptions grid
       - @user.drugs.each do |drug|
-        - if drug.active && @user.is_drug_active?(drug)
+        - if drug.active && @user.drug_active?(drug)
           = link_to drug, class: "list-group-item"
             .row
               .col-sm-6

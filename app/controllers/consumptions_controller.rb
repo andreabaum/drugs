@@ -2,7 +2,7 @@ class ConsumptionsController < ApplicationController
   before_action :set_consumption, only: [:show, :edit, :update, :destroy]
 
   def index
-    @consumptions = Consumption.all.active.sort_by{|e| e.when}
+    @consumptions = Consumption.all.active.sort_by(&:when)
   end
 
   def show
@@ -54,6 +54,7 @@ class ConsumptionsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_consumption
       @consumption = Consumption.find(params[:id])

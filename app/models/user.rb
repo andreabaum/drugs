@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include ApplicationHelper
+
   has_many :consumptions
   has_many :drugs, -> { distinct }, through: :consumptions
 
@@ -6,7 +8,7 @@ class User < ActiveRecord::Base
     consumptions.active.order(:when).map(&:when).uniq
   end
 
-  def is_drug_active? drug
+  def drug_active?(drug)
     consumptions.by_drug(drug).active.any?
   end
 end

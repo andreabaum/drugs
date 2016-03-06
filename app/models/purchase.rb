@@ -1,9 +1,11 @@
 class Purchase < ActiveRecord::Base
+  include ApplicationHelper
+
   belongs_to :drug
 
-  validates :drug, :presence => true
+  validates :drug, presence: true
 
   def when_formatted
-    self.when.strftime("%d.%m.%Y")
+    format_date self.when
   end
 end

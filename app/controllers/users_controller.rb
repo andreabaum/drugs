@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def show
-    @consumptions = @user.consumptions.active.sort_by{|e| e.when}
+    @consumptions = @user.consumptions.active.sort_by(&:when)
     respond_to do |format|
       format.html
       format.pdf { render pdf: "#{@user.name}_#{Date.today.strftime("%Y%m%d")}" }
@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

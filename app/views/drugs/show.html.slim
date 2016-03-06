@@ -20,7 +20,7 @@
       .row
         .col-sm-3 = t('format')
         .col-sm-6
-          = t("format_types.#{@drug.format_type}")
+          = t("format_types.#{@drug.format_type}") if @drug.format_type
           '
           = @drug.format
           /i.m-l[title="#{t("format_types.#{@drug.format_type}")}"] = fa_icon @drug.format_type_icon
@@ -63,7 +63,7 @@
               .row
                 .col-sm-6 = user.name
                 .col-sm-6.hint.text-muted.shy
-                  - if user.is_drug_active?(@drug)
+                  - if user.drug_active?(@drug)
                     = t('daily_dose', count: @drug.dose_by_user(user))
                   - else
                     = t('not_now')
