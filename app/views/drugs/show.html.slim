@@ -102,21 +102,7 @@
             em.text-muted = t('add_consumption')
 
     .list-group-item.footer
-      = form_for([@drug, Consumption.new]) do |c|
-        / Hide consumption.starts_at field
-        / = c.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
-        = c.hidden_field :starts_at, value: Date.today
-        = c.hidden_field :ends_at, value: Date.today + 5.years
-        .col-sm-3.no-padding-left.shy
-          - if @drug.user
-            = c.hidden_field :user_id, value: @drug.user.id
-          - else
-            = c.select :user_id, User.all.collect {|u| [ u.name, u.id ] }
-        .col-sm-3.no-padding-left.shy
-          = c.time_select :when, minute_step: 30, ignore_date: true
-        .col-sm-4.shy
-          = c.number_field :amount, class: 'form-control', value: 1, min: 0.5, step: 0.5
-        = c.submit t('add'), class: 'btn btn-default'
+      = render "consumptions/form_inline", drug: @drug
 
   hr
 
@@ -129,14 +115,9 @@
 
     - if @drug.purchases.any?
       - @drug.purchases_sorted.first(5).each do |purchase|
-        .list-group-item
-          .row
-            .col-sm-3
-            .col-sm-3 = purchase.when_formatted
-            .col-sm-4 = purchase.amount
-            .col-sm-2.shy
-              = link_to purchase, method: :delete, data: { confirm: 'Are you sure?' }
-                .i.glyphicon.glyphicon-remove.text-muted
+        .list-group-item.purchases
+          = render "purchases/row", purchase: purchase
+
     - else
       .list-group-item
         .row
@@ -145,16 +126,7 @@
             em.text-muted = t('add_purchase')
 
     .list-group-item.footer
-      = form_for([@drug, Purchase.new]) do |f|
-        / @see http://apidock.com/rails/ActionView/Helpers/DateHelper/date_select
-        .col-sm-3
-        .col-sm-3.no-padding-left
-          / Hide purchase.when field
-          / = f.date_select :when, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
-          = f.hidden_field :when, value: Date.today
-        .col-sm-4.shy
-          = f.number_field :amount, class: 'form-control', value: @drug.amount_last_purchased, min: 0
-        = f.submit t('add'), class: 'btn btn-default'
+      = render "purchases/form_inline", drug: @drug
 
 = render "partials/footer_buttons", model: @drug, options: [:edit]
 
