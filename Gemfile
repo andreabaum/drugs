@@ -34,9 +34,6 @@ gem 'bootstrap-sass', '~> 3.3.6'
 # Slim template language
 gem 'slim', '~> 3.0'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 group :production do
   gem 'mysql2'
 end
@@ -51,12 +48,13 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+  # gem 'capistrano-rails'
 
   # Static code analyzer, based on the community Ruby style guide
-  gem 'rubocop', require: false
+  gem 'rubocop'
 
   # Static analysis security vulnerability scanner
-  gem 'brakeman', :require => false
+  gem 'brakeman'
 end
 
 # PDF generator
