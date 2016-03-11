@@ -83,11 +83,11 @@
   / Consumptions
   .list-group
     / Header
-    .list-group-item.header.hidden-xs
+    .list-group-item.header
       .row
-        .col-sm-10 = t('consumptions')
+        .col-sm-10.col-xs-10 = t('consumptions')
         - if @drug.consumptions.not_active.any?
-          .col-sm-2
+          .col-sm-2.col-xs-2
             .i.glyphicon.glyphicon-time.toggle-history.text-muted[title="#{t('show_all')}"]
 
     - if @drug.consumptions.any?
@@ -99,7 +99,7 @@
       .list-group-item
         .row
           .col-sm-3.col-xs-3
-          .col-sm-6
+          .col-sm-6.col-xs-6
             em.text-muted = t('add_consumption')
 
     .list-group-item.footer
@@ -110,7 +110,7 @@
   / Purchases
   .list-group
     / Header
-    .list-group-item.header.hidden-xs
+    .list-group-item.header
       .row
         .col-sm-12 = t('purchases_last')
 
