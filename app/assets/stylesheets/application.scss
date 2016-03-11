@@ -121,6 +121,10 @@ a.list-group-item:hover {
   background-color: #f4f4f4 !important;
   height: 35px;
   line-height: 5px;
+
+  .glyphicon {
+    line-height: inherit;
+  }
 }
 
 .list-group-item.footer {

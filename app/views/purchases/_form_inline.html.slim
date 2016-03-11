@@ -1,6 +1,6 @@
 = form_for([drug, Purchase.new]) do |f|
   / @see http://apidock.com/rails/ActionView/Helpers/DateHelper/date_select
-  .col-sm-3.hidden.xs
+  .col-sm-3.hidden-xs
   .col-sm-3.col-xs-5.no-padding-left
     / Hide purchase.when field
     / = f.date_select :when, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
