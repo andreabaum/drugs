@@ -5,12 +5,17 @@ html
     title = t('drugs')
     = stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag "application", 'data-turbolinks-track' => true
+    / Mobile first @see http://getbootstrap.com/css/#overview-mobile
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    / Disable zooming capabilities on mobile devices
+    / meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     = csrf_meta_tags
 
   body
+    = render "partials/nav"
+
     /p#notice = notice
 
-    .panel.panel-default.default
-      = render "partials/nav"
-
-      = yield
+    .container-fluid
+      .panel.panel-default.default
+        = yield

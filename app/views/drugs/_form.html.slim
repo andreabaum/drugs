@@ -18,56 +18,47 @@
     .list-group
       .list-group-item
         .row
-          .col-sm-3 = t('name')
-          .col-sm-9 = f.text_field :name
+          .col-sm-3.col-xs-3 = t('name')
+          .col-sm-9.col-xs-9 = f.text_field :name
 
       .list-group-item
         .row
-          .col-sm-3 = t('note')
-          .col-sm-9 = f.text_area :note
+          .col-sm-3.col-xs-3 = t('note')
+          .col-sm-9.col-xs-9 = f.text_area :note
 
       .list-group-item
         .row
-          .col-sm-3 = t('format')
-          .col-sm-9
+          .col-sm-3.col-xs-3 = t('format')
+          .col-sm-9.col-xs-9
             .row
-              .col-sm-3 = f.select :format_type, options_for_select(Drug.format_types.map {|k,v| [t("format_types.#{k}"), k]}), class: 'short'
-              .col-sm-3 = f.text_field :format, class: 'short'
+              .col-sm-3.col-xs-6 = f.select :format_type, options_for_select(Drug.format_types.map {|k,v| [t("format_types.#{k}"), k]}), class: 'short'
+              .col-sm-3.col-xs-6 = f.text_field :format, class: 'short'
             .hint.text-muted.m-t = t('hints.format')
 
       .list-group-item
         .row
-          .col-sm-3 = t('amount')
-          .col-sm-6
+          .col-sm-3.col-xs-3 = t('amount')
+          .col-sm-6.col-xs-9
             = f.hidden_field :reset_at, value: Time.now
             = f.number_field :reset_amount, class: 'form-control', value: @drug.amount_current, min: 0, step: 0.5
             .hint.text-muted.m-t = t('hints.amount')
 
       .list-group-item
         .row
-          .col-sm-3 = t('prescription')
-          .col-sm-6
+          .col-sm-3.col-xs-3 = t('prescription')
+          .col-sm-6.col-xs-9
             = f.check_box :prescription
             .hint.text-muted.m-t = t('hints.prescription')
 
       .list-group-item
         .row
-          .col-sm-3 = t('active')
-          .col-sm-6 = f.check_box :active
+          .col-sm-3.col-xs-3 = t('active')
+          .col-sm-6.col-xs-9 = f.check_box :active
 
       .list-group-item.footer
         .row
-          .col-sm-3
+          .col-sm-3.col-xs-3
           .col-sm-2.no-padding-left
             = f.submit t('save'), class: 'btn btn-default'
-
-  /hr
-  /= form_for(@drug) do |r|
-    .row
-      .col-sm-2 = t('amount')
-      .col-sm-6 = r.number_field :reset_amount, class: 'form-control', value: @drug.amount_current, min: 0, step: 0.5
-      .col-sm-2
-        = r.hidden_field :reset_at, value: Date.today
-        = r.submit t('reset'), class: 'btn btn-default'
 
 = render "partials/footer_buttons", model: @drug, options: [:cancel, :delete]

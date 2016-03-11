@@ -16,26 +16,26 @@
   - if times.any?
     .list-group
       / Header
-      .list-group-item.header.hidden-xs
+      .list-group-item.header
         .row
-          .col-sm-6
+          .col-sm-6.col-xs-6
             /= t('drug')
-          .col-sm-1
+          .col-sm-1.col-xs-1
           - times.each do |time|
-            .col-sm-1 = time.strftime("%k:%M")
+            .col-sm-1.col-xs-1 = time.strftime("%k:%M")
 
       / consumptions grid
       - @user.drugs.each do |drug|
         - if drug.active && @user.drug_active?(drug)
           = link_to drug, class: "list-group-item"
             .row
-              .col-sm-6
+              .col-sm-6.col-xs-6
                 = drug.name
                 span.text-muted.m-l = drug.format
-              .col-sm-1
+              .col-sm-1.col-xs-1
                 .text-muted = clean_number(@user.consumptions.active.by_drug(drug).map(&:amount).inject(:+))
               - times.each do |time|
-                .col-sm-1
+                .col-sm-1.col-xs-1
                   - @user.consumptions.active.by_drug(drug).each do |consumption|
                     - if time == consumption.when
                       .m-r = consumption.amount_clean

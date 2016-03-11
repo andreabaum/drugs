@@ -28,32 +28,14 @@
 }
 
 body {
-  padding: 20px;
+  /* padding: 20px; */
   background-color: #D8D8D8;
   font-family: /*'Quicksand',*/ 'Ubuntu', 'sans-serif';
 }
 
-#nav {
-  position: relative;
-  left: -2px;
-  top: 47px;
-  width: 2px;
-  display: block;
-  float: left;
-
-  .btn {
-      margin-top: 2px;
-      padding-right: 15px;
-      border-right: 0px;
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      min-width: 100px;
-  }
-}
-
 .panel {
   margin: auto;
-  width: 800px;
+  /*width: 800px;*/
 }
 
 .panel-heading {
@@ -96,7 +78,10 @@ body {
 }
 
 .list-group-item {
-  padding: 10px 40px;
+  /* @media (min-width: @screen-md-min) { */
+  @media (min-width: 992px) {
+    padding: 10px 40px;
+  }
 
   .shy {
     visibility: hidden;
@@ -107,14 +92,11 @@ body {
   .shy {
     visibility: visible;
   }
-
 }
-
 
 .list-group-item.not-active {
   color: #aaa !important;
 }
-
 
 a.list-group-item:hover {
   background-color: #CEF6CE !important  ;
@@ -171,7 +153,13 @@ input[type='text'], input[type='number'] {
 }
 
 input[type='text'] {
-  width: 300px;
+  /* @media (min-width: @screen-md-min) { */
+  @media (min-width: 992px) {
+      width: 300px;
+  }
+  @media (max-width: 992px) {
+      width: 250px;
+  }
 }
 
 input.short {
@@ -179,7 +167,13 @@ input.short {
 }
 
 input[type='number'] {
-  width: 70px;
+  /* @media (min-width: @screen-md-min) { */
+  @media (min-width: 992px) {
+      width: 70px;
+  }
+  @media (max-width: 992px) {
+      width: 50px;
+  }
 }
 
 input[type='submit'] {
@@ -297,6 +291,12 @@ a {
   }
 }
 
+nav {
+  .glyphicon, .fa {
+    margin: 0 5px 0 1px;
+  }
+
+}
 .center {
   text-align: center;
 }

@@ -1,4 +1,4 @@
-.panel-heading.agenda
+.panel-heading.agenda.hidden-xs
   h3.panel-title = t('drugs')
 
 .panel-body
@@ -16,7 +16,7 @@
       - message = drug.amount_current > 0 ? t('ends_in_days', count: drug.ends_in) : t('no_more')
       = link_to drug, class: "list-group-item"
         .row
-          .col-sm-10
+          .col-sm-10.col-xs-9
             = drug.name
             span.text-muted.m-l
               = t("format_types.#{drug.format_type}") if drug.format_type
@@ -30,13 +30,13 @@
                   .i.glyphicon.glyphicon-exclamation-sign.text-muted[title='#{message}']
 
           - if drug.dose
-            .col-sm-2[title='#{message}']
+            .col-sm-2.col-xs-3[title='#{message}']
               = drug.ends_at_formatted
 
     / Add drug
     .list-group-item.footer
       = form_for(:drug) do |f|
-        .col-sm-10.no-padding-left
+        .col-sm-10.col-xs-8.no-padding-left
           = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
         /.col-sm-2
           = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0

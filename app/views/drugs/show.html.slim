@@ -13,13 +13,13 @@
 
     .list-group-item
       .row
-        .col-sm-3 = t('name')
-        .col-sm-6 = @drug.name
+        .col-sm-3.col-xs-3 = t('name')
+        .col-sm-6.col-xs-6 = @drug.name
 
     .list-group-item
       .row
-        .col-sm-3 = t('format')
-        .col-sm-6
+        .col-sm-3.col-xs-3 = t('format')
+        .col-sm-6.col-xs-6
           = t("format_types.#{@drug.format_type}") if @drug.format_type
           '
           = @drug.format
@@ -27,55 +27,56 @@
 
     .list-group-item
       .row
-        .col-sm-3 = t('amount')
-        .col-sm-3 = @drug.amount_current
-        .col-sm-6.hint.text-muted.shy = t('hints.amount')
+        .col-sm-3.col-xs-3 = t('amount')
+        .col-sm-3.col-xs-3 = @drug.amount_current
+        .col-sm-6.col-xs-6.hint.text-muted.shy = t('hints.amount')
 
     .list-group-item
       .row
-        .col-sm-3 = t('prescription')
-        .col-sm-3
+        .col-sm-3.col-xs-3 = t('prescription')
+        .col-sm-3.col-xs-3
           - if @drug.prescription?
             = t('yep')
           - else
             = t('no')
         - if @drug.prescription?
-          .col-sm-6.hint.text-muted.shy
+          .col-sm-6.col-xs-6.col-xs-6.hint.text-muted.shy
             = t('hints.prescription')
 
     .list-group-item
       .row
-        .col-sm-3 = t('ends_at')
+        .col-sm-3.col-xs-3 = t('ends_at')
         - if @drug.dose
-          .col-sm-3 = @drug.ends_at_formatted
-          .col-sm-6.hint.text-muted.shy
+          .col-sm-3.col-xs-3 = @drug.ends_at_formatted
+          .col-sm-6.col-xs-6.hint.text-muted.shy
             = @drug.amount_current > 0 ? t('ends_in_days', count: @drug.ends_in) : t('no_more')
         - else
-          .col-sm-9
+          .col-sm-9.col-xs-9
             .hint.text-muted = t('no_end_date')
 
+    / Users
     .list-group-item
       .row
-        .col-sm-3 = t('user')
+        .col-sm-3.col-xs-3 = t('user')
         - if @drug.users.any?
-          .col-sm-6
+          .col-sm-6.col-xs-6
             - @drug.users.each do |user|
               .row
-                .col-sm-6 = user.name
-                .col-sm-6.hint.text-muted.shy
+                .col-sm-6.col-xs-6 = user.name
+                .col-sm-6.col-xs-6.hint.text-muted.shy
                   - if user.drug_active?(@drug)
                     = t('daily_dose', count: @drug.dose_by_user(user))
                   - else
                     = t('not_now')
         - else
-          .col-sm-8
+          .col-sm-8.col-xs-8
             .hint.text-muted = t('no_user')
 
     - if @drug.note && !@drug.note.empty?
       .list-group-item
         .row
-          .col-sm-3 = t('note')
-          .col-sm-6
+          .col-sm-3.col-xs-3 = t('note')
+          .col-sm-6.col-xs-6
             .text-muted = simple_format(@drug.note)
   hr
 
@@ -97,7 +98,7 @@
     - unless @drug.consumptions.active.any?
       .list-group-item
         .row
-          .col-sm-3
+          .col-sm-3.col-xs-3
           .col-sm-6
             em.text-muted = t('add_consumption')
 
@@ -121,7 +122,7 @@
     - else
       .list-group-item
         .row
-          .col-sm-3
+          .col-sm-3.col-xs-3
           .col-sm-6
             em.text-muted = t('add_purchase')
 

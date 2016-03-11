@@ -1,7 +1,7 @@
 .row
-  .col-sm-3
-  .col-sm-3 = purchase.when_formatted
-  .col-sm-4 = purchase.amount
-  .col-sm-2.shy
+  .col-sm-3.col-xs-3
+  .col-sm-3.col-xs-3 = purchase.when_formatted
+  .col-sm-4.col-xs-4 = purchase.amount
+  .col-sm-2.col-xs-2.shy
     = link_to purchase, method: :delete, data: { confirm: 'Are you sure?' }
       .i.glyphicon.glyphicon-remove.text-muted

@@ -1,10 +1,10 @@
 = form_for([drug, Purchase.new]) do |f|
   / @see http://apidock.com/rails/ActionView/Helpers/DateHelper/date_select
-  .col-sm-3
-  .col-sm-3.no-padding-left
+  .col-sm-3.col-xs-3
+  .col-sm-3.col-xs-3.no-padding-left
     / Hide purchase.when field
     / = f.date_select :when, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
     = f.hidden_field :when, value: Time.now
-  .col-sm-4.shy
+  .col-sm-4.col-xs-2.shy
     = f.number_field :amount, class: 'form-control', value: drug.amount_last_purchased, min: 0
   = f.submit t('add'), class: 'btn btn-default'

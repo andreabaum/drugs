@@ -3,13 +3,13 @@
   / = c.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
   = c.hidden_field :starts_at, value: Date.today
   = c.hidden_field :ends_at, value: Date.today + 5.years
-  .col-sm-3.no-padding-left.shy
+  .col-sm-3.col-xs-3.no-padding-left.shy
     - if drug.user
       = c.hidden_field :user_id, value: drug.user.id
     - else
       = c.select :user_id, User.all.collect {|u| [ u.name, u.id ] }
-  .col-sm-3.no-padding-left.shy
+  .col-sm-3.col-xs-3.no-padding-left.shy
     = c.time_select :when, minute_step: 30, ignore_date: true
-  .col-sm-4.shy
+  .col-sm-4.col-xs-2.shy
     = c.number_field :amount, class: 'form-control', value: 1, min: 0.5, step: 0.5
   = c.submit t('add'), class: 'btn btn-default'

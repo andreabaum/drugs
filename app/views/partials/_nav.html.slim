@@ -1,9 +1,45 @@
+nav.navbar.navbar-default role="navigation"
+  .container-fluid
 
-#nav
-  = link_to root_path, class: 'btn btn-default pull-right text-left'
-    .i.glyphicon.glyphicon-menu-hamburger
-    = t('index')
-  - User.all.each do |user|
-    = link_to user_path(user), class: 'btn btn-default pull-right text-left'
-      .i.glyphicon.glyphicon-user
-      = user.name
+    /! Brand and toggle get grouped for better mobile display
+    .navbar-header
+      button.navbar-toggle data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand href='#{root_path}'
+        = t('drugs')
+
+    /! Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      /ul.nav.navbar-nav
+        li
+          a href='#{root_path}'
+            = t('index')
+
+      ul.nav.navbar-nav.navbar-right
+        - User.all.each do |user|
+          li = link_to user_path(user)
+            .i.glyphicon.glyphicon-user
+            = user.name
+
+        / Search
+        /form.navbar-form.navbar-left role="search"
+          .form-group
+            input.form-control placeholder="Search" type="text"
+          button.btn.btn-default type="submit"  Submit
+
+        / Dropdown
+        /li.dropdown
+          a.dropdown-toggle data-toggle="dropdown" href="#"
+            | Dropdown
+            span.caret
+          ul.dropdown-menu role="menu"
+            li
+              a href="#"  Action
+            li.divider
+            li
+              a href="#"  Separated link
+  /! /.navbar-collapse
+/! /.container-fluid
