@@ -19,7 +19,7 @@
     .list-group-item
       .row
         .col-sm-3.col-xs-3 = t('format')
-        .col-sm-6.col-xs-6
+        .col-sm-6.col-xs-9
           = t("format_types.#{@drug.format_type}") if @drug.format_type
           '
           = @drug.format
@@ -59,7 +59,7 @@
       .row
         .col-sm-3.col-xs-3 = t('user')
         - if @drug.users.any?
-          .col-sm-6.col-xs-6
+          .col-sm-6.col-xs-9
             - @drug.users.each do |user|
               .row
                 .col-sm-6.col-xs-6 = user.name

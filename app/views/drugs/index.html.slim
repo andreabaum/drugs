@@ -16,7 +16,7 @@
       - message = drug.amount_current > 0 ? t('ends_in_days', count: drug.ends_in) : t('no_more')
       = link_to drug, class: "list-group-item"
         .row
-          .col-sm-10.col-xs-9
+          .col-sm-10.col-xs-8
             = drug.name
             span.text-muted.m-l
               = t("format_types.#{drug.format_type}") if drug.format_type
@@ -30,7 +30,7 @@
                   .i.glyphicon.glyphicon-exclamation-sign.text-muted[title='#{message}']
 
           - if drug.dose
-            .col-sm-2.col-xs-3[title='#{message}']
+            .col-sm-2.col-xs-4[title='#{message}']
               = drug.ends_at_formatted
 
     / Add drug
