@@ -37,7 +37,7 @@
     / Add drug
     .list-group-item.footer
       = form_for(:drug) do |f|
-        .col-sm-10.col-xs-9.no-padding-left
+        .col-sm-10.col-xs-8.no-padding-left
           = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
         /.col-sm-2
           = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
