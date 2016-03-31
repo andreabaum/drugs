@@ -9,34 +9,35 @@
         .col-sm-10
           /= t('name')
         /.col-sm-1 = t('dose')
-        .col-sm-2= t('ends_at')
+        .col-sm-2 = t('ends_at')
 
     / Drug list
     - @drugs.select{ |drug| drug[:active]}.each do |drug|
       - message = drug.amount_current > 0 ? t('ends_in_days', count: drug.ends_in) : t('no_more')
       = link_to drug, class: "list-group-item"
         .row
-          .col-sm-10.col-xs-8
+          .col-sm-10.col-xs-9
             = drug.name
-            span.text-muted.m-l
-              = t("format_types.#{drug.format_type}") if drug.format_type
-              '
-              = drug.format
             - if drug.amount_current && drug.dose
               .pull-right
                 - if drug.amount_current > 0
                   = render 'meter', value: drug.ends_in, message: message
                 - else
                   .i.glyphicon.glyphicon-exclamation-sign.text-muted[title='#{message}']
+            span.text-muted.m-l
+              br.visible-xs
+              = t("format_types.#{drug.format_type}") if drug.format_type
+              '
+              = drug.format
 
           - if drug.dose
-            .col-sm-2.col-xs-4[title='#{message}']
+            .col-sm-2.col-xs-3[title='#{message}']
               = drug.ends_at_formatted
 
     / Add drug
     .list-group-item.footer
       = form_for(:drug) do |f|
-        .col-sm-10.col-xs-8.no-padding-left
+        .col-sm-10.col-xs-9.no-padding-left
           = f.text_field :name, class: 'form-control', placeholder: t('placeholder.drug')
         /.col-sm-2
           = f.number_field :reset_amount, class: 'form-control', value: 0, min: 0
@@ -49,6 +50,9 @@
   .list-group
     - @drugs.select{ |drug| !drug[:active]}.each do |drug|
       = link_to drug, class: "list-group-item not-active"
-        = drug.name
-        span.text-muted.m-l = drug.format
-        .pull-right = t('not_active')
+        .row
+          .col-sm-10.col-xs-9
+            = drug.name
+            /span.text-muted.m-l = drug.format
+          .col-sm-2.col-xs-3
+            = t('not_active')

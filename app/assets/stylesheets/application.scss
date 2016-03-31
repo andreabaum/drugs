@@ -95,7 +95,10 @@ body {
   }
 
   .shy {
-    visibility: hidden;
+    /* Always show on touch devices */
+    @media (min-width: 992px) {
+      visibility: hidden;
+    }
   }
 }
 
@@ -152,6 +155,9 @@ select {
   color: #555;
   padding: 5px;
   border-radius: 4px;
+  @media (max-width: 768px) {
+    height: 26px;
+  }
 }
 
 textarea {
@@ -181,6 +187,7 @@ input[type='text'] {
   }
   @media (max-width: 768px) {
     width: 200px;
+    height: 26px;
   }
 }
 
@@ -190,10 +197,11 @@ input.short {
 
 input[type='number'] {
   @media (min-width: 768px) {
-      width: 70px;
+    width: 70px;
   }
   @media (max-width: 768px) {
-      width: 40px;
+    width: 40px;
+    height: 26px;
   }
 }
 
