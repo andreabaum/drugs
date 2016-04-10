@@ -62,6 +62,11 @@ it:
     other: Termina in %{count} giorni
   no_end_date: Non é possibile stimare la scadenza poiché nessun dosaggio é presente
   no_more: Finita
+  every_days: Frequenza
+  every: Ogni
+  every_n_days:
+    one: Ogni giorno
+    other: Ogni %{count} giorni
   name: Nome
   format: Formato
   format_types:
@@ -93,7 +98,12 @@ it:
     format: "Ad esempio: Compresse 50 mg, Capsule 100 mg, Collirio, etc."
     amount: Quantitá presente stamani
     prescription: Prescrizione medica necessaria
+    every_days: "Ad esempio: ogni giorno (1), un giorno sì e uno no (2) o una volta alla settimana (7)"
+    from: Il primo giorno in cui la medicina é stata presa
 
   placeholder:
     drug: 'Medicina'
     purchase: '20'
+
+  date:
+    day_names: [Domenica, Lunedi, Martedi, Mercoledi, Giovedi, Venerdi, Sabato]

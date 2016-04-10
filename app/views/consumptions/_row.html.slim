@@ -2,10 +2,18 @@
   .col-sm-3.col-xs-3.hint.text-muted.shy = consumption.user.name unless consumption.drug.user
   .col-sm-3.col-xs-3 = consumption.when_formatted
   .col-sm-4.col-xs-4
-    - if consumption.is_active?
-      = consumption.amount_clean
-    - else
-      = "#{consumption.amount_clean} (#{consumption.starts_at_formatted} - #{consumption.ends_at_formatted})"
+    = consumption.amount_clean
+    - if consumption.every_days > 1
+      span
+        '
+        - if consumption.every_days == 7
+          = t(:every).downcase
+          '
+          = t('date.day_names')[consumption.starts_at.wday]
+        - else
+          = t('every_n_days', count: consumption.every_days).downcase
+    - unless consumption.is_active?
+      = " (#{consumption.starts_at_formatted} - #{consumption.ends_at_formatted})"
   .col-sm-2.col-xs-2.shy
     = link_to edit_consumption_path(consumption)
       .i.glyphicon.glyphicon-pencil.text-muted

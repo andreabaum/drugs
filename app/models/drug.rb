@@ -70,16 +70,23 @@ class Drug < ActiveRecord::Base
 
   def dose
     # Current daily dose, sum active consumptions (float)
-    consumptions.active.map(&:amount).inject(:+)
+    consumptions.active.map(&:amount_f).inject(:+)
   end
 
   def dose_clean
     clean_number dose
   end
 
+  #TODO Update to support different consumptions frequency, e.g. every 7 days
   def dose_by_user(user)
     # Current daily dose, sum active consumptions (float)
     clean_number consumptions.active.by_user(user).map(&:amount).inject(:+)
+  end
+
+  # Return true when all active consumptions are for every day
+  def easy_dose?(user)
+    active_consumptions = consumptions.active.by_user(user)
+    active_consumptions.map(&:every_days).inject(:+) == active_consumptions.size
   end
 
   def amount_last_purchased

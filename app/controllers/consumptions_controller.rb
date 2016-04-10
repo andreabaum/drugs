@@ -62,6 +62,6 @@ class ConsumptionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def consumption_params
-      params.require(:consumption).permit(:when, :note, :amount, :drug_id, :starts_at, :ends_at, :user_id)
+      params.require(:consumption).permit(:when, :note, :amount, :drug_id, :starts_at, :ends_at, :every_days, :user_id)
     end
 end

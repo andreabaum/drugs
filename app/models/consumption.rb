@@ -15,6 +15,10 @@ class Consumption < ActiveRecord::Base
   # TODO not working?
   # scope :by_time, -> (t) { where('when = ?', t) }
 
+  def amount_f
+    amount / every_days
+  end
+
   def amount_clean
     clean_number amount
   end

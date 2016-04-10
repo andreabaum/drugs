@@ -36,8 +36,17 @@
 
       .list-group-item
         .row
+          .col-sm-3.col-xs-3 = t('every_days')
+          .col-sm-9.col-xs-9
+            = f.number_field :every_days, class: 'form-control', min: 1
+            .hint.text-muted.m-t = t('hints.every_days')
+
+      .list-group-item
+        .row
           .col-sm-3.col-xs-3 = t('from')
-          .col-sm-6.col-xs-9 = f.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
+          .col-sm-6.col-xs-9
+            = f.date_select :starts_at, use_two_digit_numbers: true, order: [:day, :month, :year], start_year: 2015
+            .hint.text-muted.m-t = t('hints.from')
 
       .list-group-item
         .row

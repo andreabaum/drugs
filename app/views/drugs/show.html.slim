@@ -65,7 +65,8 @@
                 .col-sm-6.col-xs-4 = user.name
                 .col-sm-6.col-xs-8.hint.text-muted.shy
                   - if user.drug_active?(@drug)
-                    = t('daily_dose', count: @drug.dose_by_user(user))
+                    - if  @drug.easy_dose?(user)
+                      = t('daily_dose', count: @drug.dose_by_user(user))
                   - else
                     = t('not_now')
         - else

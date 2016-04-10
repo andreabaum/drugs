@@ -38,7 +38,10 @@
                 .col-sm-1.col-xs-1
                   - @user.consumptions.active.by_drug(drug).each do |consumption|
                     - if time == consumption.when
-                      .m-r = consumption.amount_clean
+                      .m-r[title=t('every_n_days', count: consumption.every_days)]
+                        = consumption.amount_clean
+                        - if consumption.every_days > 1
+                          = " / #{consumption.every_days}"
   - else
     .note.center
       i.glyphicon.glyphicon-heart-empty.m-r

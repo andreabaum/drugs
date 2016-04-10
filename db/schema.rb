@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 201603062115642) do
     t.date     "starts_at",  default: '2016-03-05'
     t.date     "ends_at",    default: '2016-03-05'
     t.integer  "user_id"
+    t.integer  "every_days", default: 1
   end
 
   add_index "consumptions", ["drug_id"], name: "index_consumptions_on_drug_id"

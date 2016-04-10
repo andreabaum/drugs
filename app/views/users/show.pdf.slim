@@ -34,5 +34,7 @@ style[type="text/css"]
               - @user.consumptions.active.by_drug(drug).each do |consumption|
                 - if time == consumption.when
                   = consumption.amount_clean
+                  - if consumption.every_days > 1
+                    = " / #{consumption.every_days}"
 
   .footer = t('updated_at', day: Date.today.strftime("%d.%m.%Y"))
