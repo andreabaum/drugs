@@ -3,7 +3,7 @@
 one:
   name: MyString
   note: MyText
-  active: false
+  active: true
 
 two:
   name: MyString

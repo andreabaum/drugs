@@ -70,7 +70,14 @@ class Drug < ActiveRecord::Base
 
   def dose
     # Current daily dose, sum active consumptions (float)
-    consumptions.active.map(&:amount_f).inject(:+)
+    dose = 0
+    consumptions.each { |consumption|
+      dose += consumption.amount_f if consumption.is_active?
+    }
+    dose
+
+    # Nicer but incorrect in test env (?)
+    # consumptions.active.map(&:amount_f).inject(:+)
   end
 
   def dose_clean
