@@ -47,7 +47,7 @@ class Consumption < ActiveRecord::Base
   def consumed_after_reset
     if (starts_at..ends_at).overlaps?(drug.reset_at..Date.today)
       days = [ends_at, Date.today].min - [starts_at, drug.reset_at_date].max
-      days * amount
+      days * amount_f
     else
       0
     end
