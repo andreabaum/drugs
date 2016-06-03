@@ -89,6 +89,7 @@ it:
   total: Totale
   prescription: Farmaco
 
+  history: Cronologia
   updated_at: Aggiornato al %{day}
 
   show_only_firsts: Sono mostrate solo le prima cinque fasce orarie

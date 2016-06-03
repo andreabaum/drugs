@@ -24,6 +24,14 @@ nav.navbar.navbar-default role="navigation"
             .i.glyphicon.glyphicon-user
             = user.name
 
+        / Purchases
+        li.visible-xs = link_to purchases_path
+          .i.glyphicon.glyphicon-shopping-cart
+          = t('purchases')
+
+        li.hidden-xs[title='#{t('purchases')}'] = link_to purchases_path
+          .i.glyphicon.glyphicon-shopping-cart
+
         / Search
         /form.navbar-form.navbar-left role="search"
           .form-group

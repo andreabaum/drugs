@@ -30,7 +30,7 @@
         .col-sm-3.col-xs-3 = t('amount')
         .col-sm-3.col-xs-3
           - v = @drug.amount_current_round
-          - if v > 0
+          - if v >= 0
             = v
           - else
             / Render negative values
