@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201603062115642) do
+ActiveRecord::Schema.define(version: 201606031705642) do
 
   create_table "consumptions", force: :cascade do |t|
     t.integer  "drug_id"
@@ -43,10 +43,10 @@ ActiveRecord::Schema.define(version: 201603062115642) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.datetime    "when"
-    t.text    "resource"
-    t.integer "resource_id"
-    t.text    "description"
+    t.datetime "when"
+    t.text     "resource"
+    t.integer  "resource_id"
+    t.text     "description"
   end
 
   create_table "purchases", force: :cascade do |t|
