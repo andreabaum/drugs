@@ -8,4 +8,5 @@ class Purchase < ActiveRecord::Base
   def when_formatted
     format_date self.when
   end
+
 end

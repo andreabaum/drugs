@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 201603062115642) do
     t.boolean  "prescription", default: true
   end
 
+  create_table "events", force: :cascade do |t|
+    t.datetime    "when"
+    t.text    "resource"
+    t.integer "resource_id"
+    t.text    "description"
+  end
+
   create_table "purchases", force: :cascade do |t|
     t.integer  "drug_id"
     t.datetime "when"

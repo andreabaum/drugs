@@ -1,0 +1,19 @@
+.panel-heading.agenda
+  h3.panel-title = t('purchases')
+
+.panel-body
+  .list-group
+    / Header
+    /.list-group-item.header
+      .row
+        .col-sm-2.col-xs-3 = t('when')
+        .col-sm-6.col-xs-6 = t('drug')
+        .col-sm-4.col-xs-3 = t('amount')
+
+    / List
+    - @purchases.each do |purchase|
+      = link_to purchase.drug, class: "list-group-item"
+        .row
+          .col-sm-2.col-xs-3 = purchase.when_formatted
+          .col-sm-6.col-xs-6 = purchase.drug.name
+          .col-sm-4.col-xs-3 = purchase.amount

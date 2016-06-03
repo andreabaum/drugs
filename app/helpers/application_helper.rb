@@ -29,4 +29,12 @@ module ApplicationHelper
   def format_time(time)
     time.strftime("%k:%M")
   end
+
+  def format_datetime(datetime)
+    datetime.strftime("%d.%m.%Y %k:%M")
+  end
+
+  def track(resource, description)
+    Event.create(when: Time.now, resource: resource.class, resource_id: resource.id, description: description)
+  end
 end

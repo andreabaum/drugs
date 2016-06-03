@@ -27,6 +27,7 @@ class DrugsController < ApplicationController
 
     respond_to do |format|
       if @drug.save
+        track(@drug, "Drug added {id: #{@drug.id}} #{drug_params}")
         format.html { redirect_to root_path, notice: 'Drug was successfully created.' }
         format.json { render :show, status: :created, location: @drug }
       else
@@ -40,6 +41,7 @@ class DrugsController < ApplicationController
   def update
     respond_to do |format|
       if @drug.update(drug_params)
+        track(@drug, "Drug updated {id: #{@drug.id}} #{drug_params}")
         format.html { redirect_to @drug, notice: 'Drug was successfully updated.' }
         format.json { render :show, status: :ok, location: @drug }
       else
@@ -51,6 +53,7 @@ class DrugsController < ApplicationController
 
   # DELETE /drugs/1
   def destroy
+    track(@drug, "Drug removed {id: #{@drug.id}}")
     @drug.destroy
     respond_to do |format|
       format.html { redirect_to drugs_url, notice: 'Drug was successfully destroyed.' }

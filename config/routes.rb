@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :drugs
   resources :consumptions
   resources :users
+  resources :events
 
   root 'drugs#index'
 
