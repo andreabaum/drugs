@@ -40,7 +40,7 @@
           .col-sm-3.col-xs-3 = t('amount')
           .col-sm-6.col-xs-9
             = f.hidden_field :reset_at, value: Time.now
-            = f.number_field :reset_amount, class: 'form-control', value: @drug.amount_current, min: 0, step: 0.5
+            = f.number_field :reset_amount, class: 'form-control', value: @drug.amount_current_round, min: 0, step: 0.5
             .hint.text-muted.m-t = t('hints.amount')
 
       .list-group-item

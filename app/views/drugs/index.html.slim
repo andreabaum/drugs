@@ -13,7 +13,7 @@
 
     / Drug list
     - @drugs.select{ |drug| drug[:active]}.each do |drug|
-      - message = drug.amount_current > 0 ? t('ends_in_days', count: drug.ends_in) : t('no_more')
+      - message = drug.amount_current_round > 0 ? t('ends_in_days', count: drug.ends_in) : t('no_more')
       = link_to drug, class: "list-group-item"
         .row
           .col-sm-10.col-xs-9

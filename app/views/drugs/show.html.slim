@@ -28,7 +28,14 @@
     .list-group-item
       .row
         .col-sm-3.col-xs-3 = t('amount')
-        .col-sm-3.col-xs-3 = @drug.amount_current
+        .col-sm-3.col-xs-3
+          - v = @drug.amount_current_round
+          - if v > 0
+            = v
+          - else
+            / Render negative values
+            = 0
+            span.text-muted.m-l = "(#{v})"
         .col-sm-6.col-xs-6.hint.text-muted.shy = t('hints.amount')
 
     .list-group-item
@@ -49,7 +56,7 @@
         - if @drug.dose
           .col-sm-3.col-xs-3 = @drug.ends_at_formatted
           .col-sm-6.col-xs-6.hint.text-muted.shy
-            = @drug.amount_current > 0 ? t('ends_in_days', count: @drug.ends_in) : t('no_more')
+            = @drug.amount_current_round > 0 ? t('ends_in_days', count: @drug.ends_in) : t('no_more')
         - else
           .col-sm-9.col-xs-9
             .hint.text-muted = t('no_end_date')
@@ -65,7 +72,7 @@
                 .col-sm-6.col-xs-4 = user.name
                 .col-sm-6.col-xs-8.hint.text-muted.shy
                   - if user.drug_active?(@drug)
-                    - if  @drug.easy_dose?(user)
+                    - if  @drug.has_everyday_consumptions_only?(user)
                       = t('daily_dose', count: @drug.dose_by_user(user))
                   - else
                     = t('not_now')

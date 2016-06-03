@@ -56,6 +56,7 @@ class Drug < ActiveRecord::Base
     consumptions.any? ? consumptions.map(&:consumed_after_reset).inject(:+) : 0
   end
 
+  # Return the amount currently available
   def amount_current
     if reset_at && !reset_amount.nil?
       amount = reset_amount
@@ -66,6 +67,12 @@ class Drug < ActiveRecord::Base
       # Sum purchases amount (integer)
       purchases.sum(:amount)
     end
+  end
+
+  # Return the amount currently available, preventing unwanted decimals
+  def amount_current_round
+    fract = has_integer_consumptions_only? ? 1 : 2
+    truncate_number(amount_current, fract)
   end
 
   def dose
@@ -91,9 +98,16 @@ class Drug < ActiveRecord::Base
   end
 
   # Return true when all active consumptions are for every day
-  def easy_dose?(user)
+  def has_everyday_consumptions_only?(user)
     active_consumptions = consumptions.active.by_user(user)
     active_consumptions.map(&:every_days).inject(:+) == active_consumptions.size
+  end
+
+  # Return true when all active consumptions have integer amounts
+  def has_integer_consumptions_only?
+    consumptions.active.each { |consumption|
+      return false unless consumption.amount_clean.is_a? Integer
+    }
   end
 
   def amount_last_purchased
