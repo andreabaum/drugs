@@ -3,7 +3,7 @@ class PurchasesController < ApplicationController
 
   # GET /purchases
   def index
-    @purchases = Purchase.all
+    @purchases = Purchase.all.reverse
   end
 
   # GET /purchases/1
