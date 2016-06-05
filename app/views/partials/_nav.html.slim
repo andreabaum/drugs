@@ -29,7 +29,7 @@ nav.navbar.navbar-default role="navigation"
           .i.glyphicon.glyphicon-shopping-cart
           = t('purchases')
 
-        li.hidden-xs[title='#{t('purchases')}'] = link_to purchases_path
+        li.hidden-xs.slim[title='#{t('purchases')}'] = link_to purchases_path
           .i.glyphicon.glyphicon-shopping-cart
 
         / History
@@ -37,7 +37,7 @@ nav.navbar.navbar-default role="navigation"
           .i.glyphicon.glyphicon-tasks
           = t('history')
 
-        li.hidden-xs[title='#{t('history')}'] = link_to events_path
+        li.hidden-xs.slim[title='#{t('history')}'] = link_to events_path
           .i.glyphicon.glyphicon-tasks
 
         / Search
