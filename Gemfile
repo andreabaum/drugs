@@ -63,3 +63,6 @@ gem 'wkhtmltopdf-binary'
 
 # Icons
 gem 'font-awesome-rails'
+
+# YAML based configuration
+gem 'figaro'

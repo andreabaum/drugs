@@ -1,0 +1,11 @@
+# Common settings
+# Pushed into the git repository
+# Loaded in application.rb and merged with application.yml
+
+sample: "on"
+
+# Figaro does not support nesting, using JSON
+options: >
+    {
+     "sample": "off"
+    }

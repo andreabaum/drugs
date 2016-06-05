@@ -34,7 +34,21 @@ module ApplicationHelper
     datetime.strftime("%d.%m.%Y %k:%M")
   end
 
+  # Create an event item
   def track(resource, description)
     Event.create(when: Time.now, resource: resource.class, resource_id: resource.id, description: description)
   end
+
+  # Return the value for the given configuration parameter
+  def get_config parameter
+    # Get default value from application.yml or common.yml
+    #Figaro.env.send(parameter)
+    ENV[parameter.to_s]
+  end
+
+  # Return the value for the given JSON configuration parameter
+  def get_config_json parameter, key
+    JSON.parse(get_config(parameter))[key.to_s]
+  end
+
 end

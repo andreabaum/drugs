@@ -5,5 +5,8 @@ class ApplicationController < ActionController::Base
 
   include ApplicationHelper
 
+  # Basic HTTP authentication
+  http_basic_authenticate_with name: ENV['name'], password: ENV['password']
+
   layout 'application'
 end
