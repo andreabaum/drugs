@@ -34,6 +34,13 @@ module ApplicationHelper
     datetime.strftime("%d.%m.%Y %k:%M")
   end
 
+  # Compare multiple times, ignoring the dates
+  # [2000-01-01 14:30:00 UTC:Time, 1970-01-01 14:30:00 UTC:Time] -> true
+  # [2000-01-01 14:30:00 UTC:Time, 2000-01-01 14:00:00 UTC:Time] -> false
+  def eql_times? times_array
+    times_array.map!{ |t| format_time(t) if t }.uniq.size == 1
+  end
+
   # Create an event item
   def track(resource, description)
     Event.create(when: Time.now, resource: resource.class, resource_id: resource.id, description: description)

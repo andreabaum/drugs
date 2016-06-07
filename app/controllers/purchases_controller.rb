@@ -26,7 +26,7 @@ class PurchasesController < ApplicationController
 
     respond_to do |format|
       if @purchase.save
-        track(@purchase.drug, "Purchase added {id: #{@purchase.id}} #{purchase_params}")
+        track(@purchase.drug, "Purchase added [#{@purchase.id}] #{purchase_params}")
         format.html { redirect_to @purchase.drug, notice: 'Purchase was successfully created.' }
         format.json { render :show, status: :created, location: @purchase }
       else
@@ -40,7 +40,7 @@ class PurchasesController < ApplicationController
   def update
     respond_to do |format|
       if @purchase.update(purchase_params)
-        track(@purchase.drug, "Purchase udpated {id: #{@purchase.id}} #{purchase_params}")
+        track(@purchase.drug, "Purchase udpated [#{@purchase.id}] #{purchase_params}")
         format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
         format.json { render :show, status: :ok, location: @purchase }
       else
@@ -53,7 +53,7 @@ class PurchasesController < ApplicationController
   # DELETE /purchases/1
   def destroy
     drug = @purchase.drug
-    track(drug, "Purchase removed {id: #{@purchase.id}}")
+    track(drug, "Purchase removed [#{@purchase.id}]")
     @purchase.destroy
     respond_to do |format|
       format.html { redirect_to drug, notice: 'Purchase was successfully destroyed.' }

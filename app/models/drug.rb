@@ -143,4 +143,11 @@ class Drug < ActiveRecord::Base
   def reset_at_date
     reset_at.to_date
   end
+
+  # Returns a hash of attributes that were changed before the model was saved
+  # http://api.rubyonrails.org/classes/ActiveModel/Dirty.html#method-i-previous_changes
+  def previous_changes_clean
+    excluded_params = [:updated_at, :reset_at]
+    previous_changes.except(*excluded_params)
+  end
 end
