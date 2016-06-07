@@ -36,9 +36,8 @@ class ConsumptionsController < ApplicationController
     respond_to do |format|
       if @consumption.update(consumption_params)
         changes = @consumption.previous_changes_clean
-        if changes
-          track(@consumption.drug, "Consumption updated [#{@consumption.id}] #{changes}")
-        end
+        # Only track if anything actually changed
+        track(@consumption.drug, "Consumption updated [#{@consumption.id}] #{changes}") if changes && changes.any?
         format.html { redirect_to @consumption.drug, notice: 'Consumption was successfully updated.' }
         format.json { render :show, status: :ok, location: @consumption }
       else

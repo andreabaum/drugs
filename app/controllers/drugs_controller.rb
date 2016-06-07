@@ -43,7 +43,7 @@ class DrugsController < ApplicationController
       if @drug.update(drug_params)
         changes = @drug.previous_changes_clean
         # Only track if anything actually changed
-        track(@drug, "Drug updated [#{@drug.id}] #{changes}") if changes
+        track(@drug, "Drug updated [#{@drug.id}] #{changes}") if changes && changes.any?
         format.html { redirect_to @drug, notice: 'Drug was successfully updated.' }
         format.json { render :show, status: :ok, location: @drug }
       else
