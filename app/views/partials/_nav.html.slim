@@ -27,9 +27,9 @@ nav.navbar.navbar-default role="navigation"
         / Agenda
         li.visible-xs = link_to consumptions_path
           .i.glyphicon.glyphicon-time
-          = t('agenda')
+          = t('today')
 
-        li.hidden-xs.slim[title='#{t('agenda')}'] = link_to consumptions_path
+        li.hidden-xs.slim[title='#{t('today')}'] = link_to consumptions_path
           .i.glyphicon.glyphicon-time
 
         / Purchases

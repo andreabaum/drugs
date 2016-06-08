@@ -1,6 +1,8 @@
 class Event < ActiveRecord::Base
   include ApplicationHelper
 
+  belongs_to :drug
+
   def get_resource
     Object.const_get(resource).find_by_id(resource_id.to_i)
   end

@@ -8,12 +8,23 @@
       .row
         .col-sm-2 = t('when')
         .col-sm-2 = t('drug')
-        .col-sm-8 = t('details')
+        .col-sm-2 = t('note')
+        .col-sm-6 = t('details')
 
     - @events.each do |event|
-      - obj = event.get_resource
-      = link_to obj, class: "list-group-item"
+      - drug = event.drug
+      - resource = event.get_resource
+      = link_to drug, class: "list-group-item"
         .row
-          .col-sm-2.col-xs-3 = event.when_formatted
-          .col-sm-2.col-xs-3 = obj.name if obj
-          .col-sm-8.col-xs-6 = event.description
+          .col-sm-2.col-xs-3
+            = time_ago_in_words(event.when)
+            '
+            = t('ago')
+          .col-sm-2.col-xs-3 = drug.name if drug
+          .col-sm-2.col-xs-3
+            = t(event.resource)
+            '
+            = t(event.action)
+          .col-sm-6.col-xs-3.text-muted
+            = "[#{event.resource_id}]"
+            = event.details

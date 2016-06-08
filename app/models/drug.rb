@@ -3,6 +3,7 @@ class Drug < ActiveRecord::Base
 
   has_many :purchases, dependent: :destroy
   has_many :consumptions, dependent: :destroy
+  has_many :events
 
   has_many :users, -> { distinct }, through: :consumptions
 

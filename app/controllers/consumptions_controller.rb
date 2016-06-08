@@ -22,7 +22,7 @@ class ConsumptionsController < ApplicationController
     @consumption.drug_id = params[:drug_id]
     respond_to do |format|
       if @consumption.save
-        track(@consumption.drug, "Consumption added [#{@consumption.id}] #{consumption_params}")
+        track(@consumption, :create, @consumption.inspect)
         format.html { redirect_to @consumption.drug, notice: 'Consumption was successfully created.' }
         format.json { render :show, status: :created, location: @consumption }
       else
@@ -37,7 +37,7 @@ class ConsumptionsController < ApplicationController
       if @consumption.update(consumption_params)
         changes = @consumption.previous_changes_clean
         # Only track if anything actually changed
-        track(@consumption.drug, "Consumption updated [#{@consumption.id}] #{changes}") if changes && changes.any?
+        track(@consumption, :update, changes) if changes && changes.any?
         format.html { redirect_to @consumption.drug, notice: 'Consumption was successfully updated.' }
         format.json { render :show, status: :ok, location: @consumption }
       else
@@ -49,7 +49,7 @@ class ConsumptionsController < ApplicationController
 
   def destroy
     drug = @consumption.drug
-    track(drug, "Consumption removed [#{@consumption.id}]")
+    track(@consumption, :destroy, @consumption.inspect)
     @consumption.destroy
     respond_to do |format|
       format.html { redirect_to drug, notice: 'Consumption was successfully destroyed.' }

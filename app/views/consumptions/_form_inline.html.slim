@@ -6,6 +6,8 @@
   .col-sm-3.hidden-xs.no-padding-left.shy
     - if drug.user
       = c.hidden_field :user_id, value: drug.user.id
+    - elsif User.all.size == 1
+      = c.hidden_field :user_id, value: User.first.id
     - else
       = c.select :user_id, User.all.collect {|u| [ u.name, u.id ] }
   .col-sm-3.col-xs-5.no-padding-left.shy

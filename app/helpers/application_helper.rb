@@ -42,8 +42,16 @@ module ApplicationHelper
   end
 
   # Create an event item
-  def track(resource, description)
-    Event.create(when: Time.now, resource: resource.class, resource_id: resource.id, description: description)
+  def track(resource, action, details = nil)
+    drug = resource.is_a?(Drug) ? resource : resource.drug
+    Event.create({
+        when: Time.now,
+        resource: resource.class,
+        resource_id: resource.id,
+        action: action,
+        details: details,
+        drug_id: drug.id
+    })
   end
 
   # Return the value for the given configuration parameter

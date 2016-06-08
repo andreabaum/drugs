@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 201606031705642) do
     t.text     "note"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
-    t.date     "starts_at",  default: '2016-03-05'
-    t.date     "ends_at",    default: '2016-03-05'
+    t.date     "starts_at",  default: '2016-06-08'
+    t.date     "ends_at",    default: '2016-06-08'
     t.integer  "user_id"
     t.integer  "every_days", default: 1
   end
@@ -46,8 +46,12 @@ ActiveRecord::Schema.define(version: 201606031705642) do
     t.datetime "when"
     t.text     "resource"
     t.integer  "resource_id"
-    t.text     "description"
+    t.text     "action"
+    t.string   "details"
+    t.integer  "drug_id"
   end
+
+  add_index "events", ["drug_id"], name: "index_events_on_drug_id"
 
   create_table "purchases", force: :cascade do |t|
     t.integer  "drug_id"

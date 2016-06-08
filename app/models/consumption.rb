@@ -81,7 +81,7 @@ class Consumption < ActiveRecord::Base
 
   def schedule
     starting_time = Time.parse("#{starts_at} #{when_formatted}")
-    schedule = IceCube::Schedule.new(starting_time)
+    schedule = IceCube::Schedule.new(starting_time, end_time: ends_at)
     schedule.add_recurrence_rule(
       IceCube::Rule.daily(every_days)
     )

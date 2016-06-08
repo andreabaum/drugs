@@ -91,8 +91,9 @@ it:
   today: Oggi
   tomorrow: Domani
   next_in: in
+  ago: fa
 
-  history: Cronologia
+  history: Modifiche
   updated_at: Aggiornato al %{day}
 
   show_only_firsts: Sono mostrate solo le prima cinque fasce orarie
