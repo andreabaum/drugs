@@ -35,8 +35,8 @@ class Consumption < ActiveRecord::Base
     format_date ends_at
   end
 
-  def is_active?
-    (starts_at..ends_at).cover?(Date.today)
+  def is_active? date = Date.today
+    (starts_at..ends_at).cover?(date)
   end
 
   def is_past?
@@ -59,5 +59,32 @@ class Consumption < ActiveRecord::Base
     excluded_params = [:updated_at]
     excluded_params << :when if eql_times?(previous_changes[:when])
     previous_changes.except(*excluded_params)
+  end
+
+  def next_occurrence
+    schedule.next_occurrence
+  end
+
+  def occurs_today?
+    schedule.occurs_on? Date.today
+  end
+
+  def occurs_tomorrow?
+    schedule.occurs_on? Date.tomorrow
+  end
+
+  def occurs_on? date = Date.today
+    schedule.occurs_on?(date)
+  end
+
+  private
+
+  def schedule
+    starting_time = Time.parse("#{starts_at} #{when_formatted}")
+    schedule = IceCube::Schedule.new(starting_time)
+    schedule.add_recurrence_rule(
+      IceCube::Rule.daily(every_days)
+    )
+    schedule
   end
 end

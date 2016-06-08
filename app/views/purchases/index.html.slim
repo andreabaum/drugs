@@ -4,11 +4,11 @@
 .panel-body
   .list-group
     / Header
-    /.list-group-item.header
+    .list-group-item.header.hidden-xs
       .row
-        .col-sm-2.col-xs-3 = t('when')
-        .col-sm-6.col-xs-6 = t('drug')
-        .col-sm-4.col-xs-3 = t('amount')
+        .col-sm-2 = t('when')
+        .col-sm-6 = t('drug')
+        .col-sm-4 = t('amount')
 
     / List
     - @purchases.each do |purchase|

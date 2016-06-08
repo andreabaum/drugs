@@ -5,30 +5,32 @@
     - if @user
       = @user.name
     - else
-      = t('agenda')
+      = t('today')
 
 .panel-body
   .list-group
     / Header
     .list-group-item.header.hidden-xs
       .row
-        .col-sm-1
-        .col-sm-2 = t('time')
-        .col-sm-2 = t('amount')
+        .col-sm-2 = t('time_at')
         .col-sm-6 = t('drug')
+        .col-sm-2 = t('amount')
+        .col-sm-2 = t('user')
 
     / consumption list
     - prev_time = 0
     - @consumptions.each do |consumption|
-      - if consumption.drug.active
+      - if consumption.occurs_today?
         - drug = consumption.drug
         = link_to drug, class: "list-group-item"
           .row
-            .col-sm-1
-            .col-sm-2
+            .col-sm-2.col-xs-3
               - time = consumption.when_formatted
               - unless prev_time == time
                 = consumption.when_formatted
                 - prev_time = time
-            .col-sm-2 = consumption.amount_clean
-            .col-sm-6 = drug.name
+            .col-sm-6.col-xs-4
+              = drug.name
+              span.text-muted.m-l = drug.format
+            .col-sm-2.col-xs-2 = consumption.amount_clean
+            .col-sm-2.col-xs-3 = consumption.user.name

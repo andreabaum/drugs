@@ -66,3 +66,9 @@ gem 'font-awesome-rails'
 
 # YAML based configuration
 gem 'figaro'
+
+# Timezone detection, saves browser cookie
+gem 'browser-timezone-rails'
+
+# Date recurrence library
+gem 'ice_cube'

@@ -52,7 +52,7 @@ it:
   note: Note
   amount: Quantità
   when: Data
-  time: Orario
+  time_at: Orario
   active: Attiva
   not_active: Sospesa
   ends_at: Termina
@@ -88,6 +88,9 @@ it:
   no_drugs: Nessuna medicina, ottimo!
   total: Totale
   prescription: Farmaco
+  today: Oggi
+  tomorrow: Domani
+  next_in: in
 
   history: Cronologia
   updated_at: Aggiornato al %{day}
@@ -106,5 +109,50 @@ it:
     drug: 'Medicina'
     purchase: '20'
 
+  time:
+    formats:
+      datetime: "%d.%m.%Y %k:%M"
+      time: "%k:%M"
+      date: "%d.%m.%Y"
+
   date:
+    formats:
+      date: "%d.%m.%Y"
     day_names: [Domenica, Lunedi, Martedi, Mercoledi, Giovedi, Venerdi, Sabato]
+
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: 1 ora
+        other: "%{count} ore"
+      about_x_months:
+        one: 1 mese
+        other: "%{count} mesi"
+      about_x_years:
+        one: 1 anno
+        other: "%{count} anni"
+      almost_x_years:
+        one: 1 anno
+        other: "%{count} anni"
+      half_a_minute: 1 minuto
+      less_than_x_minutes:
+        one: 1 minuto
+        other: "%{count} minuti"
+      less_than_x_seconds:
+        one: 1 secondo
+        other: "%{count} secondi"
+      over_x_years:
+        one: 1 anno
+        other: "%{count} anni"
+      x_days:
+        one: 1 giorno
+        other: "%{count} giorni"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minuti"
+      x_months:
+        one: 1 mese
+        other: "%{count} mesi"
+      x_seconds:
+        one: 1 secondo
+        other: "%{count} secondi"

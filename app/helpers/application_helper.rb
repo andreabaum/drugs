@@ -23,15 +23,15 @@ module ApplicationHelper
   end
 
   def format_date(date)
-    date.strftime("%d.%m.%Y")
+    I18n.l(date, format: :date)
   end
 
   def format_time(time)
-    time.strftime("%k:%M")
+    I18n.l(time, format: :time)
   end
 
   def format_datetime(datetime)
-    datetime.strftime("%d.%m.%Y %k:%M")
+    I18n.l(datetime, format: :datetime)
   end
 
   # Compare multiple times, ignoring the dates

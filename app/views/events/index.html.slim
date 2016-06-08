@@ -3,6 +3,13 @@
 
 .panel-body
   .list-group
+    / Header
+    .list-group-item.header.hidden-xs
+      .row
+        .col-sm-2 = t('when')
+        .col-sm-2 = t('drug')
+        .col-sm-8 = t('details')
+
     - @events.each do |event|
       - obj = event.get_resource
       = link_to obj, class: "list-group-item"

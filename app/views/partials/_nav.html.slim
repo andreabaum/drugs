@@ -24,6 +24,14 @@ nav.navbar.navbar-default role="navigation"
             .i.glyphicon.glyphicon-user
             = user.name
 
+        / Agenda
+        li.visible-xs = link_to consumptions_path
+          .i.glyphicon.glyphicon-time
+          = t('agenda')
+
+        li.hidden-xs.slim[title='#{t('agenda')}'] = link_to consumptions_path
+          .i.glyphicon.glyphicon-time
+
         / Purchases
         li.visible-xs = link_to purchases_path
           .i.glyphicon.glyphicon-shopping-cart
