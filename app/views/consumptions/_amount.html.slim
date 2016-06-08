@@ -1,0 +1,19 @@
+= consumption.amount_clean
+- if consumption.every_days > 1
+  span
+    '
+    - if consumption.every_days == 7
+      = t(:every).downcase
+      '
+      = t('date.day_names')[consumption.starts_at.wday]
+    - else
+      = t('every_n_days', count: consumption.every_days).downcase
+      span.shy.text-muted.m-l
+        - if consumption.occurs_today?
+          = t('today')
+        - elsif consumption.occurs_tomorrow?
+          = t('tomorrow')
+        - else
+          = t('next_in')
+          '
+          = time_ago_in_words(consumption.next_occurrence)
