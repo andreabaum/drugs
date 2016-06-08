@@ -110,6 +110,18 @@ it:
     drug: 'Medicina'
     purchase: '20'
 
+  activerecord:
+    models:
+      drug: Farmaco
+      purchase: Acquisto
+      consumption: Dosaggio
+
+  msg:
+    actions:
+      created: '%{item} creato con successo'
+      updated: '%{item} aggiornato con successo'
+      deleted: '%{item} eliminato con successo'
+
   time:
     formats:
       datetime: "%d.%m.%Y %k:%M"

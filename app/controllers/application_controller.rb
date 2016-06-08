@@ -9,4 +9,18 @@ class ApplicationController < ActionController::Base
   http_basic_authenticate_with name: ENV['name'], password: ENV['password']
 
   layout 'application'
+
+  # Success notices
+  # http://stackoverflow.com/questions/7098023
+  def create_success_notice
+    t(:'msg.actions.created', item: controller_name.classify.constantize.model_name.human)
+  end
+
+  def update_success_notice
+    t(:'msg.actions.updated', item: controller_name.classify.constantize.model_name.human)
+  end
+
+  def destroy_success_notice
+    t(:'msg.actions.deleted', item: controller_name.classify.constantize.model_name.human)
+  end
 end

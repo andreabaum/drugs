@@ -1,4 +1,3 @@
-
 doctype html
 html
   head
@@ -14,8 +13,11 @@ html
   body
     = render "partials/nav"
 
-    /p#notice = notice
-
     #main-content.container-fluid
       .panel.panel-default.default
         = yield
+
+- if notice
+  javascript:
+    toastr.options = {"positionClass": "toast-bottom-right"}
+    toastr.success('#{notice}');

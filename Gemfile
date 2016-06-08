@@ -72,3 +72,6 @@ gem 'browser-timezone-rails'
 
 # Date recurrence library
 gem 'ice_cube'
+
+# Toast JS library
+gem 'toastr-rails'

@@ -23,7 +23,7 @@ class ConsumptionsController < ApplicationController
     respond_to do |format|
       if @consumption.save
         track(@consumption, :create, @consumption.inspect)
-        format.html { redirect_to @consumption.drug, notice: 'Consumption was successfully created.' }
+        format.html { redirect_to @consumption.drug, notice: create_success_notice }
         format.json { render :show, status: :created, location: @consumption }
       else
         format.html { render :new }
@@ -38,7 +38,7 @@ class ConsumptionsController < ApplicationController
         changes = @consumption.previous_changes_clean
         # Only track if anything actually changed
         track(@consumption, :update, changes) if changes && changes.any?
-        format.html { redirect_to @consumption.drug, notice: 'Consumption was successfully updated.' }
+        format.html { redirect_to @consumption.drug, notice: update_success_notice }
         format.json { render :show, status: :ok, location: @consumption }
       else
         format.html { render :edit }
@@ -52,7 +52,7 @@ class ConsumptionsController < ApplicationController
     track(@consumption, :destroy, @consumption.inspect)
     @consumption.destroy
     respond_to do |format|
-      format.html { redirect_to drug, notice: 'Consumption was successfully destroyed.' }
+      format.html { redirect_to drug, notice: destroy_success_notice }
       format.json { head :no_content }
     end
   end

@@ -27,7 +27,7 @@ class PurchasesController < ApplicationController
     respond_to do |format|
       if @purchase.save
         track(@purchase, :create, @purchase.inspect)
-        format.html { redirect_to @purchase.drug, notice: 'Purchase was successfully created.' }
+        format.html { redirect_to @purchase.drug, notice: create_success_notice }
         format.json { render :show, status: :created, location: @purchase }
       else
         format.html { render :new }
@@ -41,7 +41,7 @@ class PurchasesController < ApplicationController
     respond_to do |format|
       if @purchase.update(purchase_params)
         track(@purchase, :udpate, purchase_params)
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
+        format.html { redirect_to @purchase, notice: update_success_notice }
         format.json { render :show, status: :ok, location: @purchase }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PurchasesController < ApplicationController
     track(@purchase, :destroy, @purchase.inspect)
     @purchase.destroy
     respond_to do |format|
-      format.html { redirect_to drug, notice: 'Purchase was successfully destroyed.' }
+      format.html { redirect_to drug, notice: destroy_success_notice }
       format.json { head :no_content }
     end
   end
