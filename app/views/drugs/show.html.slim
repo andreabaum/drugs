@@ -53,7 +53,7 @@
     .list-group-item
       .row
         .col-sm-3.col-xs-3 = t('ends_at')
-        - if @drug.dose
+        - if @drug.dose > 0 && @drug.active?
           .col-sm-3.col-xs-3 = @drug.ends_at_formatted
           .col-sm-6.col-xs-6.hint.text-muted.shy
             = @drug.amount_current_round > 0 ? t('ends_in_days', count: @drug.ends_in) : t('no_more')

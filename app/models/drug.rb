@@ -119,7 +119,8 @@ class Drug < ActiveRecord::Base
     if dose && dose > 0
       Date.today + (amount_current / dose)
     else
-      Date.today
+      # Show first when sorting, kept simple
+      5.year.ago
     end
   end
 

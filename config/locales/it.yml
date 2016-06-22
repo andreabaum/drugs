@@ -60,7 +60,7 @@ it:
     # http://guides.rubyonrails.org/i18n.html#pluralization
     one: Termina domani
     other: Termina in %{count} giorni
-  no_end_date: Non é possibile stimare la scadenza poiché nessun dosaggio é presente
+  no_end_date: Non é possibile stimare la scadenza poiché nessun dosaggio é attivo
   no_more: Finita
   every_days: Frequenza
   every: Ogni

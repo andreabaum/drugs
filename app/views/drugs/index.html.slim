@@ -13,14 +13,17 @@
 
     / Drug list
     - @drugs.select{ |drug| drug[:active]}.each do |drug|
-      - message = drug.amount_current_round > 0 ? t('ends_in_days', count: drug.ends_in) : t('no_more')
+      - if drug.dose == 0
+        - message = t('no_end_date')
+      - else
+        - message = drug.amount_current_round > 0 ? t('ends_in_days', count: drug.ends_in) : t('no_more')
       = link_to drug, class: "list-group-item"
         .row
           .col-sm-10.col-xs-9
             = drug.name
             - if drug.amount_current && drug.dose
               .pull-right
-                - if drug.amount_current > 0
+                - if drug.amount_current > 0 && drug.dose > 0
                   = render 'meter', value: drug.ends_in, message: message
                 - else
                   .i.glyphicon.glyphicon-exclamation-sign.text-muted[title='#{message}']
@@ -30,9 +33,11 @@
               '
               = drug.format
 
-          - if drug.dose
-            .col-sm-2.col-xs-3[title='#{message}']
+          .col-sm-2.col-xs-3[title='#{message}']
+            - if drug.dose > 0
               = drug.ends_at_formatted
+            - else
+              .m-l = '-'
 
     / Add drug
     .list-group-item.footer
