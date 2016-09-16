@@ -96,7 +96,7 @@ it:
   history: Modifiche
   updated_at: Aggiornato al %{day}
 
-  show_only_firsts: Sono mostrate solo le prima cinque fasce orarie
+  show_only_firsts: Sono mostrate solo le prime sette fasce orarie
   not_now: Non al momento
 
   hints:

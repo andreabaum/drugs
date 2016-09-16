@@ -6,9 +6,9 @@
       = @user.name
 
 .panel-body
-  - if times.count > 5
-    / TODO Support more than 5 times
-    - times = times.first(5)
+  - if times.count > 7
+    / TODO Support more than 7 times
+    - times = times.first(7)
     .note.center
       i.glyphicon.glyphicon-exclamation-sign.m-r
       = t('show_only_firsts')
@@ -18,9 +18,9 @@
       / Header
       .list-group-item.header
         .row
-          .col-sm-6.col-xs-6
+          .col-sm-4.col-xs-4
             /= t('drug')
-          .col-sm-1.col-xs-1
+          .col-sm-1.hidden-xs
           - times.each do |time|
             .col-sm-1.col-xs-1 = time.strftime("%k:%M")
 
@@ -29,10 +29,10 @@
         - if drug.active && @user.drug_active?(drug)
           = link_to drug, class: "list-group-item"
             .row
-              .col-sm-6.col-xs-6
+              .col-sm-4.col-xs-4
                 = drug.name
                 span.text-muted.m-l = drug.format
-              .col-sm-1.col-xs-1
+              .col-sm-1.hidden-xs
                 .text-muted = clean_number(@user.consumptions.active.by_drug(drug).map(&:amount).inject(:+))
               - times.each do |time|
                 .col-sm-1.col-xs-1

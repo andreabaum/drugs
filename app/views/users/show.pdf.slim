@@ -3,7 +3,7 @@
 style[type="text/css"]
   = Rails.application.assets.find_asset('pdf.scss').to_s.html_safe
 
-- times = @user.consumptions_times.first(5)
+- times = @user.consumptions_times.first(7)
 
 .pdf
 
@@ -11,7 +11,7 @@ style[type="text/css"]
 
   table
     tr
-      th[width="70%"]
+      th[width="60%"]
         /= t('drug')
       th[width="5%"]
       - times.each do |time|
